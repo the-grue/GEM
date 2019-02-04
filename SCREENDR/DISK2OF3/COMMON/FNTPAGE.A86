@@ -1,0 +1,293 @@
+
+;**************************
+;  inc_lfu
+;**************************
+inc_lfu:
+	les	di, act_font
+	inc 	es: word ptr 92[di]
+	jnc	inc_lfu_done
+	inc	es: word ptr 94[di]
+inc_lfu_done:
+	ret
+
+
+;*************************
+;  chk_fnt
+;*************************
+chk_fnt:
+	test	fi_flags, 10h		;is this font not here!!!!!
+	jz	chk_fnt_done
+	push	es
+	push	di
+	push	ax
+	push	bx
+	les	di, act_font
+	mov	ax, di
+	mov	bx, es
+	callf	ftmgradd		;here we go	
+	and	fi_flags, 0ffefh	;enable the local font header
+	mov	ax, es:word ptr 70[di]
+	mov	poff_tbl+2, ax		;fix up the segment of offset table
+	mov	seg_htbl, ax		;fix up segment of horz off table
+	mov	ax, es:word ptr 78[di]
+	mov	FOFF+2, ax
+	pop	bx
+	pop	ax
+	pop	di
+	pop	es
+chk_fnt_done:
+	ret
+
+
+
+;==========
+set_fnthdr:	; set font header
+;==========
+;
+;	Set the current font header.
+;
+;	Entry:	ax = char
+;
+;	Exit:	act_font = font header for this character
+;		cur_font = act_font
+;		font_inf = *cur_font
+
+	push ax
+	call chk_ade
+	; Is the proper header in place?
+	cmp ax, 0 ! je sfe
+	  ; Nope, 
+	  ; Is the char out of range
+	  cmp ax, 2 ! jne sf1
+	    ; Yes,  force a space
+	    pop ax			; clear the incoming char from stack
+	    mov ax, 20h			; set a space
+	    push ax			
+	    call chk_ade
+	    cmp ax, 0 ! je sfe
+sf1:
+	    call chk_fnt
+sfe:
+	pop ax
+	ret
+
+eject
+
+;=======
+chk_ade:	; check the ADE value of a char
+;=======
+;
+; jn 10-27-87
+; This is the support for a segmented screen font.
+;
+; This routine must be called for every character.
+;
+; If the ADE value of the character passed in falls within
+; the range of the characters in the currently selected font
+; then we just return.
+;
+; If the ADE value of the character passed in not within the
+; the range of the characters in the currently selected font
+; the following is done:
+;
+;	1) The font chain traversed, starting with first, until
+;	   the first font header segment for the currently selected
+;	   font is found.
+;
+;	2) The font segments for the currently selected font are
+;	   traversed until the font segment containing 
+;	   the required ADE value is found.
+;
+;	3) act_font is set to the new font header.
+;
+;	Entry:	char passed in on stack
+;
+;	Exit:	act_font = the proper font header for the entry character 
+;		cur_font = act_font
+;		the new font header is copied into the current virtual
+;		work station font info structure.
+;		ax = 0 - if no change to the font_inf header
+;		   = 1 - if there was a change.
+;			 or if the font in the font header is not loaded.
+;		   = 2 - if the character was out of range.
+;
+;	Note:	This routine preserves all registers used
+;		except ax.  This is because is was added onto an
+;		existing system.
+;
+;		act_font is relative to the current virtual work 
+;		station
+
+	push bp				; C type preamble
+	mov bp, sp
+
+	mov ax, 4[bp]			; ax = the character
+
+	push si				; save regs we need.
+	push es
+
+	; Does the ADE value of the character fall
+	; within the range of the current font header ADE values?
+
+	and ax, 0ffh			; mask off the high byte
+	les si, act_font		; es:si = act_font
+
+	; check the low bound
+	cmp ax, es:24h[si] ! jl ca1
+	  ; check the upper bound
+	  cmp ax, es:26h[si] ! jg ca1
+	    ; The character falls within
+	    ; the ADE bounds of the current font header.
+	    ;---
+	    ; Is the font present?
+	    test es:42h[si], word ptr 010h ! jz ca2
+	      ; the font is not present.
+	      mov ax, 01
+	      jmps cae
+ca2:	; the font is present.
+	    xor ax, ax
+	    jmps cae
+
+ca1:	; the character does not fall within the bounds of the
+	; current font header.  find the correct header.
+
+	call find_font_seg0		; es:si -> font_seg0
+	call find_ade_seg		; es:si -> font header seg we want
+	; Is the character with in range
+	cmp ax, 0 ! jz ca3
+	  ; Nope, set the out of range return code...
+	  mov ax, 2
+	  jmps cae
+ca3:
+	mov word ptr act_font, si	; set up the actual font pointer
+	mov word ptr act_font + 2, es
+
+	mov word ptr cur_font, si	; set up the current font pointer
+	mov word ptr cur_font + 2, es
+
+	push cx
+	push di
+	call cpy_head			; put the new font header into the
+	pop di				; virtual work station font info
+	pop cx				; structure.
+
+	mov ax, 1			; set the return code.
+
+cae:
+	pop es				; restore the regs used in
+	pop si				; the basic search.
+	pop bp
+
+	ret
+
+eject
+
+;------------
+find_ade_seg:
+;------------
+;
+;	Find the font header segment that contains the
+;	ADE segment range
+;
+;	Entry:	ax = char
+;		es:si = first header for this font style and point size
+;
+;	Exit:	es:si = header we want.
+;		ax = 0 - if we found a font segment that contains
+;			 the char we want
+;		   = 1 - if the character is out of bounds
+
+	push bx				; preserve reg that is used
+fas4:
+	; Is this character within range
+	cmp ax, es:24h[si] ! jl fas1	; check low bound.
+	  ; Its greater >= the low bound
+	  cmp ax, es:26h[si] ! jg fas2	; check the high bound.
+	    ; We found the header we want
+	    mov ax, 0
+	    jmps fase
+
+fas1:	; The character value is below the lowest ADE for this font.
+	; So, return the lowest header.
+	mov ax, 1
+	jmps fase
+
+fas2:	; Check the next header
+	; Is the next header NULL?
+	mov bx, es:58h[si]
+	or bx, es:5Ah[si]
+	jnz fas3
+	  ; The next header is 0
+	  ; So just return the one we have.
+	  mov ax, 1
+	  jmps fase
+fas3:
+	; Point to thenext font segment.
+	les si, es:58h[si]
+	jmps fas4
+
+fase:	; find ade segment exit
+	pop bx
+	ret
+
+eject
+
+;--------------
+find_font_seg0:
+;--------------
+;
+;	Find the first segment of this font.
+;
+;	Entry:	es:si = act_font
+;
+;	Exit:	es:si = addr of first font header segment of the
+;			desired font face and point size.
+
+	push ax				; save regs used
+	push bx
+	push cx
+
+	; register usage for search
+	;  ax = desired font style
+	;  bx = desired point size
+	;  es:si = ptr to font header
+
+	mov ax, es:[si]			; ax = desired font style
+	mov bx, es:2[si]		; bx = desired point size
+
+	; first is in the physical work station segment
+
+	mov si, seg first
+	mov es, si
+	mov si, offset first		; es:si = -> to first font in chain
+ffs3:
+	; is the correct font style?
+	cmp ax, es:[si]	! jne ffs1
+	  ; this is the font style we want.
+	  ; Is this the correct point size?
+	  cmp bx, es:2[si] ! jne ffs1
+	    ; This is the correct point size also.
+	    ; We have found the font header we seek
+	    jmps ffse
+ffs1:
+	; the current font header is not the one we seek.
+	; Is there another font header in the chain?
+	mov cx, es:54h[si]
+	or cx, es:56h[si]
+	jnz ffs2
+	  ; This was the last header.
+	  ; THIS IS AN ERROR.
+	  ; Return the last font header we found
+	  jmps ffse
+ffs2:
+	; there is another font 
+	; point to it and go to the top of the loop
+	les si, es:54h[si]
+	jmps ffs3
+
+ffse:	; find font segment 0 exit point
+
+	pop cx				; restore regs that were used	
+	pop bx
+	pop ax
+	ret

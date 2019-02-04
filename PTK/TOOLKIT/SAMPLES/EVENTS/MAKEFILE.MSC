@@ -1,0 +1,59 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+LOBJ = xmainl.obj eventsl.obj windowl.obj  metaoutl.obj meta_tl.obj \
+      meta_rl.obj meta_fl.obj
+
+SOBJ = xmains.obj eventss.obj windows.obj  metaouts.obj meta_ts.obj \
+      meta_rs.obj meta_fs.obj
+
+xmainl.obj:    xmain.c
+   cl -c -AL -Gs -Oas -Foxmainl.obj xmain.c
+
+eventsl.obj:   events.c
+   cl -c -AL -Gs -Oas -Foeventsl.obj events.c
+
+windowl.obj:   window.c
+   cl -c -AL -Gs -Oas -Fowindowl.obj window.c
+
+metaoutl.obj:   meta_out.c
+   cl -c -AL -Gs -Oas -Fometaoutl.obj meta_out.c
+
+meta_tl.obj:   meta_t.c
+   cl -c -AL -Gs -Oas -Fometa_tl.obj meta_t.c
+
+meta_rl.obj:   meta_r.c
+   cl -c -AL -Gs -Oas -Fometa_rl.obj meta_r.c
+
+meta_fl.obj:   meta_f.c
+   cl -c -AL -Gs -Oas -Fometa_fl.obj meta_f.c
+
+#xmains.obj:    xmain.c
+#   cl -c -AS -Gs -Oas -Foxmains.obj xmain.c
+#
+#eventss.obj:   events.c
+#   cl -c -AS -Gs -Oas -Foeventss.obj events.c
+#
+#windows.obj:   window.c
+#   cl -c -AS -Gs -Oas -Fowindows.obj window.c
+#
+#metaouts.obj:   meta_out.c
+#   cl -c -AS -Gs -Oas -Fometaouts.obj meta_out.c
+#
+#meta_ts.obj:   meta_t.c
+#   cl -c -AS -Gs -Oas -Fometa_ts.obj meta_t.c
+#
+#meta_rs.obj:   meta_r.c
+#   cl -c -AS -Gs -Oas -Fometa_rs.obj meta_r.c
+#
+#meta_fs.obj:   meta_f.c
+#   cl -c -AS -Gs -Oas -Fometa_fs.obj meta_f.c
+#
+eventsl.app:   $(LOBJ)
+   cl -AL -Feeventsl.app $(LOBJ) lmscgem.lib
+
+#eventss.app:   $(SOBJ)
+#   cl -AL -Feeventss.app $(SOBJ) smscgem.lib
+
+#all:  eventss.app eventsl.app
+#   del *.obj

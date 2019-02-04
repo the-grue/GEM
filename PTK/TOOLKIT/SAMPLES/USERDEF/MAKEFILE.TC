@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  userdefl.app userdefs.app
+#   del *.obj
+
+userdefl.app:   userdefl.obj
+   tcc -euserdefl.app userdefl.obj ltcgem.lib
+
+userdefl.obj:   userdef.c
+   tcc -c -ml -ouserdefl.obj userdef.c
+
+#userdefs.app:   userdefs.obj
+#   tcc -ms -euserdefs.app userdefs.obj stcgem.lib
+
+#userdefs.obj:   userdef.c
+#   tcc -c -ms -ouserdefs.obj userdef.c

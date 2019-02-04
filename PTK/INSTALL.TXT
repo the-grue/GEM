@@ -1,0 +1,131 @@
+:* ---------------------------------------------------------------------*/
+:*    INSTALL.TXT file for GEM Programmer's Toolkit R3.1 (3.5" media)   */
+:*									*/
+:* Date		Comments						*/
+:* ---------------------------------------------------------------------*/
+CHECKVER 0300
+IF1BUTN OLDVERS
+IFFD FDSYS
+:* ---------------------------------------------------------------------*/
+SRCMSG 1[3][Cannot find the file you are trying to|
+	   copy. Please be sure your Programmer's|
+	   Toolkit Disk 1 is in drive A.|
+	   GEM Programmer's Toolkit|
+	   installation incomplete.][ Retry |  Quit  ]
+CREATEMSG 1[3][File creation error. Your hard disk may|
+	   be out of space, destination folder may|
+	   be missing, or destination file may be|
+	   set to read only. GEM Programmer's Toolkit|
+	   installation incomplete.][ Retry |  Quit  ]
+DSTMSG 1[3][File write error. Your hard disk may be|
+	   out of space. GEM Programmer's Toolkit|
+	   installation incomplete.][  OK  ]
+ALERT 1[0][GEM Programmer's Toolkit will be|
+           installed on your hard disk. A folder|
+           named \TOOLKIT will be created on|
+	   your hard disk. Click on OK when you|
+	   are ready.][   OK   |  Quit  ]
+IF2BUTN BADEXIT
+PATBAT C:
+:*
+:* start work for 1st disk
+:*
+IFNOSPC C: 4 BADMAKE
+:* create folders required for first PTK-Disk
+MD C:\TOOLKIT
+MD C:\TOOLKIT\TOOLS
+MD C:\TOOLKIT\TOOLS\SRC
+MD C:\TOOLKIT\BINDINGS
+COPY A:\TOOLKIT\TOOLS\*.* C:\TOOLKIT\TOOLS
+COPY A:\TOOLKIT\TOOLS\SRC\*.* C:\TOOLKIT\TOOLS\SRC
+COPY A:\TOOLKIT\BINDINGS\*.* C:\TOOLKIT\BINDINGS
+:*
+:* end of 1st disk
+:*
+SRCMSG 1[3][Cannot find the file you are trying to|
+	   copy. Please be sure your Programmer's|
+	   Toolkit Disk 2 is in drive A.|
+	   GEM Programmer's Toolkit|
+	   installation incomplete.][ Retry |  Quit  ]
+CREATEMSG 1[3][File creation error. Your hard disk may|
+	   be out of space, destination folder may|
+	   be missing, or destination file may be|
+	   set to read only. GEM Programmer's Toolkit|
+	   installation incomplete.][ Retry |  Quit  ]
+DSTMSG 1[3][File write error. Your hard disk may be|
+	   out of space. GEM Programmer's Toolkit|
+	   installation incomplete.][  OK  ]
+ALERT 1[0][Please insert GEM Programmer's|
+           Toolkit Disk 2 into Drive A!][   OK   |  Quit  ]
+IF2BUTN BADEXIT
+:*
+:* start work for 2nd disk
+:*
+IFNOSPC C: 15 BADMAKE
+:* create folders required for 2nd PTK-Disk
+MD C:\TOOLKIT
+MD C:\TOOLKIT\SAMPLES
+MD C:\TOOLKIT\SAMPLES\CLOCK
+MD C:\TOOLKIT\SAMPLES\DOODLE
+MD C:\TOOLKIT\SAMPLES\EVENTS
+MD C:\TOOLKIT\SAMPLES\FDTEST
+MD C:\TOOLKIT\SAMPLES\FREEMEM
+MD C:\TOOLKIT\SAMPLES\MEMGRAF
+MD C:\TOOLKIT\SAMPLES\STARTUP
+MD C:\TOOLKIT\SAMPLES\HELLO
+MD C:\TOOLKIT\SAMPLES\XFORM
+MD C:\TOOLKIT\SAMPLES\RSCREATE
+MD C:\TOOLKIT\SAMPLES\SPOOLER
+MD C:\TOOLKIT\SAMPLES\USERDEF
+MD C:\TOOLKIT\INC
+MD C:\TOOLKIT\DOC
+COPY A:\TOOLKIT\SAMPLES\CLOCK\*.* C:\TOOLKIT\SAMPLES\CLOCK
+COPY A:\TOOLKIT\SAMPLES\DOODLE\*.* C:\TOOLKIT\SAMPLES\DOODLE
+COPY A:\TOOLKIT\SAMPLES\EVENTS\*.* C:\TOOLKIT\SAMPLES\EVENTS
+COPY A:\TOOLKIT\SAMPLES\FDTEST\*.* C:\TOOLKIT\SAMPLES\FDTEST
+COPY A:\TOOLKIT\SAMPLES\FREEMEM\*.* C:\TOOLKIT\SAMPLES\FREEMEM
+COPY A:\TOOLKIT\SAMPLES\MEMGRAF\*.* C:\TOOLKIT\SAMPLES\MEMGRAF
+COPY A:\TOOLKIT\SAMPLES\STARTUP\*.* C:\TOOLKIT\SAMPLES\STARTUP
+COPY A:\TOOLKIT\SAMPLES\HELLO\*.* C:\TOOLKIT\SAMPLES\HELLO
+COPY A:\TOOLKIT\SAMPLES\XFORM\*.* C:\TOOLKIT\SAMPLES\XFORM
+COPY A:\TOOLKIT\SAMPLES\RSCREATE\*.* C:\TOOLKIT\SAMPLES\RSCREATE
+COPY A:\TOOLKIT\SAMPLES\SPOOLER\*.* C:\TOOLKIT\SAMPLES\SPOOLER
+COPY A:\TOOLKIT\SAMPLES\USERDEF\*.* C:\TOOLKIT\SAMPLES\USERDEF
+COPY A:\TOOLKIT\INC\*.* C:\TOOLKIT\INC
+COPY A:\TOOLKIT\DOC\*.* C:\TOOLKIT\DOC
+:*
+:* end of 2nd disk
+:*
+ALERT 1[0][Your GEM Programmer's Toolkit|
+           has been successfully copied|
+           to your hard disk!][   OK   ]
+ALERT 1[0][To finish your installation|
+	   of the bindings, run INSTLIB.APP|
+	   located in \TOOLKIT\BINDINGS!][   OK   ]
+GOTO DONE
+:* ---------------------------------------------------------------------*/
+:FDSYS
+ALERT 1[3][ERROR: You cannot install GEM|
+	   Programmer's Toolkit on a floppy|
+	   disk-based system.][   OK   ]
+GOTO BADEXIT
+:* ---------------------------------------------------------------------*/
+:OLDVERS
+ALERT 1[3][ERROR: This installation process re-|
+	   quires GEM/3 release 3.0 or higher.|
+	   You must install the release of GEM|
+	   provided with this application or|
+	   contact your supplier.][   OK   ]
+GOTO BADEXIT
+:* ---------------------------------------------------------------------*/
+:BADMAKE
+ALERT 1[3][ERROR: Unable to create directory.|
+	   The destination disk may be out of|
+	   space.][   OK   ]
+:* ---------------------------------------------------------------------*/
+:BADEXIT
+ALERT 1[0][GEM Programmer's Toolkit|
+	  installation incomplete.][   OK   ]
+:* ---------------------------------------------------------------------*/
+:DONE
+DOS

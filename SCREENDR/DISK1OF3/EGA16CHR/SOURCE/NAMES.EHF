@@ -1,0 +1,7 @@
+
+sht_nm	db	'EGA 16 HIRES'
+	rb	13 - length sht_nm
+
+lng_nm	db	'EGA 16 Color High Resolution Driver'
+	rb	81 - length lng_nm
+

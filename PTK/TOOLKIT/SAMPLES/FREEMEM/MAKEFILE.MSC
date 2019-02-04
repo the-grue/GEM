@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+freememl.obj: freemem.c
+   cl -AL -c -Gs -Oas -Zdil -DDESKACC=1 -Fofreememl.obj freemem.c
+
+freememl.acc: freememl.obj
+   link ..\startup\c0accmsl freememl /NOE, freememl.acc, nul, lmscgem llibce
+
+#freemems.obj: freemem.c
+#   cl -AS -c -Gs -Oas -Zdil -DDESKACC=1 -Fofreemems.obj freemem.c
+
+#freemems.acc: freemems.obj
+#   link ..\startup\c0accmss freemems /NOE, freemems.acc, nul, smscgem slibce
+
+#all:  freememl.acc freemems.acc
+#   del *.obj

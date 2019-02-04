@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+xforml.obj:   xform.c
+   cl -c -AL -Gs -Oas -Zl -Foxforml.obj xform.c
+
+#xforms.obj:   xform.c
+#   cl -c -AS -Gs -Oas -Zl -Foxforms.obj xform.c
+
+xforml.app:   xforml.obj
+   cl -AL -Fexforml.app xforml.obj lmscgem.lib llibce.lib
+
+#xforms.app:   xforms.obj
+#   cl -AS -Fexforms.app xforms.obj smscgem.lib slibce.lib
+
+#all:          xforml.app xforms.app
+#   del *.obj

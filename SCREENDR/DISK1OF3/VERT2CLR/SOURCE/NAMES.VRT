@@ -1,0 +1,7 @@
+		;123456789012
+sht_nm	db	'VERT 2 CLR'
+	rb	13 - length sht_nm
+
+lng_nm	db	'Verticom 2 Color Adaptor'
+	rb	81 - length lng_nm
+

@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  xforml.app xforms.app
+#   del *.obj
+
+xforml.app:   xforml.obj
+   tcc -ml -exforml.app xforml.obj ltcgem.lib
+
+#xforms.app:   xforms.obj
+#   tcc -ms -exforms.app xforms.obj stcgem.lib
+
+xforml.obj:   xform.c
+   tcc -c -ml -oxforml.obj xform.c
+
+#xforms.obj:   xform.c
+#   tcc -c -ms -oxforms.obj xform.c

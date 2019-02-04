@@ -1,0 +1,31 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  hellol.app hellos.app hellol.acc hellos.acc
+#   del *.obj
+all:  hellol.app hellol.acc
+   del *.obj
+
+#hellos.acc: helsacc.obj
+#   tlink ..\startup\c0acctcs helsacc, hellos.acc,, c:\tc\lib\stcgem c:\tc\lib\cs
+
+#helsacc.obj: hello.c
+#   tcc -ms -c -DDESKACC=1 -ohelsacc.obj hello.c
+
+hellol.acc: hellacc.obj
+   tlink ..\startup\c0acctcl hellacc, hellol.acc,, c:\tc\lib\ltcgem c:\tc\lib\cl
+
+hellacc.obj: hello.c
+   tcc -ml -c -DDESKACC=1 -ohellacc.obj hello.c
+
+#hellos.app: helsapp.obj
+#   tcc -ms -ehellos.app helsapp.obj stcgem.lib
+
+#helsapp.obj: hello.c
+#   tcc -ms -c -ohelsapp.obj hello.c
+
+hellol.app: hellapp.obj
+   tcc -ml -ehellol.app hellapp.obj ltcgem.lib
+
+hellapp.obj: hello.c
+   tcc -ml -c -ohellapp.obj hello.c

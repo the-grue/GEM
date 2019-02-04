@@ -1,0 +1,2 @@
+rscreate.app:   rscreate.obj
+   tcc -erscreate.exe rscreate.obj ltcgem.lib

@@ -1,0 +1,7 @@
+GEM/3 M.R.S.
+Desktop Sources
+Calclock source code
+version 3.0
+4 December 87
+Disk 3 of 3
+

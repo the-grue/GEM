@@ -1,0 +1,18 @@
+sdp758.ega = zyxg, entry,
+jmptbl,
+monobj,
+monout,
+opttext,
+isin,
+dummy,
+ibmegahc, p752,
+egamblit,
+egablit,
+eopttxt1,
+eopttxt2,
+eoptdraw,
+hirespat,
+enddseg,
+8x14[nop]
+
+

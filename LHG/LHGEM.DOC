@@ -1,0 +1,151 @@
+*******************************************************************************
+*                                                                             *
+*                   LHgem 1.2 - for MS-DOS upper memory                       * 
+*                   HIgem 1.2 - for DR-DOS upper memory                       *
+*                                                                             *
+*			      for use with                                    *
+*                        Digital Research's GEM 3.x                           *
+*                                                                             *
+*                                                                             *
+*               (C)1994-1999, Ken Mauro - All rights reserved.                * 
+*                                         Free for non commercial use.        *
+*                                         Source code is included.            *
+*******************************************************************************
+
+LHGEM is a DOS UMB loader that will allow existing applications running under
+Digital Research's GEM 3.x, to free up to 150k of extra DOS program memory.
+The program is designed for i286(drdos), 386/486(ms/drdos) using EMM386.EXE  
+
+By loading all or part of the GEM system into this upper memory area, frees 
+up conventional memory (below 640k) normally divided between DOS, GEM, apps, 
+accessories, fonts and other system data structures.
+
+The result - less swapping to disk, faster re-draws, better font cacheing etc.
+
+This is even more apparent when desktop accessories are loaded. With the GEM 
+AES & VDI loaded in the upper memory area, GEM Paint 2.0 can have a full page 
+available in VGA 800x600 16 color mode, not possible otherwise.
+
+The use of this program requires either a light technical understanding of 
+MS-DOS/ DR-DOS upper memory managment or in the absence of - some patience. 
+
+Overview 
+--------
+The upper memory address area is normally reserved for expansion such as bios 
+support, and option cards typically claiming memory space in 4-64k blocks.
+
+These addresses usually occur from c000hex to ffffhex (the system rom area). 
+Space is not required by those acessory cards can be turned into extra usable 
+dos memory - sort of for memory resident utilities or programs data etc. 
+
+The trick is to have your expansion options memory usage arranged in a 
+contiguous order so as to maximize the left over address space (below the 
+1meg boundry) can be remapped for use via EMM386.EXE on MSDOS/DRDOS 5 & up. 
+
+With no accessory cards most 386/486 machines using MSDOS emm386.exe with the
+LIM EMS function disabled will make up to 155k of upper memory area available.
+This figure is somewhat less for DRDOS because some system data resides there.
+
+Also these results may also be influenced by the system bios's manufacturer.
+
+Caveats
+-------
+Since the GEM runtime code is loaded only after your DOS boots, it is necessary 
+that any other use of the upper memory area be determined at boot time before
+GEM is running or is shelled to dos. No other external programs or TSR's should 
+be allocating or de-allocating upper memory blocks. Upon GEM'S final exit to DOS
+a check with MEM.EXE will show that upper memory is available but, fragmented.
+
+Not a real problem as DOS de-fragments as required for subsequent loadhighs.
+Rebooting will make the upper memory area contiguous again. 
+
+When shelling to a dos prompt via GEM desktop's 'Enter Dos Commands' attempting
+to run some older pre-msdos5 programs or utilites, may produce an insufficient
+memory error, even if chkdsk.exe and mem.exe says there is. The preferred way 
+to run external programs is by using the 'install application' menu item and 
+choosing the 'DOS' & 'needs full memory' options (see your GEM desktop manual). 
+
+LHgem may or may not work reliably under a windows dos shell. 
+The primary objective is to free DOS memory for GEM applications.
+
+
+
+Installation
+------------
+The software comes pre assembled and ready to go for a generic desktop install.
+If you wish to re-assemble & link you must run LCONFIG.EXE the first time or
+to subsequently customize it afterwards. 
+
+You may alter, re-assemble & link the LHGEM, HIGEM & LHCONFIG sources as long 
+as you do not remove the copyright messages. 
+
+LHMAKE.BAT (for masm & link) is provided for your convenience.
+
+
+
+Implementation
+--------------
+(Refer to your DOS manual for the following software drivers if needed.) 
+
+EMM386.EXE - supplied with MS/DRDOS 5.x/ 6.x on 80386 & up based machines.
+HIDOS.SYS  - supplied with DRDOS 5.x/ 6.x on 80286 based machine.*
+
+*depending on system board support of shadow ram.	
+
+
+Example setups for emm386.exe/ hidos.sys for upper memory configuration.. 
+the following line in your CONFIG.SYS file might look like this:
+
+EMM386.EXE /NOEMS		- for MSDOS 5.x/ MSDOS 6.x  w/ 80386 & up
+EMM386.EXE /EMSALL		- for DRDOS 5.x/ DRDOS 6.x  w/ 80386 & up
+HIDOS.SYS /CHIPSET=EMSALL	- DRDOS 5.x/ DRDOS 6.x  w/some 80286 machines.
+
+Save copies of your config.sys and autoexec.bat on a bootable floppy.
+After modifing your config.sys & autoexec.bat - reboot.
+Use the MEM.EXE command to view the entire memory map. 
+Since this command has several options - consult your dos reference.
+
+The following figures are based on MEM.EXE'S amount of FREE upper memory figure.
+
+if =>  80k - GEM.EXE/ GEM.RSC   + allocated data can reside there. (about 78k)
+if => 130k - the entire GEM AES + allocated data can reside there.   
+if => 150k - the entire GEM AES + a desk accessory can reside there.
+
+Put a copy of LHgem.exe to the GEM system subdirectory  -  \gemapps\gemsys  
+If this subdirectory does not exist, you do not have a standard installation. 
+
+Modify this line in GEM.BAT as follows .......(after saving original of course) 
+
+default line :  gemvdi desktop %1 %2 %3	
+change to ...:  gemvdi desktop %1 %2 %3 -LHGEM.EXE    ( -HIGEM.EXE for DR-DOS )
+
+Save the changed batch file and run it.
+if all goes well, the GEM DESKTOP should be running.
+from the DESKTOP'S menu select "Enter Dos Commands" to shell to a DOS prompt. 
+
+type MEM.EXE /d/p  [enter] ...... for MS-DOS 5/6   
+type MEM.EXE /a/p  [enter] ...... for DR-DOS 5/6 
+
+Hopefully, if all went well you will see the areas of upper memory occupied
+by the GEMVDI.EXE, GEM.EXE, GEM.RSC and most or all off it's components, 
+whatever does not fit will automatically be loaded into the lower 640k.
+
+Type EXIT to return to GEM 
+
+IF you repeat this test with your original GEM.BAT startup file you can make 
+a before and after evaluation - I think you will be pleased with the results. 
+
+A supplied GEM accessory, FREEMEM.ACC  can be used for this purpose while in 
+the desktop environment.
+
+------------------------------------------------------------------------------
+
+In closing, the legal stuff..
+
+If you agree to use Lhgem/HIgem, you must agree to assume all responsiblity
+in determining it's suitability to your system, and the results of any liability
+or consequences that might result from it's use. If you do not agree with these
+terms, simply erase, discard or destroy this software package and documentation.
+
+Any names and products mentioned are trademarks of their respective companies.
+

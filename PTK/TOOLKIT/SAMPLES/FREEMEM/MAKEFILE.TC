@@ -1,0 +1,18 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  freememl.acc freemems.acc
+#   del *.obj
+
+freememl.acc: freememl.obj
+   tlink ..\startup\c0acctcl freememl, freememl.acc, nul, c:\tc\lib\ltcgem c:\tc\lib\cl
+
+#freemems.acc: claccs.obj
+#   tlink ..\startup\c0acctcs freemems, freemems.acc, nul, c:\tc\lib\stcgem c:\tc\lib\cs
+
+freememl.obj: freemem.c
+   tcc -c -ml -DDESKACC=1 -ofreememl.obj freemem.c
+
+#freemems.obj: freemem.c
+#   tcc -c -ms -DDESKACC=1 -ofreemems.obj freemem.c
+

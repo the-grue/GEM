@@ -1,0 +1,20 @@
+#
+#  set variable ASM to either tasm or masm
+#
+ASM = tasm
+
+all:  c0acctcl.obj c0acctcs.obj c0accmsl.obj c0accmss.obj
+   @echo all startups are done!
+
+c0acctcl.obj: c0acctc.asm
+   $(ASM) c0acctc /MX ,c0acctcl.obj;
+
+c0acctcs.obj: c0acctc.asm
+   $(ASM) c0acctc /MX /D__SMALL__ ,c0acctcs.obj;
+
+c0accmsl.obj: c0accms.asm
+   $(ASM) c0accms /MX ,c0accmsl.obj;
+
+c0accmss.obj: c0accms.asm
+   $(ASM) c0accms /MX /D__SMALL__ ,c0accmss.obj;
+

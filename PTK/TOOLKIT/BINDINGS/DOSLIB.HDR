@@ -1,0 +1,37 @@
+/*****************************************************************************
+ *
+ *	-------------------------------------------------------------
+ *	GEM Desktop					  Version 3.1
+ *	Serial No.  XXXX-0000-654321		  All Rights Reserved
+ *	Copyright (C) 1985 - 1989		Digital Research Inc.
+ *	-------------------------------------------------------------
+ *
+ *****************************************************************************/
+
+#include "portab.h"				/* portable coding conv	*/
+#include "dosbind.h"  				/* doslib prototypes 	*/ 
+
+typedef union {
+
+   struct {
+	UWORD ax, bx, cx, dx, si, di, cflag, flags;
+   }x;
+
+   struct {
+	UBYTE al, ah, bl, bh, cl, ch, dl, dh;
+   }h;
+
+}REGS;
+
+typedef struct {
+
+   UWORD es;
+   UWORD cs;
+   UWORD ss;
+   UWORD ds;
+
+}SREGS;
+
+EXTERN UWORD DOS_ERR;
+EXTERN REGS regs;
+EXTERN SREGS segregs;

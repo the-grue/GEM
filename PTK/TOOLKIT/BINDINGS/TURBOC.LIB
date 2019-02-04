@@ -1,0 +1,116 @@
+/* LIBMAN: AES: NAME: AESLIB\MAKEFILE */
+OBJ = aesbind.obj form.obj menu.obj scrp.obj xgrf.obj \
+      appl.obj fsel.obj objc.obj shel.obj \
+      evnt.obj graf.obj rsrc.obj wind.obj  
+aeslib:  $(OBJ)
+      @echo AES is done
+/* LIBMAN: AES: NAME: AESLIB\LIBAES.RSP */
++ AESLIB\AESBIND &
++ AESLIB\APPL &
++ AESLIB\EVNT &
++ AESLIB\FORM &
++ AESLIB\FSEL &
++ AESLIB\GRAF &
++ AESLIB\MENU &
++ AESLIB\OBJC &
++ AESLIB\RSRC &
++ AESLIB\SCRP &
++ AESLIB\SHEL &
++ AESLIB\WIND &
++ AESLIB\XGRF
+/* LIBMAN: VDI: NAME: VDILIB\MAKEFILE */
+OBJ = attrib.obj escape.obj inquire.obj raster.obj \
+      control.obj input.obj output.obj vdibind.obj
+vdi: $(OBJ)
+      @echo VDI is done
+/* LIBMAN: VDI: NAME: VDILIB\LIBVDI.RSP */ 
++ VDILIB\ATTRIB &
++ VDILIB\CONTROL &
++ VDILIB\ESCAPE &
++ VDILIB\INPUT &
++ VDILIB\INQUIRE &
++ VDILIB\OUTPUT &
++ VDILIB\RASTER &
++ VDILIB\VDIBIND
+/* LIBMAN: DOS: NAME: DOSLIB\MAKEFILE */ 
+OBJ = dosbind.obj
+doslib: $(OBJ)
+      @echo DOSLIB is done
+/* LIBMAN: DOS: NAME: DOSLIB\LIBDOS.RSP */ 
++ DOSLIB\DOSBIND
+/* LIBMAN: OBJ: NAME: OBLIB\MAKEFILE */ 
+OBJ = oblib.obj
+oblib: $(OBJ)
+   @echo OBLIB is done
+/* LIBMAN: OBJ: NAME: OBLIB\LIBOB.RSP */ 
++ OBLIB\OBLIB
+/* LIBMAN: RCL: NAME: RCLIB\MAKEFILE */ 
+OBJ = rclib.obj
+rclib: $(OBJ)
+      @echo RCLIB is done
+/* LIBMAN: RCL: NAME: RCLIB\LIBRC.RSP */ 
++ RCLIB\RCLIB
+/* LIBMAN: XLI: NAME: XFMLIB\MAKEFILE */ 
+OBJ = xfmlib.obj
+xfmlib: $(OBJ)
+      @echo XFMLIB is done
+/* LIBMAN: XLI: NAME: XFMLIB\LIBX.RSP */ 
++ XFMLIB\XFMLIB
+/* LIBMAN: EMS: NAME: EMSLIB\MAKEFILE */ 
+OBJ = emslib.obj
+emslib: $(OBJ)
+      @echo EMSLIB is done
+/* LIBMAN: EMS: NAME: EMSLIB\LIBEMS.RSP */ 
++ EMSLIB\EMSLIB
+/* LIBMAN: MIS: NAME: MISC\MAKEFILE */ 
+OBJ = fardraw.obj formdo.obj trimage.obj ev_event.obj
+misc: $(OBJ)
+      @echo MISC is done
+fardraw.obj:   fardraw.asm
+   tasm /dTC /mx fardraw.asm fardraw.obj
+/* LIBMAN: MIS: NAME: MISC\LIBMISC.RSP */ 
++MISC\FARDRAW &
++MISC\FORMDO &
++MISC\TRIMAGE &
++MISC\EV_EVENT
+/* LIBMAN: ALL: NAME: MAKELIB.BAT */ 
+echo off
+if "%1" == "" goto argu_err
+cd aeslib
+make
+cd ..\vdilib
+make
+cd ..\doslib
+make
+cd ..\oblib
+make
+cd ..\rclib
+make
+cd ..\xfmlib
+make
+cd ..\emslib
+make
+cd ..\misc
+make
+cd ..
+IF EXIST %1TCGEM.LIB DEL %1TCGEM.LIB
+TLIB %1TCGEM.LIB /C /E @AESLIB\LIBAES.RSP
+TLIB %1TCGEM.LIB /C /E @VDILIB\LIBVDI.RSP
+TLIB %1TCGEM.LIB /C /E @DOSLIB\LIBDOS.RSP
+TLIB %1TCGEM.LIB /C /E @OBLIB\LIBOB.RSP
+TLIB %1TCGEM.LIB /C /E @RCLIB\LIBRC.RSP
+TLIB %1TCGEM.LIB /C /E @XFMLIB\LIBX.RSP
+TLIB %1TCGEM.LIB /C /E @EMSLIB\LIBEMS.RSP
+TLIB %1TCGEM.LIB /C /E @MISC\LIBMISC.RSP
+DEL %1TCGEM.BAK
+goto exit
+:argu_err
+echo usage:
+echo        MAKELIB L to create large memory model
+echo        MAKELIB S to create small memory model
+echo Note:
+echo        In either case, you have to make sure that
+echo        your compiler configuration file contains the
+echo        right command line option to generate small
+echo        or large memory model object files!
+:exit

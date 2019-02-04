@@ -1,0 +1,43 @@
+/* Device-dependent constants for the Enhanced Graphics Adapter mono driver. */
+#define X_ASPECT        165
+#define Y_ASPECT        200
+
+#define MAX_COLOR	16
+#define MAX_LINE_STYLE	7
+#define MAX_L_WIDTH     40
+#define MAX_MARK_INDEX	6
+#define MAX_FONT	1
+#define MX_FIL_STYLE	4
+#define MX_FIL_HAT_INDEX	12
+#define	MX_FIL_PAT_INDEX	24
+#define MAX_MODE	3
+#define MAX_ARC_CT	70
+
+
+/* Device-independent enumeration values. */
+#define SQUARED 0
+#define ARROWED 1
+#define CIRCLED 2
+
+#define LLUR    0
+#define ULLR    1
+
+
+/* Device-independent equivalences. */
+#define xres      DEV_TAB[0]
+#define yres      DEV_TAB[1]
+#define xsize     DEV_TAB[3]
+#define ysize     DEV_TAB[4]
+#define iptscnt   CONTRL[1]
+#define optscnt   CONTRL[2]
+#define iintcnt   CONTRL[3]
+#define ointcnt   CONTRL[4]
+#define gdp_code  CONTRL[5]
+#define	DEF_CHWT  SIZ_TAB[0]
+#define	DEF_CHHT  SIZ_TAB[1]
+#define	DEF_LWID  SIZ_TAB[4]
+#define DEF_MKWD  SIZ_TAB[8]
+#define DEF_MKHT  SIZ_TAB[9]
+#define MAX_MKWD  SIZ_TAB[10]
+#define MAX_MKHT  SIZ_TAB[11]
+

@@ -1,0 +1,7 @@
+		;123456789012
+sht_nm	db	'WYSE SCRN'
+	rb	13 - length sht_nm
+
+lng_nm	db	'Wyse 1280 X 800 Screen Driver'
+	rb	81 - length lng_nm
+

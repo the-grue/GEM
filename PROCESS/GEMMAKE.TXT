@@ -1,0 +1,30 @@
+Follow these instructions to build the GEM sources.
+
+Unpack the files in Gemfull.zip using the directory option.
+change directory to 
+\gem\mrs\gem3x\desktop\disk1of3
+to build the desktop;
+unpack Deskfix.zip to directory.
+find tools:- 
+Hc.exe
+link86.exe
+rasm86.exe
+and add to directory.
+run makedesk.bat from Ken Mauro's desfix.zip
+***********************************************
+change directory \gem3x\aes
+make a new directory eg tryaes
+copy contents of \aes\disk1of2 and \aes\disk2of2 to new directory
+copy tools to directory viz:-
+Hc.exe
+link86.exe
+rasm86.exe
+and Hc.pro from deskfix.zip
+run the batch file COMP30.BAT
+rename GEM30.EXE to GEM.EXE
+**************************************************
+change directory to \gem3x\gdos
+copy tools 
+link86.exe
+rasm86.exe
+run the attcahed batchfile gvdi.bat

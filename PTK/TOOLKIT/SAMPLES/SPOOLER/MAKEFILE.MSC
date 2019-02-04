@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+spoolerl.obj: spooler.c
+   cl -c -AL -Gs -Oas -Zl -Fospoolerl.obj spooler.c
+
+#spoolers.obj: spooler.c
+#   cl -c -AS -Gs -Oas -Zl -Fospoolers.obj spooler.c
+
+spoolerl.app: spoolerl.obj
+   cl -Fespoolerl.app spoolerl.obj lmscgem.lib llibce.lib
+
+#spoolers.app: spoolers.obj
+#   cl -Fespoolers.app spoolers.obj smscgem.lib slibce.lib
+
+#all:  spoolerl.app spoolers.app
+#   del *.obj

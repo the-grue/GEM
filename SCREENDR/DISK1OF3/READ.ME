@@ -1,0 +1,27 @@
+
+
+			    GEM/3 Screen Drivers
+			       Jeffery Newman
+			          --------
+			      January 28, 1988
+
+	
+The following tools were used to create the GEM/3 screen drivers:
+
+		Lattice C Compiler Version 2.14
+		Microsoft C Compiler Version 4.0 - (for font utility only)
+		RASM86 Version 1.4
+		LINK86 Version 2.02
+	
+
+	The make files supplied rely on a specific directory structure (the
+directory structure as set up on these disks).  The make files also require 
+an "obj" subdirectory to be in each driver's device-specific directory.  The
+make files are written in the MS make syntax.
+
+	The make files for the specific drivers expect the system fonts to
+exist before they are executed.  To create the system fonts, run the make file
+"fonts.mk" in the fonts subdirectory. 
+
+
+

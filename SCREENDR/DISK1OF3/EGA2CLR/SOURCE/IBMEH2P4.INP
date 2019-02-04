@@ -1,0 +1,17 @@
+sdehm8.ega=zyxg, entry,
+jmptbl,
+monobj,
+monout,
+opttext,
+isin,
+dummy,
+ibmegahm,
+opttxt1,
+opttxt2,
+opttdraw,
+monspblt,
+rastop,
+hirespat,
+enddseg,
+8x14[nop]
+

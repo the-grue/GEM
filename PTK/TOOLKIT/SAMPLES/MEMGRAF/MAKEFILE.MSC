@@ -1,0 +1,26 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+memgrafl.app:
+   cl -AL -Gs -Oas -Zl -Fememgrafl.app -Fomemappl.obj memgraf.c lmscgem.lib llibce.lib
+
+#memgrafs.app:
+#   cl -AS -Gs -Oas -Zl -Fememgrafs.app -Fomemapps.obj memgraf.c smscgem.lib slibce.lib
+
+memaccl.obj: memgraf.c
+   cl -AL -c -Gs -Oas -Zdil -DDESKACC=1 -Fomemaccl.obj memgraf.c
+
+memgrafl.acc: memaccl.obj
+   link ..\startup\c0accmsl memaccl /NOE, memgrafl.acc, nul, lmscgem llibce
+
+#memaccs.obj: memgraf.c
+#   cl -AS -c -Gs -Oas -Zdil -DDESKACC=1 -Fomemaccs.obj memgraf.c
+
+#memgrafs.acc: memaccs.obj
+#   link ..\startup\c0accmss memaccs /NOE, memgrafs.acc, nul, smscgem slibce
+
+#all:  memgrafl.app memgrafs.app memgrafl.acc memgrafs.acc
+#   del *.obj
+
+all: memgrafl.app memgrafl.acc
+   del *.obj

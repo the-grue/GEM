@@ -1,0 +1,332 @@
+/* LIBMAN: ALL: NAME: EMSLIB.C */
+/******************************************************************************
+ *
+ *    Modulname   :  EMSLIB.C
+ *
+ *    Author      :  Robert Schneider
+ *    Version     :  1.0
+ *    Created     :  May 3, 1989
+ *
+ *****************************************************************************
+ *
+ *	-------------------------------------------------------------
+ *	GEM Desktop					  Version 3.1
+ *	Serial No.  XXXX-0000-654321		  All Rights Reserved
+ *	Copyright (C) 1985 - 1989		Digital Research Inc.
+ *	-------------------------------------------------------------
+ *
+ *****************************************************************************/
+
+#include <portab.h>
+
+#define EMS_INT 0x67          /* interrupt of EM-mangager                     */
+
+GLOBAL WORD  emm_error;       /* holds last ems-error                         */
+GLOBAL UWORD emm_bx;          /* return code of bx                            */
+GLOBAL UWORD emm_dx;          /* return code of dx                            */
+GLOBAL UWORD emm_ax;          /* return code of ax                            */
+
+MLOCAL BYTE *emm_name = "EMMXXXX0"; /* emm identification string              */
+
+/***********************************************************************
+ *    ems_int()
+ *
+ *    call EMS-manager EMM
+ *
+ *  Input   :  function-code, handle, logical page, physical-page
+ *  Output  :  TRUE or FALSE
+ ***********************************************************************/
+
+#if HIGH_C
+
+#include <msdos.cf>
+
+GLOBAL WORD ems_int(fkt,dx,bx,al)
+WORD fkt;
+WORD dx;
+WORD bx;
+WORD al;
+{
+   Registers.AX.LH.H = fkt;
+   Registers.AX.LH.L = al;
+   Registers.BX.R    = bx;
+   Registers.DX.R    = dx;
+
+   callint(EMS_INT);
+
+   emm_ax = Registers.AX.R;
+   emm_bx = Registers.BX.R;
+   emm_dx = Registers.DX.R;
+
+   return ((emm_error = emm_ax) ? FALSE : TRUE);
+}
+
+#else /* HIGH_C */
+
+#include <dos.h>
+
+MLOCAL union REGS regs;       /* Prozessorregister fr den Interruptaufruf    */
+MLOCAL struct SREGS sregs;    /* Segmentregister fr den Interrupt-Aufruf     */
+
+GLOBAL WORD ems_int(fkt,dx,bx,al)
+WORD fkt;
+WORD dx;
+WORD bx;
+WORD al;
+{
+   regs.h.ah = fkt;
+   regs.h.al = al;
+   regs.x.bx = bx;
+   regs.x.dx = dx;
+
+   int86(EMS_INT, &regs, &regs);
+
+   emm_ax = regs.x.ax;
+   emm_bx = regs.x.bx;
+   emm_dx = regs.x.dx;
+
+   return ((emm_error = emm_ax) ? FALSE : TRUE);
+}
+
+#endif /* HIGH_C */
+
+/*
+ * strmcmp for small memory model
+ */
+
+MLOCAL WORD ems_strncmp(p1, p2, len)
+BYTE FAR *p1;
+BYTE *p2;
+WORD len;
+{
+   while (len--)
+   {
+      if (*p1 != *p2)
+         return(TRUE);
+   }
+   return(FALSE);
+}
+
+/***********************************************************************
+ *    ems_inst();
+ * 
+ *    Check, whether EMS-manager is installed
+ *
+ * Input    :  none
+ * Output   :  TRUE, EMM installed
+ *             FALSE, EMM not installed
+ ***********************************************************************/
+
+#if HIGH_C
+
+GLOBAL WORD ems_inst()
+{
+   REG BYTE FAR *p;
+
+   Registers.AX.R = 0x3567;         /* Get interrupt-vector 0x67           */
+   calldos();                       /* Call DOS                            */
+   p = MKFP(Registers.ES.R, 10);         /* Create pointer                      */
+
+   return((!ems_strncmp(p,emm_name,strlen(emm_name))) ? TRUE : FALSE);
+ }
+
+#else /* HIGH_C */
+
+GLOBAL WORD ems_inst()
+{
+   REG BYTE *p;
+
+   regs.x.ax = 0x3567;              /* Get interrupt-vector 0x67           */
+   intdosx(&regs, &regs, &sregs);   /* Call DOS                            */
+   p = MKFP(sregs.es, 10);         /* Create pointer                      */
+
+   return((!strncmp(p,emm_name,strlen(emm_name))) ? TRUE : FALSE);
+ }
+
+#endif /* HIGH_C */
+
+/***********************************************************************
+ *    ems_errcode
+ *
+ *    return error-code of last EMS-operation
+ *
+ * Input    :  none
+ * Output   :  error-code or 0 if none available
+ ***********************************************************************/
+
+GLOBAL WORD ems_errcode()
+{
+   return(emm_error);
+}
+
+/* LIBMAN: SRC: HDR: NAME: EMS_NP.C */
+/***********************************************************************
+ *    ems_num_page()
+ *
+ *    Get number of EMS-pages
+ *
+ * Input    :  none
+ * Output   :  number of pages or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_num_page()
+{
+   if (ems_int(0x42,0,0,0))
+      return(emm_dx);
+   else
+      return(FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: EMS_FP.C */
+/***********************************************************************
+ *    ems_free_page()
+ *
+ *    Get number of free pages
+ *
+ * Input    :  none
+ * Output   :  number of free pages or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_free_page()
+{
+   if (ems_int(0x42,0,0,0))
+      return(emm_bx);
+   else
+      return(FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: EMS_FS.C */
+/***********************************************************************
+ *    ems_frame_seg()
+ *
+ *    Get segment of EMS frame
+ *
+ * Input    :  none
+ * Output   :  segment of EMS frame or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_frame_seg()
+{
+   if (ems_int(0x41,0,0,0))
+      return(emm_bx);
+   else
+      return(FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: EMS_ALL.C */
+/***********************************************************************
+ *    ems_alloc
+ *
+ *    allocate given number of EMS-pages and return handle of them
+ *
+ * Input    :  number of pages to allocate (each is 16 KB)
+ * Output   :  handle or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_alloc(pages)
+WORD pages;
+{
+   if (ems_int(0x43,0,pages,0))
+      return(emm_dx);
+   else
+      return(FALSE);
+ }
+
+/* LIBMAN: SRC: HDR: NAME: EMS_MAP.C */
+/***********************************************************************
+ *    ems_map
+ *
+ *    show logical page logp from handle handle in physical page
+ *    physp.
+ *
+ * Input    :  handle   handle of allocated pages
+ *             logp     logical to be shown
+ *             physp    physical page
+ * Output   :  TRUE or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_map(handle,logp,physp)
+WORD handle;
+WORD logp;
+WORD physp;
+{
+   if (ems_int(0x44,handle,logp,physp))
+      return(TRUE);
+   else
+      return(FALSE);
+ }
+
+/* LIBMAN: SRC: HDR: NAME: EMS_FREE.C */
+/***********************************************************************
+ *    ems_free
+ *
+ *    free all pages from handle handle
+ *
+ * Input    :  handle handle which pages to free
+ * Output   :  TRUE or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_free(handle)
+WORD handle;
+{
+   if (ems_int(0x45,handle,0,0))
+      return(TRUE);
+   else
+      return(FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: EMS_VERS.C */
+/***********************************************************************
+ *    ems_version
+ *
+ *    Get version number of EMS-manager
+ *
+ * Input    :  none
+ * Output   :  decimal version number (e.g. 35 for 3.5, 40 for 4.0)
+ ***********************************************************************/
+
+GLOBAL WORD ems_version()
+{
+   if (ems_int(0x46,0,0,0))
+      return( (emm_ax & 0x0f) + (emm_ax >> 4) * 10);
+   else
+      return(FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: EMS_SMAP.C */
+/***********************************************************************
+ *    ems_save_map
+ *
+ *    save current mapping of the four physical pages
+ *
+ * Input    :  handle of previosly allocated pages
+ * Output   :  TRUE or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_save_map(handle)
+WORD handle;
+{
+   if (ems_int(0x47,handle,0,0))
+      return(TRUE);
+   else
+      return(FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: EMS_RMAP.C */
+/***********************************************************************
+ *    ems_restore_map()
+ *
+ *    restore a previosly saved map of the physical pages.
+ *
+ * Input    :  handle of previosly allocated pages
+ * Output   :  TRUE or FALSE
+ ***********************************************************************/
+
+GLOBAL WORD ems_restore_map(handle)
+WORD handle;
+{
+   if (ems_int(0x48,handle,0,0))
+      return(TRUE);
+   else
+      return(FALSE);
+}

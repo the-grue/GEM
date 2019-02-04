@@ -1,0 +1,736 @@
+/* LIBMAN: ALL: NAME: FARDRAW.ASM */
+;------------------------------------------------------------------------------
+;	File	:	FARDRAW.ASM
+;
+;	This file provides calls, which allows a C-programmer to use
+;	user defined objects.
+;
+;	This file can be used with Turbo-C, MS-C and High-C.
+;	See release-notes below.
+;
+;	Version	:	1.00
+;	Created	:	08/15/89
+;	Author  :	Robert Schneider, Digital Research GmbH
+;
+;------------------------------------------------------------------------------
+;------------------------------------------------------------------------------
+;
+;	Note
+;		Switch off stack-checking on your compiler.
+;
+;		This is necessary because the stack-check-function
+;		modifies the values of registers ax and bx. These
+;		registers contain the pointer to the PARMBLK-structure.
+;		and should remain unchanged until fardr_start has been
+;		called.
+;------------------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Beginning for Metaware High-C
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF HC
+
+	DATA SEGMENT WORD PUBLIC 'DATA'
+	DATA ENDS
+
+	FARDRAW SEGMENT BYTE PUBLIC 'CODE'
+
+	CGROUP GROUP FARDRAW
+
+	ASSUME   cs:FARDRAW, ds:DATA
+
+	PUBLIC	fardr_start
+	PUBLIC	fardr_end
+
+IFDEF __SMALL__
+fardr_start	PROC	NEAR
+ELSE
+fardr_start	PROC	FAR
+ENDIF
+
+ENDIF	; HC
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Beginning for Microsoft-C
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF MSC
+
+	_DATA SEGMENT WORD PUBLIC 'DATA'
+	_DATA ENDS
+
+	_BSS SEGMENT WORD PUBLIC 'BSS'
+	_BSS ENDS
+
+	CONST SEGMENT WORD PUBLIC 'CONST'
+	CONST ENDS
+
+	DGROUP GROUP CONST,_BSS,_DATA
+
+IFDEF __SMALL__
+	_TEXT SEGMENT BYTE PUBLIC 'CODE'
+	ASSUME   cs:_TEXT, ds:_DATA
+ELSE
+	_FARDRAW SEGMENT BYTE PUBLIC 'CODE'
+	ASSUME   cs:_FARDRAW, ds:_DATA
+ENDIF
+
+
+	PUBLIC	_fardr_start
+	PUBLIC	_fardr_end
+
+IFDEF __SMALL__
+
+	PUBLIC	_fardr_cs
+
+;
+;	Due to the fact that MS-C does not allow to cast a
+;	near function pointer into a long function pointer,
+;	one has to use this function, to get the current cs.
+;
+_fardr_cs	PROC	NEAR
+	push	cs
+	pop	ax	;	return cs in ax
+	ret
+_fardr_cs	ENDP
+
+ENDIF	; __SMALL__
+
+IFDEF __SMALL__
+_fardr_start	PROC	NEAR
+ELSE
+_fardr_start	PROC	FAR
+ENDIF
+
+ENDIF	; MSC
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Beginning for Turbo-C
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF TC
+
+	_DATA SEGMENT WORD PUBLIC 'DATA'
+	_DATA ENDS
+
+IFDEF __SMALL__
+	_TEXT SEGMENT BYTE PUBLIC 'CODE'
+	ASSUME   cs:_TEXT, ds:_DATA
+ELSE
+	_FARDRAW SEGMENT BYTE PUBLIC 'CODE'
+	ASSUME   cs:_FARDRAW, ds:_DATA
+
+ENDIF
+
+	PUBLIC	_fardr_start
+	PUBLIC	_fardr_end
+
+IFDEF __SMALL__
+_fardr_start	PROC	NEAR
+ELSE
+_fardr_start	PROC	FAR
+ENDIF
+
+ENDIF	; TC
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Beginning of real code
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	push	ax		;	Segment of PARMBLK-Pointer
+	push	bx		;	Offset of PARMBLK-Pointer
+	push	ds		;	Save DS because own will be loaded
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Metaware High-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF HC
+	mov	ax,DATA		;	Get own DATA-Segment
+ENDIF
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Microsoft-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF MSC
+	mov	ax,DGROUP	;	Get own DATA-Segment
+ENDIF
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Turbo-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF TC
+	mov	ax,_DATA	;	Get own DATA-Segment
+ENDIF
+	mov	ds,ax		;	Assign it to DS
+	pop	ax		;	Pop old Data-Segment
+	mov	fd_ds,ax	;	Save ds of AES
+
+	mov	fd_cx,cx	;	Save cx of AES
+	mov	fd_dx,dx	;	Save dx of AES
+	mov	ax,si
+	mov	fd_si,si	;	Save si of AES
+	mov	ax,di
+	mov	fd_di,di	;	Save di of AES
+	mov	ax,es
+	mov	fd_es,ax	;	Save es of AES
+
+	pop	ax		;	Pop Offset of PARMBLK-Pointer to AX
+	pop	dx		;	Pop Segment of PARMBLK-Pointer to DS
+	ret			;	so it is a Cdecl-Function-Return
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Metaware High-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF HC
+fardr_start	ENDP
+
+fardr_end	PROC	FAR
+ENDIF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Microsoft-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF MSC
+_fardr_start	ENDP
+
+_fardr_end	PROC	FAR
+ENDIF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Turbo-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF TC
+_fardr_start	ENDP
+
+_fardr_end	PROC	FAR
+ENDIF
+
+	push	bp
+	mov	bp,sp
+IFDEF __SMALL__
+	mov	bx, 4[bp]
+ELSE
+	mov	bx, 6[bp]
+ENDIF
+	pop	bp
+	mov	cx,fd_cx	;	Restore cx of AES
+	mov	dx,fd_dx	;	Restore dx of AES
+	mov	ax,fd_si
+	mov	si,ax		;	Restore si of AES
+	mov	ax,fd_di
+	mov	di,ax		;	Restore di of AES
+	mov	ax,fd_ds
+	mov	ds,ax		;	Restore ds of AES
+	mov	ax,fd_es
+	mov	es,ax		;	Restore es of AES
+	mov	ax,bx
+	mov	sp,bp
+	pop	bp
+	ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Metaware High-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF HC
+fardr_end	ENDP
+
+FARDRAW		ENDS
+
+DATA SEGMENT WORD PUBLIC 'DATA'
+ENDIF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Microsoft-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF MSC
+_fardr_end	ENDP
+
+IFDEF __SMALL__
+_TEXT		ENDS
+ELSE
+_FARDRAW	ENDS
+ENDIF
+
+_DATA SEGMENT WORD PUBLIC 'DATA'
+ENDIF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Turbo-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF TC
+_fardr_end	ENDP
+
+IFDEF __SMALL__
+_TEXT		ENDS
+ELSE
+_FARDRAW	ENDS
+ENDIF
+
+_DATA SEGMENT WORD PUBLIC 'DATA'
+ENDIF
+
+fd_cx	dw	0
+fd_dx	dw	0
+fd_si	dw	0
+fd_di	dw	0
+fd_ds	dw	0
+fd_es	dw	0
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Metaware High-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF HC
+DATA		ENDS
+ENDIF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Microsoft-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF MSC
+_DATA		ENDS
+ENDIF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	Turbo-C dependent
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IFDEF TC
+_DATA		ENDS
+ENDIF
+
+END
+/* LIBMAN: ALL: NAME: FORMDO.C */
+/*****************************************************************************
+ * form_do()
+ *
+ *	-   The source to form_do() is provided to allow for 
+ *          simpler application tailoring of the AES's generalized 
+ *          form fill-in capability. This source code refers to two 
+ *          new calls:
+ *
+ *          form_keybd()
+ *
+ *          form_button()
+ *
+ *
+ *    NOTE: Use this code only if the normal form_do code doesn't suit 
+ *          your needs.  (_AND AT YOUR OWN RISK_)
+ *
+ *
+ *
+ *          form_do() is as follows:
+ *
+ *****************************************************************************/
+
+#include <portab.h>
+#include <aes.h>
+
+#define FMD_FORWARD  0
+#define FMD_BACKWARD 1
+#define FMD_DEFLT    2
+#define FMD_CONTROL  3
+#define FMD_END      4
+
+#define EXFL_CONTROL 0x0200
+#define EXFL_END     0x0400
+
+MLOCAL WORD find_obj    _((OBJECT FAR *tree, WORD start_obj, WORD which,
+                           WORD extype));
+MLOCAL WORD fm_inifld   _((OBJECT FAR *tree, WORD start_fld));
+
+/*
+ * routine to scan an object tree for a specified
+ * ob_flags or for a given extended object type.
+ */
+
+MLOCAL WORD find_obj(tree, start_obj, which, extype)
+REG OBJECT FAR *tree;
+WORD start_obj;
+WORD which;
+WORD extype;
+{
+   REG WORD obj, flag, theflag, inc;
+
+   obj = 0;
+   flag = EDITABLE;
+   inc = 1;
+   switch(which)
+   {
+      case FMD_BACKWARD:
+         inc = -1;
+      /* fall thru */
+      case FMD_FORWARD:
+         obj = start_obj + inc;
+         break;
+
+      case FMD_DEFLT:
+         flag = DEFAULT;
+         break;
+
+      case FMD_CONTROL:
+         flag = EXFL_CONTROL;
+         break;
+
+      case FMD_END:
+         flag = EXFL_END;
+         break;
+   }
+
+   while ( obj >= 0 )
+   {
+      theflag = tree[obj].ob_flags;
+      if (flag)
+      {
+         if (theflag & flag && !(theflag & HIDETREE))
+         {
+            if (!extype)
+               return(obj);
+            if ((tree[obj].ob_type >> 8) == extype)
+               return(obj);
+         }
+      }
+
+      if (theflag & LASTOB)
+         obj = -1;
+      else
+         obj += inc;
+   }
+
+   return(start_obj);
+}
+
+MLOCAL WORD fm_inifld(tree, start_fld)
+
+OBJECT FAR *tree;
+WORD start_fld;
+{
+/*
+ * position cursor on the starting field
+ */
+   if (start_fld == 0)
+      start_fld = find_obj(tree, 0, FMD_FORWARD, 0);
+
+   return( start_fld );
+}
+
+GLOBAL WORD form_exdo(tree, start_fld)
+
+REG OBJECT FAR *tree;
+WORD start_fld;
+{
+   REG WORD edit_obj;
+       WORD next_obj;
+       WORD which, cont;
+       WORD idx;
+       WORD mx, my, mb, ks, br;
+       UWORD kr;
+
+   wind_update(BEG_UPDATE);
+   wind_update(BEG_MCTRL);
+/*
+ * set starting field to edit, if want
+ * first editing field then walk tree
+ */
+   next_obj = fm_inifld(tree, start_fld);
+   edit_obj = 0;
+/*
+ * interact with user
+ */
+   cont = TRUE;
+   while(cont)
+   {
+/*
+ * position cursor on the selected editting field
+ */
+      if ( (next_obj != 0) && (edit_obj != next_obj) )
+      {
+         edit_obj = next_obj;
+         next_obj = 0;
+         objc_edit(tree, edit_obj, 0, &idx, EDINIT);
+      }
+/*
+ * wait for mouse or key
+ */
+      which = evnt_multi(MU_KEYBD | MU_BUTTON, 
+                         0x02, 0x01, 0x01, 
+                         0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0,
+                         0x0L,
+                         0, 0,
+                         &mx, &my, &mb, &ks, &kr, &br);
+/*
+ * handle keyboard event
+ */
+     if (which & MU_KEYBD)
+     {
+         switch( kr )
+         {
+/*
+ * translate a return into a cursor down if it is not a shift-return
+ */
+            case 0x1c0d:
+               if (!(ks & (K_RSHIFT|K_LSHIFT)))
+                  kr = 0x5000;
+               break;
+
+            default:
+               break;
+         }
+
+         if ((ks & K_CTRL) || kr == 0x4f00)
+         {
+/*
+ * if its the end key, search for an object with the EXFL_END flag
+ */
+            if (kr == 0x4f00)
+               next_obj = find_obj(tree, 0, FMD_END, 0);
+/*
+ * else search for an object containing the kr value in extended type
+ */
+            else
+               next_obj = find_obj(tree, 0, FMD_CONTROL, kr & 0x1f);
+            if (next_obj != -1)
+            {
+               br = (ks & (K_RSHIFT|K_LSHIFT)) ? 2 : 1;
+               cont = form_button(tree, next_obj, br, &next_obj);
+            }
+         }
+         else
+         {
+            cont = form_keybd(tree, edit_obj, next_obj, kr, &next_obj, &kr);
+            if (kr)
+               objc_edit(tree, edit_obj, kr, &idx, EDCHAR);
+         }
+     }
+/*
+ * handle button event
+ */
+     if (which & MU_BUTTON)
+     {
+         next_obj = objc_find(tree, ROOT, MAX_DEPTH, mx, my);
+         if (next_obj == -1)
+         {
+/*
+ * sound(TRUE, 440, 2);
+ */
+            next_obj = 0;
+         }
+         else
+            cont = form_button(tree, next_obj, br, &next_obj);
+      }
+/*
+ * handle end of field  clean up
+ */
+      if ( (!cont) || ((next_obj != 0) && (next_obj != edit_obj)) )
+         objc_edit(tree, edit_obj, 0, &idx, EDEND);
+   }
+
+   wind_update(END_MCTRL);
+   wind_update(END_UPDATE);
+/*
+ * return exit object hi bit may be set
+ * if exit obj. was double-clicked
+ */
+   return(next_obj);
+}
+
+/*
+ * NOTE:   This is the end of the source code for form_do.  Remember this 
+ *         code was provided for you to use or modify in the writing of 
+ *         your own code to perform similar functions.  BEWARE, check your 
+ *         code carefully !!
+ */
+/* LIBMAN: ALL: NAME: TRIMAGE.C */
+/******************************************************************************
+ *
+ *    TRGIMAGE.C
+ *
+ *    Procedures, that convert icons and images of an object tree
+ *    into device specific format.
+ *
+ * Author   :  Robert Schneider
+ * created  :  12/12/88
+ * Version  :  1.00
+ *
+ *****************************************************************************/
+
+#include <portab.h>
+#include <aes.h>
+#include <vdi.h>
+
+GLOBAL VOID fix_icon       _((WORD vdi_handle, OBJECT FAR *tree));
+GLOBAL VOID trans_gimage   _((WORD vdi_handle, OBJECT FAR *tree, WORD obj));
+MLOCAL VOID vdi_trans      _((WORD vdi_handle, VOID FAR *saddr, WORD swb,
+                              VOID FAR *daddr, WORD dwb, WORD h));
+MLOCAL VOID vdi_fix        _((MFDB FAR *pfd, VOID FAR *theaddr, WORD wb,
+                              WORD h));
+
+
+/*----------------------------------*/
+/*          fix_icon                */
+/* Runs through a tree and converts,*/
+/* and converts icons and images    */
+/*----------------------------------*/
+GLOBAL VOID fix_icon(vdi_handle, tree)
+
+WORD vdi_handle;
+OBJECT FAR *tree;
+{
+   WORD obj = 0;
+   WORD type;
+
+   do
+   {
+      type = tree[obj].ob_type & 0xff;
+      if (type == G_ICON || type == G_IMAGE)
+         trans_gimage(vdi_handle, tree, obj);
+   } while (!(tree[obj++].ob_flags & LASTOB));
+}
+
+/*--------------------------------*/
+/*        trans_gimage()          */
+/* Transform bit images and icons */
+/*--------------------------------*/
+GLOBAL VOID trans_gimage(vdi_handle, tree, obj)
+
+WORD vdi_handle;
+OBJECT FAR *tree;
+WORD obj;
+{
+   ICONBLK FAR *ic;
+   BITBLK  FAR *ib;
+   WORD    FAR *taddr;
+   WORD         wb, hl;
+
+   ic = (ICONBLK *)tree[obj].ob_spec;
+   ib = (BITBLK *)tree[obj].ob_spec;
+
+   if ((tree[obj].ob_type & 0xff) == G_ICON)
+   {
+      taddr = ic->ib_pmask;
+      wb    = ic->ib_wicon;
+      wb    = wb >> 3;                   /* pixels to bytes */
+      hl    = ic->ib_hicon;
+      vdi_trans(vdi_handle, taddr, wb, taddr, wb, hl); /* transform mask */
+
+      taddr = ic->ib_pdata;
+   }
+   else if ((tree[obj].ob_type & 0xff) == G_IMAGE)
+   {
+      taddr = ib->bi_pdata;
+      wb    = ib->bi_wb;
+      hl    = ib->bi_hl;
+   }
+   else
+      return;
+
+   vdi_trans(vdi_handle, taddr, wb, taddr, wb, hl);   /* transform image or  */
+                                                      /* icon data           */
+}
+
+/*------------------------------*/
+/*        vdi_trans()           */
+/*   'on the fly' transform     */
+/*------------------------------*/
+MLOCAL VOID vdi_trans(vdi_handle, saddr, swb, daddr, dwb, h)
+
+WORD vdi_handle;
+VOID FAR *saddr;
+WORD swb;
+VOID FAR *daddr;
+WORD dwb;
+WORD h;
+{
+   MFDB src, dst;                    /* local MFDB                   */
+
+   vdi_fix(&src, saddr, swb, h);
+   src.ff = TRUE;                    /* standard format              */
+
+   vdi_fix(&dst, daddr, dwb, h);
+   dst.ff = FALSE;                   /* transform to device          */
+                                     /* specific format              */   
+   vr_trnfm(vdi_handle, &src, &dst ); 
+}
+
+/*------------------------------*/
+/*          vdi_fix()           */
+/* set up MFDB for transform    */
+/*------------------------------*/
+
+MLOCAL VOID vdi_fix(pfd, theaddr, wb, h)
+
+MFDB FAR *pfd;
+VOID FAR *theaddr;
+WORD wb, h;
+{
+   pfd->fww = wb >> 1;             /* # of bytes to words          */
+   pfd->fwp = wb << 3;             /* # of bytes to to pixels      */
+   pfd->fh = h;                    /* height in scan lines         */
+   pfd->np = 1;                    /* number of planes             */
+   pfd->mp = theaddr;              /* memory pointer               */
+}
+/* LIBMAN: ALL: NAME: EV_EVENT.C */
+/******************************************************************************
+ *
+ * ev_event.c
+ *
+ *    This source handles the call to evnt_multi by passing it the right
+ *    parameters from the MEVENT-structure, so a DOS-user need not be
+ *    concerned with all unneeded parameters.
+ *
+ * Input :
+ *    MEVENT *mevent;
+ *
+ * Ouput :
+ *    WORD event     -     type of event that occured
+ *
+ ******************************************************************************/
+
+#include "portab.h"
+#include "aes.h"
+
+WORD evnt_event(mevent)
+
+MEVENT FAR *mevent;
+{
+   return ( evnt_multi(
+               mevent->e_flags,
+               mevent->e_bclk, mevent->e_bmsk, mevent->e_bst,
+               mevent->e_m1flags,
+               mevent->e_m1.g_x, mevent->e_m1.g_y,
+               mevent->e_m1.g_w, mevent->e_m1.g_h,
+               mevent->e_m2flags,
+               mevent->e_m2.g_x, mevent->e_m2.g_y,
+               mevent->e_m2.g_w, mevent->e_m2.g_h,
+               mevent->e_mepbuf,
+               FPOFF(mevent->e_time), FPSEG(mevent->e_time),
+               &mevent->e_mx, &mevent->e_my, (WORD FAR *)&mevent->e_mb,
+               (WORD FAR *)&mevent->e_ks, &mevent->e_kr,
+               (WORD FAR *)&mevent->e_br));
+}

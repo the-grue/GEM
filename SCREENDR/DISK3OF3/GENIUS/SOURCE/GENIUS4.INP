@@ -1,0 +1,17 @@
+sdgen8.vga=zyxg, entry,
+jmptbl,
+monobj,
+monout,
+opttext,
+isin,
+dummy,
+genius,
+opttxt1,
+opttxt2,
+opttdraw,
+monspblt,
+rastop,
+hirespat,
+enddseg,
+8x16[nop]
+

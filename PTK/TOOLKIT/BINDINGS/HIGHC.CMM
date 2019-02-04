@@ -1,0 +1,124 @@
+/* LIBMAN: AES: NAME: AESLIB\MAKEFILE */
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = aesbind.obj
+aeslib:  $(OBJ)
+      @echo AES is done
+/* LIBMAN: AES: NAME: AESLIB\LIBAES.RSP */
++ AESLIB\AESBIND
+/* LIBMAN: VDI: NAME: VDILIB\MAKEFILE */
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vdibind.obj
+vdi: $(OBJ)
+      @echo VDI is done
+/* LIBMAN: VDI: NAME: VDILIB\LIBVDI.RSP */ 
++ VDILIB\VDIBIND
+/* LIBMAN: DOS: NAME: DOSLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = dosbind.obj
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+doslib: $(OBJ)
+      @echo DOSLIB is done
+/* LIBMAN: DOS: NAME: DOSLIB\LIBDOS.RSP */ 
++ DOSLIB\DOSBIND
+/* LIBMAN: OBJ: NAME: OBLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = oblib.obj
+oblib: $(OBJ)
+   @echo OBLIB is done
+/* LIBMAN: OBJ: NAME: OBLIB\LIBOB.RSP */ 
++ OBLIB\OBLIB
+/* LIBMAN: RCL: NAME: RCLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = rclib.obj
+rclib: $(OBJ)
+      @echo RCLIB is done
+/* LIBMAN: RCL: NAME: RCLIB\LIBRC.RSP */ 
++ RCLIB\RCLIB
+/* LIBMAN: XLI: NAME: XFMLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = xfmlib.obj
+xfmlib: $(OBJ)
+      @echo XFMLIB is done
+/* LIBMAN: XLI: NAME: XFMLIB\LIBX.RSP */ 
++ XFMLIB\XFMLIB
+/* LIBMAN: EMS: NAME: EMSLIB\MAKEFILE */ 
+.SUFFIXES .obj .c .obj .asm
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = emslib.obj
+emslib: $(OBJ)
+      @echo EMSLIB is done
+/* LIBMAN: EMS: NAME: EMSLIB\LIBEMS.RSP */ 
++ EMSLIB\EMSLIB
+/* LIBMAN: MIS: NAME: MISC\MAKEFILE */ 
+.SUFFIXES .obj .c .obj .asm
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+.asm.obj:
+   masm $* /DHC /MX;
+OBJ = fardraw.obj formdo.obj trimage.obj ev_event.obj
+misc: $(OBJ)
+      @echo MISC is done
+/* LIBMAN: MIS: NAME: MISC\LIBMISC.RSP */ 
++MISC\FARDRAW &
++MISC\FORMDO &
++MISC\TRIMAGE &
++MISC\EV_EVENT
+/* LIBMAN: ALL: NAME: MAKELIB.BAT */ 
+echo off
+if "%1" == "" goto argu_err
+cd aeslib
+ndmake
+cd ..\vdilib
+ndmake
+cd ..\doslib
+ndmake
+cd ..\oblib
+ndmake
+cd ..\rclib
+ndmake
+cd ..\xfmlib
+ndmake
+cd ..\emslib
+ndmake
+cd ..\misc
+ndmake
+cd ..
+IF EXIST %1HCGEM.LIB DEL %1HCGEM.LIB
+LIB %1HCGEM.LIB @AESLIB\LIBAES.RSP ;
+LIB %1HCGEM.LIB @VDILIB\LIBVDI.RSP ;
+LIB %1HCGEM.LIB @DOSLIB\LIBDOS.RSP ;
+LIB %1HCGEM.LIB @OBLIB\LIBOB.RSP ;
+LIB %1HCGEM.LIB @RCLIB\LIBRC.RSP ;
+LIB %1HCGEM.LIB @XFMLIB\LIBX.RSP ;
+LIB %1HCGEM.LIB @EMSLIB\LIBEMS.RSP ;
+LIB %1HCGEM.LIB @MISC\LIBMISC.RSP ;
+DEL %1HCGEM.BAK
+goto exit
+:argu_err
+echo usage:
+echo        MAKELIB L to create large memory model
+echo        MAKELIB S to create small memory model
+echo Note:
+echo        In either case, you have to make sure that
+echo        your compiler configuration file contains the
+echo        right command line option to generate small
+echo        or large memory model object files!
+:exit
+/* LIBMAN: ALL: NAME: GEMLIB.PRO */ 
+#pragma memory_model(Large);
+#pragma Off (Prototype_override_warnings);

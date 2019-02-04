@@ -1,0 +1,4 @@
+output vfntcnv
+file vfntcnv
+map = vfntcnv.map s, m
+lib /hc/small/hcse

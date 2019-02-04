@@ -1,0 +1,86 @@
+
+               LHconfig 1.0 - configure program for LHgem/HIgem  
+                                 for use with
+                           Digital Research's GEM 3.x 
+
+	        (C)Ken Mauro 1994-1999 - all rights reserved.
+                                         Free for non commercial use 
+===============================================================================
+
+LHGEM.EXE and HIGEM.EXE are default configured for a standard GEM 3.x system.
+
+If your system is not a standard GEM 3.x installation, the LHconfig.EXE 
+configuration program is included as part of the LHgem package. It will allow 
+you to configure LHgem.exe (MS-DOS) or HIgem (DR-DOS) to find a chosen default 
+GEM *.app (usually the GEM Desktop) at startup.
+
+This program has been tested with the following 3rd party applications..
+
+PerForm......... by Delrina technologies inc.           
+Finesse......... by Logitech inc.
+Publish-it!..... by Timeworks inc.               
+Key Publisher... by Sofkey Software Products.
+CCP's Artline... Digital Research & CCP gmbh.(Germany)
+
+If you are using one the above applications, the GEM system software
+may be installed using a directory structure specific to that application.
+
+
+\gemapps		location for the GEM *.app program files
+\gemapps\gemsys 	location for GEM system files including GEMVDI.EXE 
+			and GEM'S desktop.app, the only APP loaded by default.
+			(LHgem & HIgem are pre-configured for this setup.)
+
+
+For example, if you have Key publisher installed you might see..
+
+
+\keypub			location for keypub.app - desktop publishing program.
+\keypub\gemsys		location for GEM system files including GEMVDI.EXE.  
+
+
+To configure LHgem/HIgem for the above example..
+------------------------------------------------
+LHgem.exe, HIgem.exe and LHapp.exe must all be located in the same directory.
+At the DOS prompt, enter the following commands.. 
+
+
+LHCONFIG \keypub\keypub.app	then follow the menu instructions.	
+
+
+After LHconfig is finished copy LHgem.exe (MS-DOS) or HIgem.exe (DR-DOS) 
+to the GEMSYS subdirectory, this example assumes you are on drive C..
+
+
+C:> copy lhgem.exe \keypub\gemsys	(then press enter.)
+
+
+Using Publish-it as an example
+------------------------------
+Before editing your startup batch file, keypub.bat might looks like this..
+
+cd \keypub\gemsys
+gemvdi \keypub\keypub.app
+
+
+After editing, your startup batch file (keypub.bat) looks like this..
+
+
+cd \keypub\gemsys
+gemvdi \keypub\keypub.app -LHGEM.EXE            ( -LHGEM or LHGEM.EXE - ok)
+
+
+This example can be extended to other non-standard GEM installations.
+At this point, you can resume reading where you left off at the LHgem.doc file.
+
+********************************************************************************
+In closing, the legal stuff..
+
+If you agree to use Lhconfig.exe, you must agree to assume all responsiblity
+in determining it's suitability to your system, and the results of any liability
+or consequences that might result from it's use. If you do not agree with these
+terms, simply erase, discard or destroy this software package and documentation.
+
+All names and products mentioned are trademarks of their respective companies.
+********************************************************************************
+

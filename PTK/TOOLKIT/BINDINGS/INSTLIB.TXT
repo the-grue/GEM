@@ -1,0 +1,157 @@
+@COMPILER
+{
+NAME     |Turbo-C
+FILE     |TURBOC
+COMMENT  |
+Edit portab.h located in
+\TOOLKIT\INC and set the
+TURBO_C identifier to 1 and
+all remaining identifiers to 0!
+}
+{
+NAME     |MS-C
+FILE     |MSC
+COMMENT  |
+Edit portab.h located in
+\TOOLKIT\INC and set the
+MS_C identifier to 1 and
+all remaining identifiers to 0!
+}
+{
+NAME     |High-C
+FILE     |HIGHC
+COMMENT  |
+Edit portab.h located in
+\TOOLKIT\INC and set the
+HIGH_C identifier to 1 and
+all remaining identifiers to 0!
+}
+@LIBRARIES
+{
+NAME     |GEM/3_AES
+ABBREV   |AES:
+SOURCE   |AESBIND.SRC
+HEADER   |AESLIB.HDR
+FOLDER   |AESLIB
+SUBFOLDER|
+HELP     |
+This library contains all
+calls to the GEM application
+environment services.
+}
+{
+NAME     |GEM/3_VDI
+ABBREV   |VDI:
+SOURCE   |VDIBIND.SRC
+HEADER   |VDILIB.HDR
+FOLDER   |VDILIB
+SUBFOLDER|ESCAPE;CONTROL;ATTRIB;OUTPUT;RASTER;INPUT;INQUIRE
+HELP     |
+This library contains all
+calls to the GEM virtual
+device interface.
+}
+{
+NAME     |Operating_System
+ABBREV   |DOS:
+SOURCE   |DOSBIND.SRC
+HEADER   |DOSLIB.HDR
+FOLDER   |DOSLIB
+SUBFOLDER|
+HELP     |
+This library contains several
+calls to the operating system.
+}
+{
+NAME     |Expanded_Memory
+ABBREV   |EMS:
+SOURCE   |EMSLIB.SRC
+HEADER   |EMSLIB.HDR
+FOLDER   |EMSLIB
+SUBFOLDER|
+HELP     |
+This library contains calls to the
+Expanded Memory Manager. This allows
+you to access more than 640K of memory.
+}
+{
+NAME     |Enhanced_Objects
+ABBREV   |OBJ:
+SOURCE   |OBLIB.SRC
+HEADER   |OBLIB.HDR
+FOLDER   |OBLIB
+SUBFOLDER|
+HELP     |
+This library contains functions for
+easier dialog and object handling.
+}
+{
+NAME     |Raster_Functions
+ABBREV   |RCL:
+SOURCE   |RCLIB.SRC
+HEADER   |RCLIB.HDR
+FOLDER   |RCLIB
+SUBFOLDER|
+HELP     |
+This library contains functions for
+raster operations.
+}
+{
+NAME     |Transformations
+ABBREV   |XLI:
+SOURCE   |XFMLIB.SRC
+HEADER   |XFMLIB.HDR
+FOLDER   |XFMLIB
+SUBFOLDER|
+HELP     |
+This library contains functions for
+coordinate transformation. You will
+use this library when dealing with
+different output devices.
+}
+{
+NAME     |Miscellaneous
+ABBREV   |MIS:
+SOURCE   |MISC.SRC
+HEADER   |
+FOLDER   |MISC
+SUBFOLDER|
+HELP     |
+This library contains several files
+that are of help when programming
+GEM/3 applications.
+}
+@MODEL
+{
+NAME     |Common
+ABBREV   |CMM:
+EXT      |CMM
+HELP     |
+This model leaves the sources
+untouched. All functions are
+placed in one source.
+
+Not optimized!
+}
+{
+NAME     |Library
+ABBREV   |LIB:
+EXT      |LIB
+HELP     |
+This model creates one source
+for all functions belonging to
+a specific category within one
+source.
+Optimized!
+}
+{
+NAME     |Separated
+ABBREV   |SRC:
+EXT      |SEP
+HELP     |
+This model creates one source
+for each function within a
+specific library.
+
+Highly optimized!
+}

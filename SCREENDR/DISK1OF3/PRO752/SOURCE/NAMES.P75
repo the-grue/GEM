@@ -1,0 +1,7 @@
+
+sht_nm	db	'PROSYNC 752'
+	rb	13 - length sht_nm
+
+lng_nm	db	'Quadram 752 X 358 X 4 Prosync driver'
+	rb	81 - length lng_nm
+

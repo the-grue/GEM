@@ -1,0 +1,122 @@
+
+
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+	                  G E M S E T U P    3 . 0    
+
+               S T R I N G    S E T   T R A N S L A T I O N  
+
+                            G U I D E L I N E S
+
+
+                               Cregg Lund			     
+			  Digital Research Inc.
+			     December, 1987
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+
+
+
+
+
+	GEMSETUP gets most of it's character strings from 2 files called:
+GEMSETUP.TXT and GEMSETUP.MSG.  The TXT file contains all the choices 
+for device drivers.  The MSG file contains prompts, messages, and other
+strings used by GEMSETUP.  
+
+	To translate the strings in the MSG file, follow these guidelines:
+
+	1) The beginning and end of each string set is marked by open and 
+	   close braces ('{' and '}').  The first character of each string
+	   set must immediatly follow the open brace.  The closing brace must
+	   be on the next line after the last character of the string set.
+
+	   example:
+	   {EXIT TO DOS
+	   CONTINUE                                                  
+	   }
+
+	2) Above each string set is a message which states the number of 
+	   lines that particular string set occupies.  That number must be
+	   maintained.  DO NOT add any additional lines.  If after a string
+	   is translated it occupies less lines, then leave the last lines 
+	   blank.
+
+	3) DO NOT use editors which insert hidden characters (i.e. ESC 
+	   characters.)  Also, avoid using tabs.  Use spaces instead.
+
+	4) When translating a line which has a PIPE character ('|') in it,
+	   be sure and leave the PIPE in it's original line.  The PIPE can
+	   be moved around to any column in the original line.
+
+	5) DO NOT do anything to the lines which begin with AT_SIGNs, ('@').
+	   Do not translate them, do not move them, do not touch them.
+
+	6) Don't bother trying to do anything with the lines which say:
+	   RESERVED.
+
+	7) The string sets under the @PROMPT_PTR header are indented for 
+	   cosmetic reasons.  If more room is needed for translating a 
+	   particular line, then use the indentation space; however, keep
+	   in mind that unindented screens will look inconsistent with the
+	   rest.
+
+	8) Avoid indenting any string sets other than the strings under
+	   @PROMPT_PTR.
+
+	   
+
+
+
+
+	To translate the strings in the TXT file, follow these guidelines:
+
+	1) The TXT file is catagorized by hardware types.  Each catagory
+	   has a number of devices within it.  Each device has different
+	   information associated with it.  The  begininng and ending of the
+	   device information is marked with open and close braces ('{' and
+	   '}' ).  An example of device information, SCREEN in this case, 
+	   follows:
+
+	    {
+	    |DESCRIPTION|AT&T DEB Card 16-Color Display (640x400) 
+	    |SHORT DESCR|AT&T 16 Clr
+	    |FILENAME|SDDEB8.EGA
+	    |SRC DISK|GEM SCREEN DISK #1
+	    |FNT WILDCRD|*.EGA
+	    |LONG DESCRP|
+	    Choose this entry if the AT&T DEB Graphics adapter card and 16-
+	    color display are installed in your computer.  This display 
+	    offers a resolution of 640 horizontal by 400 vertical pixels.
+	    }
+
+
+	2) The strings between the PIPEs ('|') should not be translated.
+	   The only strings that should be translated are the strings 
+	   following the DESCRIPTION, the SRC DISK, the FONT DISK and the 
+	   LONG DESCRP labels.  All other strings are transparent to the 
+	   user.  If the 'labels' between the PIPEs are translated, then 
+	   the strings under the @KEYWORDS_PTR header in the GEMSETUP.MSG
+	   file should be modified to reflect those translations.
+
+	3) The DESCRIPTION strings must not go beyond the end of the line,
+	   (i.e. maximum of 64 characters not counting <cr><lf>.)  The
+	   DESCRIPTION strings are what the user sees as choices for 
+	   screens, printers, etc.
+
+	4) The SCR DISK, and FONT DISK strings must follow the normal DOS
+	   file naming conventions (8 characters plus 3 for extension.)
+	   These strings must match EXACTLY the strings under the @HLAB_PTR
+	   header in the GEMSETUP.MSG file. These strings are what the user
+	   sees when asked to "Insert the disk labeled ...".
+
+	5) The LONG DESCRP strings can be up to 10 lines long and the current
+	   number of lines used for each LONG DESCRP does not need to be 
+	   maintained.  Start the LONG DESCRP string on the next line after
+	   the LONG DESCRP label.  These string sets are what the user sees
+	   when he pushes <F1> to get device information.

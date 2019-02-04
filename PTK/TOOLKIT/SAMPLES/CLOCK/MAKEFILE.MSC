@@ -1,0 +1,26 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+clockl.app:
+   cl -AL -Gs -Oas -Zl -Feclockl.app -Foclappl.obj clock.c lmscgem.lib llibce.lib
+
+#clocks.app:
+#   cl -AS -Gs -Oas -Zl -Feclocks.app -Foclapps.obj clock.c smscgem.lib slibce.lib
+#
+claccl.obj: clock.c
+   cl -AL -c -Gs -Oas -Zdil -DDESKACC=1 -Foclaccl.obj clock.c
+
+clockl.acc: claccl.obj
+   link ..\startup\c0accmsl claccl /NOE, clockl.acc, nul, lmscgem llibce
+
+#claccs.obj: clock.c
+#   cl -AS -c -Gs -Oas -Zdil -DDESKACC=1 -Foclaccs.obj clock.c
+#
+#clocks.acc: claccs.obj
+#   link ..\startup\c0accmss claccs /NOE, clocks.acc, nul, smscgem slibce
+#
+#all:  clockl.app clocks.app clockl.acc clocks.acc
+#   del *.obj
+#
+all:   clockl.app clockl.acc
+   del *.obj

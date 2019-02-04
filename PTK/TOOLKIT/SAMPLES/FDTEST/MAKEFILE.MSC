@@ -1,0 +1,20 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+fdtestl.obj:   fdtest.c
+   cl -c -AL -Gs -Oas -Zl -Fofdtestl.obj fdtest.c
+
+#fdtests.obj:   fdtest.c
+#   cl -c -AS -Gs -Oas -Zl -Fofdtests.obj fdtest.c
+
+fdtestl.app:   fdtestl.obj
+   cl -AL -Fefdtestl.app fdtestl.obj lmscgem.lib llibce.lib
+
+#fdtests.app:   fdtests.obj
+#   cl -AS -Fefdtests.app fdtests.obj smscgem.lib slibce.lib
+
+#all:  fdtestl.app fdtests.app
+#   del *.obj
+
+all:  fdtestl.app
+   del *.obj

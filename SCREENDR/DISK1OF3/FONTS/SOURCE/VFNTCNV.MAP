@@ -1,0 +1,374 @@
+
+Memory Map for VFNTCNV.EXE  1/15/88                                    Page 1  
+
+Groups:
+
+    
+    Name       Address  Size  DSalloc
+    CGROUP          0   6CF0         
+    DGROUP       6CE0   1150         
+    PGROUP          0    D20         
+
+Sections:
+
+    
+    Name        Maddr Msize  Daddr Dsize Lev Ov# Fth Pload
+                    0  7E80    200  7E80   0   0   0   No 
+
+Modules:
+
+    Module VFNTCNV from file VFNTCNV
+        Segment CODE.CODE, Addr = 0, Size = 0
+        Segment DATA.DATA, Addr = 6CEE, Size = 0
+        Segment HEAP.HEAP, Addr = 7E2C, Size = 0
+        Segment DATA.DATA, Addr = 6CEE, Size = B7F
+            BITMSK      6CE: 182   CHAR_WID    6CE:  14   CHRBM       6CE:  1E
+            CHRBMW      6CE:  3E   FNAME       6CE:  60   FONT_BUF    6CE:  1C
+            FONT_COU    6CE:  12   FONT_FIL    6CE:  16   FONT_HEI    6CE:   E
+            FORM_WID    6CE:  10   HDRLBS      6CE: 38C   HDRVAL      6CE: 6C4
+            HDR_FILE    6CE:  1A   HDR_NAME    6CE:  50   OFFSETS     6CE: 18A
+            OUT_FILE    6CE:  18   PBUFFER     6CE: 102   PFONT_LI    6CE:  82
+            PFONT_NA    6CE:  40   RESTBL      6CE: 69A
+        Segment VFNTCNV.CODE, Addr = 0, Size = D18
+            EMIT_CMT      0: 504   EMIT_FNT      0: 8AE   EMIT_HDR      0: 568
+            EMIT_WTB      0: 807   ERROR         0: D05   INIT_HDR      0: 98E
+            MAIN          0:   0   MKCHRBM       0: B72   MKFNTBM       0: ABC
+            OPEN_10P      0: C09   OPEN_8PT      0: C8B
+        Segment MODEL.DATA, Addr = 7872, Size = 1
+            MODEL?      6CE: B92   SMALL?      6CE: B92
+    Module INIT from file /HC/SMALL/HCSE
+        Segment CODE.CODE, Addr = 0, Size = 0
+        Segment DATA.DATA, Addr = 786E, Size = 4
+            _MWSTACK_   6CE: B8E
+        Segment ??HEAP.HEAP, Addr = 7E30, Size = 0
+        Segment ?STACK.NIL, Addr = 7E30, Size = 50
+        Segment _MWLTCONV.DATA, Addr = 7874, Size = 8
+        Segment DSEG.DATA, Addr = 787C, Size = 25
+            _MW8087     6CE: BB8   _MWARGLEN   6CE: BB0   _MWARGP     6CE: BA8
+            _MWARGVP    6CE: BAC   _MWCPU      6CE: BA0   _MWENVP     6CE: BB2
+            _MWES       6CE: BA2   _MWINPUT    6CE: B9C   _MWIS_286   6CE: BB6
+            _MWIS_386   6CE: BB7   _MWOS       6CE: BA1   _MWOUTPUT   6CE: B9E
+            _MWPROGNA   6CE: BBB   _OSMAJOR    6CE: BBF   _OSMINOR    6CE: BC0
+        Segment ?INIT.CODE, Addr = D18, Size = 24A
+            $STRT$        0: D1F   _MWGETDS      0: F5F   _MWHEAPHI     0: F24
+            _MWHEAPLO     0: F1F   _MWINIT       0: D1F   _MWSET_ST     0: F49
+            _MWSS         0: F5C
+        Segment _MW87_USED1.DATA, Addr = 78A1, Size = 8
+    Module PRINTF from file /HC/SMALL/HCSE
+        Segment _MWPRINTF.CODE, Addr = F62, Size = A4
+            FPRINTF       0: FEF   PRINTF        0: FD7   VFPRINTF      0: F9B
+            VPRINTF       0: FC0
+        Segment ?PRINTF_EXTERNALS.DATA, Addr = 78AA, Size = 22
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+    Module FGETS from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+
+Memory Map for VFNTCNV.EXE  1/15/88                                    Page 2  
+
+        Segment _MWFGETS.CODE, Addr = 1006, Size = 315
+            FGETS         0:12D0   GETS          0:1303
+        Segment _MWLTCONV.DATA, Addr = 7874, Size = 8
+    Module SCANF from file /HC/SMALL/HCSE
+        Segment _MWSCANF.CODE, Addr = 131C, Size = B48
+            FSCANF        0:1E2C   SCANF         0:1E10   SSCANF        0:1E47
+            _MWADVANC     0:131C   _MWAT_EOF     0:1409   _MWINPUT_     0:1399
+            _MWNEXT_I     0:13AC   _MWPUSH_B     0:13CF   _MWSET_IN     0:13FC
+        Segment @_MWSCANF.DATA, Addr = 78D4, Size = C
+        Segment ?SCANF_EXTERNALS.DATA, Addr = 78E0, Size = 2
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+    Module FSEEK from file /HC/SMALL/HCSE
+        Segment _MWSTDIO1C.CODE, Addr = 1E64, Size = 16C
+            FSEEK         0:1E64   FTELL         0:1F40   REWIND        0:1FB6
+        Segment @_MWSTDIO1C.DATA, Addr = 78E2, Size = 1
+    Module FCLOSE from file /HC/SMALL/HCSE
+        Segment _MWFCLOSE.CODE, Addr = 1FD0, Size = 21C
+            FCLOSE        0:20C9   FFLUSH        0:1FE5   _MWCFCLOS     0:218C
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+    Module FOPEN from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWFOPEN.CODE, Addr = 21EC, Size = 2A4
+            FOPEN         0:240D   _MWGET_FI     0:21EC   _MWSET_FL     0:237A
+    Module FGETC from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWFGETC.CODE, Addr = 2490, Size = 55
+            FGETC         0:2490   GETC          0:24C2   GETCHAR       0:24D3
+    Module FPUTC from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWFPUTC.CODE, Addr = 24E6, Size = E9
+            FPUTC         0:24E6   FPUTS         0:2544   PUTC          0:251B
+            PUTCHAR       0:252F   PUTS          0:259D
+        Segment @_MWFPUTC.DATA, Addr = 78E4, Size = 1
+    Module EXIT from file /HC/SMALL/HCSE
+        Segment _MWEXITS.CODE, Addr = 25D0, Size = 2C
+            ABORT         0:25F0   EXIT          0:25D0   _EXIT         0:25DD
+    Module STRLEN from file /HC/SMALL/HCSE
+        Segment _MWSTRLEN.CODE, Addr = 25FC, Size = 19
+            STRLEN        0:25FC
+    Module CTOP2 from file /HC/SMALL/HCSE
+        Segment _MWCTOP2.CODE, Addr = 2616, Size = 51
+            CALLOC        0:2616   REALLOC       0:2657
+        Segment ?_MWHEAP.DATA, Addr = 78E6, Size = 6
+    Module CFINIT from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWFINIT.CODE, Addr = 2668, Size = 73
+            _MWCFINIT     0:2668   _MWCFTERM     0:26AF
+    Module DUMMYPIO from file /HC/SMALL/HCSE
+        Segment _MWDUMMYPIO.CODE, Addr = 26DC, Size = 1
+            _MWFINIT      0:26DC   _MWFTERM      0:26DC
+    Module TERM from file /HC/SMALL/HCSE
+        Segment @_MWTERM1.DATA, Addr = 78EC, Size = 2
+        Segment _MWTERM1.CODE, Addr = 26DE, Size = 41
+            _MWEND        0:26DE   _MWHALT       0:26F8
+    Module INTRUP from file /HC/SMALL/HCSE
+        Segment _MWINTS.CODE, Addr = 2720, Size = 1A3
+            _MWINIT_I     0:281A   _MWRESTOR     0:2892
+        Segment _MWLITERALS.DATA, Addr = 78EE, Size = 45
+        Segment @_MWINTS.DATA, Addr = 7A58, Size = C
+        Segment ?_MWPORTIO.DATA, Addr = 7A64, Size = C
+    Module ARG from file /HC/SMALL/HCSE
+
+Memory Map for VFNTCNV.EXE  1/15/88                                    Page 3  
+
+        Segment _MWARG.CODE, Addr = 28C4, Size = 10B
+            _MWSET_UP     0:28C4
+        Segment @_MWARG.DATA, Addr = 7A70, Size = 1
+    Module FWRITE from file /HC/SMALL/HCSE
+        Segment _MWFWRITE.CODE, Addr = 29D0, Size = 4AE
+            FWRITE        0:2D9F   _MWFWRITE     0:29E6
+        Segment _MWLTCONV.DATA, Addr = 7874, Size = 8
+    Module APRINTF from file /HC/SMALL/HCSE
+        Segment ?PRINTF_EXTERNALS.DATA, Addr = 78AA, Size = 22
+        Segment _MWAPRINTF.CODE, Addr = 2E7E, Size = 8C5
+            _MWAPRINT     0:34D8   _MWPAD_TO     0:2EAF   _MWSEND_P     0:2E7E
+        Segment @_MWAPRINTF.DATA, Addr = 7A72, Size = 3C
+    Module ERRNO from file /HC/SMALL/HCSE
+        Segment ?_MWSTATUS.DATA, Addr = 7AAE, Size = 4
+            ERRNO       6CE: DD0
+    Module INIT_BUF from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWINIT_BUF.CODE, Addr = 3744, Size = 9F
+            _MWINIT_B     0:3744
+    Module FREAD from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWFREAD.CODE, Addr = 37E4, Size = 563
+            FREAD         0:3CBE
+        Segment _MWLTCONV.DATA, Addr = 7874, Size = 8
+        Segment @_MWFREAD.DATA, Addr = 7AB2, Size = 2
+    Module SYSTEM4 from file /HC/SMALL/HCSE
+        Segment _MWDOS_INTERFACE4.CODE, Addr = 3D48, Size = C6
+            _MWFILECL     0:3DC3   _MWZREAD      0:3D48   _MWZTRUNC     0:3DAC
+            _MWZWRITE     0:3D6F
+        Segment _MWDOSREGS.DATA, Addr = 7AB4, Size = 12
+        Segment ?_MWSTATUS.DATA, Addr = 7AAE, Size = 4
+            ERRNO       6CE: DD0
+    Module CMP from file /HC/SMALL/HCSE
+        Segment _MWCMP_.CODE, Addr = 3E0E, Size = 1D
+            _MWCMP        0:3E0E
+    Module UNGETC from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWUNGETC.CODE, Addr = 3E2C, Size = A7
+            UNGETC        0:3E2C
+    Module FEOF from file /HC/SMALL/HCSE
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+        Segment _MWFEOF.CODE, Addr = 3ED4, Size = 4A
+            CLEARERR      0:3F12   FEOF          0:3ED4   FERROR        0:3EF3
+    Module MPYL from file /HC/SMALL/HCSE
+        Segment _MWMPYL_.CODE, Addr = 3F1E, Size = 22
+            _MWMPYL       0:3F1E
+    Module SCANR from file /HC/SMALL/HCSE
+        Segment _MWSCANR.CODE, Addr = 3F40, Size = 3AF
+            _MWIN_CON     0:3F40
+        Segment ?SCANF_EXTERNALS.DATA, Addr = 78E0, Size = 2
+        Segment _MWLITERALS.DATA, Addr = 7934, Size = A
+    Module SYSTEM5 from file /HC/SMALL/HCSE
+        Segment _MWDOS_INTERFACE5.CODE, Addr = 42F0, Size = 3F
+            _MWLSEEK      0:42F0
+        Segment _MWDOSREGS.DATA, Addr = 7AB4, Size = 12
+    Module CVARS from file /HC/SMALL/HCSE
+        Segment @_MWCVARS.DATA, Addr = 7AC6, Size = 138
+            _IOB        6CE: DE6
+        Segment ?_MWSTDIO.DATA, Addr = 78CC, Size = 8
+    Module CTOP1 from file /HC/SMALL/HCSE
+        Segment _MWCTOP1.CODE, Addr = 4330, Size = 18
+
+Memory Map for VFNTCNV.EXE  1/15/88                                    Page 4  
+
+            FREE          0:4330   MALLOC        0:433B
+    Module SYSTEM1 from file /HC/SMALL/HCSE
+        Segment _MWDOS_INTERFACE1.CODE, Addr = 4348, Size = 8E
+            _MWDOS        0:4348   _MWDOS_EX     0:43C2   _MWLOAD_D     0:4397
+            _MWLOAD_P     0:4370   _MWZCLOSE     0:43AC
+        Segment _MWDOSREGS.DATA, Addr = 7AB4, Size = 12
+        Segment ?_MWSTATUS.DATA, Addr = 7AAE, Size = 4
+            ERRNO       6CE: DD0
+    Module _FMODE from file /HC/SMALL/HCSE
+        Segment @_FMODE.DATA, Addr = 7BFE, Size = 2
+            _FMODE      6CE: F1E
+    Module SYSTEM3 from file /HC/SMALL/HCSE
+        Segment _MWDOS_INTERFACE3.CODE, Addr = 43D6, Size = 62
+            _MWC_CREA     0:43E9   _MWC_DOS_     0:43D6   _MWC_OPEN     0:4406
+            _MWC_UNLI     0:4428
+        Segment _MWDOSREGS.DATA, Addr = 7AB4, Size = 12
+        Segment ?_MWSYSTEM.DATA, Addr = 7C00, Size = 1
+    Module HEAP from file /HC/SMALL/HCSE
+        Segment ?_MWHEAP.DATA, Addr = 78E6, Size = 6
+        Segment @_MWHEAP_MGMT.DATA, Addr = 7C02, Size = 8
+        Segment ?HEAP_LOCAL.DATA, Addr = 7C0A, Size = 1A
+        Segment HEAPCODE.CODE, Addr = 4438, Size = 5A0
+            _MWCHECK_     0:49BB   _MWEACH_F     0:44AE   _MWEACH_I     0:444C
+            _MWFREE       0:491E   _MWHMALLO     0:48A8   _MWINSERT     0:459E
+            _MWMALLOC     0:48E8   _MWMALLOC     0:47A0
+    Module HEAP2 from file /HC/SMALL/HCSE
+        Segment @_MWHEAP_MGMT2.DATA, Addr = 7C24, Size = 3
+        Segment HEAPCODE.CODE, Addr = 49D8, Size = 1A3
+            _MWCREALL     0:4B52   _MWREALLO     0:4A70
+        Segment ?_MWHEAP.DATA, Addr = 78E6, Size = 6
+    Module ONEXIT from file /HC/SMALL/HCSE
+        Segment ONEXIT.CODE, Addr = 4B7C, Size = 31
+            ONEXIT        0:4B81   _MWCALL_O     0:4B95
+        Segment @ONEXIT.DATA, Addr = 7C28, Size = 2
+    Module TERM2 from file /HC/SMALL/HCSE
+        Segment _MWTERM2.CODE, Addr = 4BAE, Size = 6D
+            _MWABORT      0:4BD3   _MWDISPLA     0:4BAE   _MWSTACK_     0:4C05
+            _MWSTKERR     0:4BF9
+        Segment _MWLTCONV.DATA, Addr = 7874, Size = 8
+        Segment @_MWTERM2.DATA, Addr = 7C2A, Size = 1
+        Segment _MWLITERALS.DATA, Addr = 793E, Size = 33
+        Segment ?_MWPORTIO.DATA, Addr = 7A64, Size = C
+    Module INTRUPT2 from file /HC/SMALL/HCSE
+        Segment _MWINT2.CODE, Addr = 4C1C, Size = 7A
+            _MWCALL_I     0:4C47   _MWCALL_I     0:4C6F
+    Module C_STKDMP from file /HC/SMALL/HCSE
+        Segment _MWSTACKDUMP.CODE, Addr = 4C96, Size = 11
+            _MWSTACKD     0:4C96
+        Segment _MWLITERALS.DATA, Addr = 7972, Size = 28
+    Module INTRUPT1 from file /HC/SMALL/HCSE
+        Segment _MWINTERRUPTS.CODE, Addr = 4CA8, Size = 68
+            _MWINSTAL     0:4CD8   _MWINSTAL     0:4CED   _MWINT        0:4CAC
+            _MWINTERR     0:4CAA   _MWINTERR     0:4CA8   _MWPOP_AN     0:4D00
+            _MWVECTOR     0:4CBE
+    Module DIVL from file /HC/SMALL/HCSE
+        Segment _MWDIVL_.CODE, Addr = 4D10, Size = 189
+            _MWDIVL       0:4DD2   _MWMODL       0:4E59   _MWREML       0:4E7E
+            _MWUDIVL      0:4D10   _MWUMODL      0:4DB7
+        Segment DUMMY.DATA, Addr = 7C30, Size = 0
+    Module FSIM0D from file /HC/SMALL/HCSE
+        Segment _MWFSIM0D.CODE, Addr = 4E9A, Size = 2A
+
+Memory Map for VFNTCNV.EXE  1/15/88                                    Page 5  
+
+            _MWFLLOAD     0:4E9A
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM0F from file /HC/SMALL/HCSE
+        Segment _MWFSIM0F.CODE, Addr = 4EC4, Size = 94
+            _MWFTLOAD     0:4EC4   _MWFTRET      0:4F22
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module PRINTR from file /HC/SMALL/HCSE
+        Segment _MWPRINTR.CODE, Addr = 4F58, Size = 9E6
+            _MWOUT_CO     0:57F2
+        Segment _MWLITERALS.DATA, Addr = 799A, Size = 1E
+        Segment ?PRINTF_EXTERNALS.DATA, Addr = 78AA, Size = 22
+        Segment @_MWPRINTR.DATA, Addr = 7D28, Size = 40
+    Module FLOA4 from file /HC/SMALL/HCSE
+        Segment _MWFLOA4.CODE, Addr = 593E, Size = DE
+            _MWBCD_TO     0:5A09   _MWGET_EX     0:59CB   _MWREAL_T     0:59F6
+            _MWSPECIA     0:593E
+        Segment _MWLITERALS.DATA, Addr = 79B8, Size = 1E
+    Module FSIM1A from file /HC/SMALL/HCSE
+        Segment _MWFSIM1A.CODE, Addr = 5A1C, Size = BF
+            _MWFABS       0:5AA5   _MWFDUP       0:5AC3   _MWFNEG       0:5A4F
+            _MWFSUB       0:5A7E   _MWFSUBR      0:5A73   _MWFXCH       0:5A1C
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FLOA3 from file /HC/SMALL/HCSE
+        Segment @_MWFLOA3.DATA, Addr = 7D68, Size = 82
+        Segment _MWFLOA3.CODE, Addr = 5ADC, Size = 62
+            _MWTEN_TO     0:5ADC
+        Segment _MWLITERALS.DATA, Addr = 79D6, Size = A
+    Module FSIM1C from file /HC/SMALL/HCSE
+        Segment _MWFSIM1C.CODE, Addr = 5B3E, Size = 124
+            _MWFDIV       0:5B49   _MWFDIVR      0:5B3E
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM1B from file /HC/SMALL/HCSE
+        Segment _MWFSIM1B.CODE, Addr = 5C62, Size = F3
+            _MWFMPY       0:5C62
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM0E from file /HC/SMALL/HCSE
+        Segment _MWFSIM0E.CODE, Addr = 5D56, Size = 2C
+            _MWFLRET      0:5D56
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM0C from file /HC/SMALL/HCSE
+        Segment _MWFSIM0C.CODE, Addr = 5D82, Size = 3A
+            _MWFRET       0:5D82
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module DOS from file /HC/SMALL/HCSE
+        Segment _MWCALLDOS_.CODE, Addr = 5DBC, Size = 54
+            _MWCALLDO     0:5DBC
+        Segment _MWDOSREGS.DATA, Addr = 7AB4, Size = 12
+    Module C_HEAP1 from file /HC/SMALL/HCSE
+        Segment _MWHEAP1.CODE, Addr = 5E10, Size = 3A
+            _MWDUMP_H     0:5E39   _MWFERR       0:5E10
+        Segment _MWLITERALS.DATA, Addr = 79E0, Size = 51
+        Segment ?_MWPORTIO.DATA, Addr = 7A64, Size = C
+    Module KB2 from file /HC/SMALL/HCSE
+        Segment _MWCONSOLE2.CODE, Addr = 5E4A, Size = 2A
+            _MWKBNEWL     0:5E60   _MWKBPUTS     0:5E4A
+        Segment _MWLTCONV.DATA, Addr = 7874, Size = 8
+    Module FSIM0 from file /HC/SMALL/HCSE
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+        Segment _MWFSIM0.CODE, Addr = 5E74, Size = C0
+            _MWFPOP       0:5EA4   _MWFPSTAC     0:5E74   _MWINC_TO     0:5E8E
+            _MWNORMAL     0:5EAE
+
+Memory Map for VFNTCNV.EXE  1/15/88                                    Page 6  
+
+        Segment _MWLITERALS.DATA, Addr = 7A32, Size = 25
+        Segment ?_MWPORTIO.DATA, Addr = 7A64, Size = C
+    Module EFLSUPP from file /HC/SMALL/HCSE
+        Segment _MWFDATA.DATA, Addr = 7DEA, Size = 1B
+        Segment _MWFLOAT.CODE, Addr = 5F34, Size = 13D
+            _MWSET_FL     0:5F4B   _MWSET_RO     0:5F34   _MW_87_F2     0:5F74
+            _MW_87_F2     0:5F9B   _MW_87_F2     0:5F96   _MW_87_F2     0:5F91
+            _MW_87_FB     0:6065   _MW_87_FB     0:6059   _MW_87_FF     0:5FB2
+            _MW_87_FL     0:5FF4   _MW_87_FL     0:5FDF   _MW_87_FL     0:5FE8
+            _MW_87_FP     0:6014   _MW_87_FR     0:5FD1   _MW_87_FT     0:6009
+            _MW_87_FT     0:5FFF   _MW_87_FX     0:604C   _MW_87_RO     0:6044
+            _MW_87_TR     0:602C   _MW_87_UF     0:5FBB
+    Module LTOX from file /HC/SMALL/HCSE
+        Segment _MWLTOX_.CODE, Addr = 6072, Size = 138
+            _MWLTOX       0:6072   _MWXTOL       0:6107
+    Module FSIM0B from file /HC/SMALL/HCSE
+        Segment _MWFSIM0B.CODE, Addr = 61AA, Size = 35
+            _MWFLOAD      0:61AA
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM1D from file /HC/SMALL/HCSE
+        Segment _MWFSIM1D.CODE, Addr = 61E0, Size = C8
+            _MWFCMP       0:6286   _MWFCOMPA     0:6274   _MWFCOMPA     0:61E0
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM1 from file /HC/SMALL/HCSE
+        Segment _MWFSIM1.CODE, Addr = 62A8, Size = 11A
+            _MWFADD       0:62A8
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM4 from file /HC/SMALL/HCSE
+        Segment _MWFSIM4.CODE, Addr = 63C2, Size = A4
+            _MWFXAM       0:63C2
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIM6 from file /HC/SMALL/HCSE
+        Segment _MWFSIM6.CODE, Addr = 6466, Size = 2B4
+            _MWFBLD       0:6466   _MWFBSTP      0:6545
+        Segment ?_MWFSIM.DATA, Addr = 7C30, Size = F8
+    Module FSIMA from file /HC/SMALL/HCSE
+        Segment _MWFSIMA.CODE, Addr = 671A, Size = 168
+            _MWADDMAN     0:671A   _MWDSHL       0:6861   _MWNEGMAN     0:6779
+            _MWSUBMAN     0:6739   _MWSUBMAN     0:6758   _MWXNORMA     0:6799
+            _MWXSHL       0:67E2   _MWXSHR       0:67FB   _MWXSHRCN     0:6810
+    Module FSIMAB from file /HC/SMALL/HCSE
+        Segment _MWFSIMAB.CODE, Addr = 6882, Size = 1C3
+            _MWXDIV       0:6886
+        Segment DIVDATA.DATA, Addr = 7E06, Size = 14
+    Module FSIMAA from file /HC/SMALL/HCSE
+        Segment _MWFSIMAA.CODE, Addr = 6A46, Size = 1D6
+            _MWXMPY       0:6A4A
+        Segment COPY.DATA, Addr = 7E1A, Size = 12
+    Module RTOX from file /HC/SMALL/HCSE
+        Segment _MWRTOX_.CODE, Addr = 6C1C, Size = D1
+            _MWRTOX       0:6C1C   _MWXTOR       0:6C87

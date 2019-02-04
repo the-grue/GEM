@@ -1,0 +1,253 @@
+/* LIBMAN: CMM: LIB: NAME: OBLIB.C */
+/******************************************************************************
+ *
+ *    Modulname   :  OBLIB.C
+ *
+ *    Author      :  Robert Schneider
+ *    Version     :  1.0
+ *    Created     :  April 20, 1989
+ *
+ *****************************************************************************
+ *
+ *	-------------------------------------------------------------
+ *	GEM Desktop					  Version 3.1
+ *	Serial No.  XXXX-0000-654321		  All Rights Reserved
+ *	Copyright (C) 1985 - 1989		Digital Research Inc.
+ *	-------------------------------------------------------------
+ *
+ *****************************************************************************/
+
+#include "portab.h"
+#include "aes.h"
+#include "oblib.h"
+
+/* LIBMAN: SRC: HDR: NAME: OB_DOST.C */
+
+/******************************************************************************
+ *
+ * Set state in ob_state of a object
+ *
+ ******************************************************************************/
+
+VOID ob_dostate(tree, index, state)
+OBJECT FAR *tree;
+WORD index;
+WORD state;
+{
+   tree[index].ob_state |= state;
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_UDST.C */
+
+/******************************************************************************
+ *
+ * Unset state in ob_state of a object
+ *
+ ******************************************************************************/
+
+VOID ob_undostate(tree, index, state)
+OBJECT FAR *tree;
+WORD index;
+WORD state;
+{
+   tree[index].ob_state &= (~state);
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_ISST.C */
+
+/******************************************************************************
+ *
+ * Test state in ob_state of a object
+ *
+ ******************************************************************************/
+
+WORD ob_isstate(tree, index, state)
+OBJECT FAR *tree;
+WORD index;
+WORD state;
+{
+   return((tree[index].ob_state & state) ? TRUE : FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_DOFL.C */
+
+/******************************************************************************
+ *
+ * Set flags in ob_flags of a object
+ *
+ ******************************************************************************/
+
+VOID ob_doflag(tree, index, flag)
+OBJECT FAR *tree;
+WORD index;
+WORD flag;
+{
+   tree[index].ob_flags |= flag;
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_UDFL.C */
+
+/******************************************************************************
+ *
+ * Unset flags in ob_flags of a object
+ *
+ ******************************************************************************/
+
+VOID ob_undoflag(tree, index, flag)
+OBJECT FAR *tree;
+WORD index;
+WORD flag;
+{
+   tree[index].ob_flags &= (~flag);
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_ISFL.C */
+
+/******************************************************************************
+ *
+ * Test flags in ob_flags of a object
+ *
+ ******************************************************************************/
+
+WORD ob_isflag(tree, index, flag)
+OBJECT FAR *tree;
+WORD index;
+WORD flag;
+{
+   return((tree[index].ob_flags & flag) ? TRUE : FALSE);
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_XYWH.C */
+
+/******************************************************************************
+ *
+ * Get position and dimensions of a object
+ *
+ ******************************************************************************/
+
+VOID ob_xywh(tree, index, rec)
+OBJECT FAR *tree;
+WORD index;
+GRECT FAR *rec;
+{
+   objc_offset(tree,index, &rec->g_x, &rec->g_y);
+   rec->g_w = tree[index].ob_width;
+   rec->g_h = tree[index].ob_height;
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_G_TXT.C */
+
+/******************************************************************************
+ *
+ * Get pointer to string of a object (regardless of its type)
+ *
+ ******************************************************************************/
+
+BYTE FAR *ob_get_text(tree, index, clear)
+OBJECT FAR *tree;
+WORD index;
+WORD clear;
+{
+   REG BYTE FAR *p;
+
+   switch(tree[index].ob_type & 0xff)
+   {
+      case G_TEXT:
+      case G_FTEXT:
+      case G_BOXTEXT:
+      case G_FBOXTEXT:
+         p = (BYTE FAR *) ((TEDINFO FAR *)tree[index].ob_spec)->te_ptext;
+         break;
+
+      case G_BUTTON:
+      case G_STRING:
+      case G_TITLE:
+         p = (BYTE FAR *)tree[index].ob_spec;
+         break;
+
+      default : return(0l);
+   }
+
+   if (clear)
+      *p = 0;
+
+   return(p);
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_S_TXT.C */
+
+/******************************************************************************
+ *
+ * Set pointer to a string of a object (regardless of its type)
+ *
+ ******************************************************************************/
+
+VOID ob_set_text(tree, index, p)
+OBJECT FAR *tree;
+WORD index;
+BYTE FAR *p;
+{
+   switch(tree[index].ob_type & 0xff)
+   {
+      case G_TEXT:
+      case G_FTEXT:
+      case G_BOXTEXT:
+      case G_FBOXTEXT:
+         ((TEDINFO FAR *)tree[index].ob_spec)->te_ptext = p;
+         break;
+
+      case G_BUTTON:
+      case G_STRING:
+      case G_TITLE:
+         tree[index].ob_spec = (LONG)p;
+         break;
+
+      default : break;
+   }
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_DR_DI.C */
+
+/******************************************************************************
+ *
+ * Draw a dialog with an optional growing box
+ *
+ ******************************************************************************/
+
+VOID ob_draw_dialog(tree, xl, yl, wl, hl)
+OBJECT FAR *tree;
+WORD xl, yl, wl, hl;
+{
+   GRECT rec;
+
+   form_center(tree, &rec.g_x, &rec.g_y, &rec.g_w, &rec.g_h);
+   form_dial(FMD_START, rec.g_x, rec.g_y, rec.g_w, rec.g_h,
+                        rec.g_x, rec.g_y, rec.g_w, rec.g_h);
+   if (xl || yl || wl || hl)
+      form_dial(FMD_GROW, xl, yl, wl, hl,
+                   rec.g_x - 5, rec.g_y - 5,
+                   rec.g_w + 10, rec.g_h + 10);
+   objc_draw(tree, ROOT, MAX_DEPTH,
+             rec.g_x - 5, rec.g_y - 5, rec.g_w + 10, rec.g_h + 10);
+}
+
+/* LIBMAN: SRC: HDR: NAME: OB_UD_DI.C */
+
+/******************************************************************************
+ *
+ * Undraw a dialog with an optional shrinking box
+ *
+ ******************************************************************************/
+
+VOID ob_undraw_dialog(tree, xl, yl, wl, hl)
+OBJECT FAR *tree;
+WORD xl, yl, wl, hl;
+{
+   GRECT rec;
+
+   ob_xywh(tree, 0, &rec);
+   form_dial(FMD_FINISH,rec.g_x - 5, rec.g_y - 5, rec.g_w + 10, rec.g_h + 10,
+                        rec.g_x - 5, rec.g_y - 5, rec.g_w + 10, rec.g_h + 10);
+   if (xl || yl || wl || hl)
+      form_dial(FMD_SHRINK, xl, yl, wl, hl, rec.g_x, rec.g_y, rec.g_w, rec.g_h);
+}

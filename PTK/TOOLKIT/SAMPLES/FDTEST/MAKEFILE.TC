@@ -1,0 +1,19 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  fdtestl.app fdtests.app
+#   del *.obj
+all: fdtestl.app
+   del *.obj
+
+fdtestl.app:   fdtestl.obj
+   tcc -efdtestl.app fdtestl.obj ltcgem.lib
+
+fdtestl.obj:   fdtest.c
+   tcc -c -ml -ofdtestl.obj fdtest.c
+
+#fdtests.app:   fdtests.obj
+#   tcc -ms -efdtests.app fdtests.obj stcgem.lib
+#
+#fdtests.obj:   fdtest.c
+#   tcc -c -ms -ofdtests.obj fdtest.c

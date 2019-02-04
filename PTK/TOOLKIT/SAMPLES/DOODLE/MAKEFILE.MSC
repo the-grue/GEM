@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+doodlel.obj:   doodle.c
+   cl -c -AL -Gs -Oas -Zl -Fodoodlel.obj doodle.c
+
+#doodles.obj:   doodle.c
+#   cl -c -AS -Gs -Oas -Zl -Fodoodles.obj doodle.c
+
+doodlel.app:   doodlel.obj
+   cl -AL -Fedoodlel.app doodlel.obj lmscgem.lib llibce.lib
+
+#doodles.app:   doodles.obj
+#   cl -AS -Fedoodles.app doodles.obj smscgem.lib slibce.lib
+
+#all:  doodlel.app doodles.app
+#   del *.obj

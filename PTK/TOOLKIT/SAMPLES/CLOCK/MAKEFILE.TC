@@ -1,0 +1,32 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  clockl.app clocks.app clockl.acc clocks.acc
+#   del *.obj
+#
+all:  clockl.app clockl.acc
+   del *.obj
+
+clockl.acc: claccl.obj
+   tlink ..\startup\c0acctcl claccl, clockl.acc, nul, c:\tc\lib\ltcgem c:\tc\lib\cl
+
+#clocks.acc: claccs.obj
+#   tlink ..\startup\c0acctcs claccs, clocks.acc, nul, c:\tc\lib\stcgem c:\tc\lib\cs
+
+clockl.app: clappl.obj
+   tcc -ml -eclockl.app clappl.obj ltcgem.lib
+
+#clocks.app: clapps.obj
+#   tcc -ms -eclocks.app clapps.obj stcgem.lib
+
+claccl.obj: clock.c
+   tcc -c -ml -DDESKACC=1 -oclaccl.obj clock.c
+
+#claccs.obj: clock.c
+#   tcc -c -ms -DDESKACC=1 -oclaccs.obj clock.c
+
+clappl.obj: clock.c
+   tcc -c -ml -oclappl.obj clock.c
+
+#clapps.obj: clock.c
+#   tcc -c -ms -oclapps.obj clock.c

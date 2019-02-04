@@ -1,0 +1,7 @@
+		;123456789012
+sht_nm	db	'EGA MONO'
+	rb	13 - length sht_nm
+
+lng_nm	db	'EGA Monochrome Adaptor'
+	rb	81 - length lng_nm
+

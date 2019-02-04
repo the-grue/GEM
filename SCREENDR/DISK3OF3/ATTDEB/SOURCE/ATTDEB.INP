@@ -1,0 +1,17 @@
+sddeb8.ega=zyxg, entry,
+jmptbl,
+monobj,
+monout,
+opttext,
+isin,
+dummy,
+devdep,
+opttxt1,
+opttxt2,
+opttdraw,
+monspblt,
+rastop,
+hirespat,
+enddseg,
+8x16[nop]
+

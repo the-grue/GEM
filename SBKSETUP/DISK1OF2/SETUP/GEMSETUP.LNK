@@ -1,0 +1,27 @@
+OUTPUT 	
+ gemsetup.app
+
+BATCH
+
+MAP
+=gemsetup.lst s,m
+
+FILE	
+prepstrt,
+gsmain,
+gssetup,
+gsnewdev,
+gsfilcpy,
+gsnewcfg,
+gsdvinst,
+gsdualfp,
+dosasm,
+hcsmall,
+gsutil,
+scrnutil,
+rtlasm,
+longasm,
+proend
+
+LIBRARY
+dosbind

@@ -1,0 +1,7 @@
+		;123456789012
+sht_nm	db	'IBM CGA'
+	rb	13 - length sht_nm
+
+lng_nm	db	'IBM Color Graphics Adaptor'
+	rb	81 - length lng_nm
+

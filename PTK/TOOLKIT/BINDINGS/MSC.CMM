@@ -1,0 +1,130 @@
+/* LIBMAN: AES: NAME: AESLIB\MAKEFILE */
+OBJ = aesbind.obj
+aeslib:  $(OBJ)
+      echo AES is done
+
+aesbind.obj: aesbind.c
+
+/* LIBMAN: AES: NAME: AESLIB\LIBAES.RSP */
++ AESLIB\AESBIND
+/* LIBMAN: VDI: NAME: VDILIB\MAKEFILE */
+OBJ = vdibind.obj
+vdi: $(OBJ)
+      echo VDI is done
+
+vdibind.obj: vdibind.c
+
+/* LIBMAN: VDI: NAME: VDILIB\LIBVDI.RSP */ 
++ VDILIB\VDIBIND
+/* LIBMAN: DOS: NAME: DOSLIB\MAKEFILE */ 
+OBJ = dosbind.obj
+doslib: $(OBJ)
+      echo DOSLIB is done
+
+dosbind.obj: dosbind.c
+
+/* LIBMAN: DOS: NAME: DOSLIB\LIBDOS.RSP */ 
++ DOSLIB\DOSBIND
+/* LIBMAN: OBJ: NAME: OBLIB\MAKEFILE */ 
+OBJ = oblib.obj
+oblib: $(OBJ)
+   echo OBLIB is done
+
+oblib.obj: oblib.c
+
+/* LIBMAN: OBJ: NAME: OBLIB\LIBOB.RSP */ 
++ OBLIB\OBLIB
+/* LIBMAN: RCL: NAME: RCLIB\MAKEFILE */ 
+OBJ = rclib.obj
+rclib: $(OBJ)
+      echo RCLIB is done
+
+rclib.obj: rclib.c
+
+/* LIBMAN: RCL: NAME: RCLIB\LIBRC.RSP */ 
++ RCLIB\RCLIB
+/* LIBMAN: XLI: NAME: XFMLIB\MAKEFILE */ 
+OBJ = xfmlib.obj
+xfmlib: $(OBJ)
+      echo XFMLIB is done
+
+xfmlib.obj: xfmlib.c
+
+/* LIBMAN: XLI: NAME: XFMLIB\LIBX.RSP */ 
++ XFMLIB\XFMLIB
+/* LIBMAN: EMS: NAME: EMSLIB\MAKEFILE */ 
+OBJ = emslib.obj
+emslib: $(OBJ)
+      echo EMSLIB is done
+
+emslib.obj:
+
+/* LIBMAN: EMS: NAME: EMSLIB\LIBEMS.RSP */ 
++ EMSLIB\EMSLIB
+/* LIBMAN: MIS: NAME: MISC\MAKEFILE */ 
+OBJ = fardraw.obj formdo.obj trimage.obj ev_event.obj
+misc: $(OBJ)
+      echo MISC is done
+
+fardraw.obj:
+
+formdo.obj:
+
+trimage.obj:
+
+ev_event.obj:
+
+/* LIBMAN: MIS: NAME: MISC\LIBMISC.RSP */
++MISC\FARDRAW &
++MISC\FORMDO &
++MISC\TRIMAGE &
++MISC\EV_EVENT
+/* LIBMAN: ALL: NAME: MAKELIB.BAT */
+echo off
+if "%1" == "" goto argu_err
+set INIT=\TOOLKIT\GEMLIB
+cd aeslib
+make makefile
+cd ..\vdilib
+make makefile
+cd ..\doslib
+make makefile
+cd ..\oblib
+make makefile
+cd ..\rclib
+make makefile
+cd ..\xfmlib
+make makefile
+cd ..\emslib
+make makefile
+cd ..\misc
+make makefile
+cd ..
+IF EXIST %1MSCGEM.LIB DEL %1MSCGEM.LIB
+LIB %1MSCGEM.LIB @AESLIB\LIBAES.RSP ;
+LIB %1MSCGEM.LIB @VDILIB\LIBVDI.RSP ;
+LIB %1MSCGEM.LIB @DOSLIB\LIBDOS.RSP ;
+LIB %1MSCGEM.LIB @OBLIB\LIBOB.RSP ;
+LIB %1MSCGEM.LIB @RCLIB\LIBRC.RSP ;
+LIB %1MSCGEM.LIB @XFMLIB\LIBX.RSP ;
+LIB %1MSCGEM.LIB @EMSLIB\LIBEMS.RSP ;
+LIB %1MSCGEM.LIB @MISC\LIBMISC.RSP ;
+DEL %1MSCGEM.BAK
+goto exit
+:argu_err
+echo usage:
+echo        MAKELIB L to create large memory model
+echo        MAKELIB S to create small memory model
+echo Note:
+echo        In either case, you have to make sure that
+echo        your compiler configuration file contains the
+echo        right command line option to generate small
+echo        or large memory model object files!
+:exit
+/* LIBMAN: ALL: NAME: TOOLS.INI */ 
+[make]
+.c.obj:
+  cl -c -AL -Gs -Oas -Zl -I\TOOLKIT\INC $*.c
+
+.asm.obj:
+  masm $* /DMSC /MX;

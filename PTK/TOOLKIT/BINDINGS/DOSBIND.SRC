@@ -1,0 +1,712 @@
+/* LIBMAN: ALL: NAME: DOSBIND.C */
+/******************************************************************************
+ *
+ *    Modulname   :  DOSBIND.C
+ *
+ *    Author      :  Lee Lorenzen
+ *    Version     :  1.0
+ *    Created     :  February 15, 1985
+ *
+ *    Author      :  Robert Schneider
+ *    Version     :  1.1
+ *    Modified    :  April 20, 1989
+ *             Modified for splitted library and MS-C / Turbo-C use.
+ *
+ *****************************************************************************
+ *
+ *	-------------------------------------------------------------
+ *	GEM Desktop					  Version 3.1
+ *	Serial No.  XXXX-0000-654321		  All Rights Reserved
+ *	Copyright (C) 1985 - 1989		Digital Research Inc.
+ *	-------------------------------------------------------------
+ *
+ *****************************************************************************/
+
+#include "portab.h"				/* portable coding conv	*/
+#include "dosbind.h"  				/* doslib prototypes 	*/ 
+
+typedef union {
+
+   struct {
+	UWORD ax, bx, cx, dx, si, di, cflag, flags;
+   }x;
+
+   struct {
+	UBYTE al, ah, bl, bh, cl, ch, dl, dh;
+   }h;
+
+}REGS;
+
+typedef struct {
+
+   UWORD es;
+   UWORD cs;
+   UWORD ss;
+   UWORD ds;
+
+}SREGS;
+
+GLOBAL UWORD DOS_ERR;
+GLOBAL REGS regs;
+GLOBAL SREGS segregs;
+
+#if HIGH_C
+
+#include <msdos.cf>
+
+VOID __dos()
+{
+   Registers.AX.R = regs.x.ax;
+   Registers.BX.R = regs.x.bx;
+   Registers.CX.R = regs.x.cx;
+   Registers.DX.R = regs.x.dx;
+   Registers.SI.R = regs.x.si;
+   Registers.DI.R = regs.x.di;
+   Registers.ES.R = segregs.es;
+   Registers.DS.R = segregs.ds;
+
+   calldos();
+
+   regs.x.ax = Registers.AX.R;
+   regs.x.bx = Registers.BX.R;
+   regs.x.cx = Registers.CX.R;
+   regs.x.dx = Registers.DX.R;
+   segregs.es = Registers.ES.R;
+
+   DOS_ERR = (Registers.Flags & 1);
+}
+
+#else /* if HIGH_C */
+
+VOID __dos()
+{
+   intdosx(&regs,&regs,&segregs);
+
+   DOS_ERR = regs.x.cflag;
+}
+
+#endif /* if HIGH_C */
+
+VOID dos_func(ax, lodsdx, hidsdx)  
+UWORD ax;
+UWORD lodsdx;
+UWORD hidsdx;
+{
+   regs.x.ax = ax;
+   regs.x.dx = lodsdx;    /* low  DS:DX   */
+   segregs.ds = hidsdx;   /* high DS:DX   */
+
+   __dos();
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_CHDI.C */
+
+/*
+ * change the current directory
+ */
+WORD dos_chdir(pdrvpath)
+BYTE FAR *pdrvpath;
+{
+   dos_func(0x3b00, FPOFF(pdrvpath), FPSEG(pdrvpath));   
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_GDIR.C */
+
+/*
+ * get current directory
+ */
+WORD dos_gdir(drive, pdrvpath)
+WORD drive;
+BYTE FAR *pdrvpath;
+{
+   regs.x.ax = 0x4700;
+   regs.x.dx = (UWORD) drive;   /* 0 = default drive, 1 = A:,etc */
+   regs.x.si = FPOFF(pdrvpath);
+   segregs.ds = FPSEG(pdrvpath);
+
+   __dos();
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_GDRV.C */
+
+/*
+ * get current drive
+ */
+WORD dos_gdrv()
+{
+   regs.x.ax = 0x1900;
+
+   __dos();
+
+   return((WORD) regs.x.ax & 0x00ff);   /*    0 = A:, 1 = B: etc */
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SDRV.C */
+
+/*
+ * select new drive, new drive becomes default
+ */
+WORD dos_sdrv(newdrv)
+WORD newdrv;
+{
+   regs.x.ax = 0x0e00;
+   regs.x.dx = newdrv;
+
+   __dos();
+
+   return((WORD) regs.x.ax & 0x00ff);   /*    0 = A:, 1 = B: etc */
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SDTA.C */
+
+/*
+ * set the Disk Transfer Address ( DTA )
+ */
+WORD dos_sdta(ldta)
+VOID FAR *ldta;
+{
+   dos_func(0x1a00, FPOFF(ldta), FPSEG(ldta));
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_GDTA.C */
+
+/*
+ * get the Disk Transfer Address ( DTA )
+ */
+VOID FAR *dos_gdta()
+{
+   VOID FAR *dta;
+
+   dos_func(0x2f00, 0, 0);
+
+   dta = MKFP(segregs.es,regs.x.bx);
+
+   return(dta);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SFIR.C */
+
+/*
+ * search for first matching file
+ */
+WORD dos_sfirst(pspec, attr)
+BYTE FAR *pspec;
+WORD attr;
+{
+   regs.x.cx = attr; /* file attributes */
+
+   dos_func(0x4e00, FPOFF(pspec), FPSEG(pspec));
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SNEX.C */
+
+/*
+ * search for next matching file
+ * dos_sfirst() must be used just before this one
+ */
+WORD dos_snext()
+{
+   regs.x.ax = 0x4f00;
+
+   __dos();
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_OPEN.C */
+
+/*
+ * open file
+ */
+WORD dos_open(pname, access)
+BYTE FAR *pname;                 /* filename */
+WORD access;                     /* 0 = read, 1 = write, 2 = both */
+{
+   dos_func((UWORD) 0x3d00 + access, FPOFF(pname), FPSEG(pname));
+
+   return((WORD) regs.x.ax);   /* regs.x.ax contains file handle */
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_CLOS.C */
+
+/*
+ * close file
+ */
+WORD dos_close(handle)
+WORD handle;
+{
+   regs.x.ax = 0x3e00;
+   regs.x.bx = handle;
+
+   __dos();
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_RPIE.C */
+
+/*
+ * read file
+ */
+UWORD read_piece(handle, cnt, pbuffer)
+WORD handle;
+UWORD cnt;        /* number of bytes to read    */
+VOID FAR *pbuffer;/* buffer to read into        */
+{
+   regs.x.cx = cnt;
+   regs.x.bx = handle;
+
+   dos_func(0x3f00, FPOFF(pbuffer), FPSEG(pbuffer));
+
+   return((WORD) regs.x.ax);   /* regs.x.ax = number of bytes actually read */
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_READ.C */
+
+/*
+ * read complete file 32k at a time
+ */
+LONG dos_read(handle, cnt, pbuffer)
+WORD handle;
+LONG cnt;
+VOID FAR *pbuffer;
+{
+   UWORD buff_piece;
+   LONG rd_cnt;
+   LONG workbuf = (LONG)pbuffer;
+
+   buff_piece = 0x8000; /* 32k */
+   rd_cnt = 0L;
+   DOS_ERR = FALSE;
+   while (cnt && !DOS_ERR)
+   {
+      if (cnt > 0x00008000L)
+         cnt -= 0x00008000L;
+      else
+      {
+         buff_piece = cnt;
+         cnt = 0;
+      }
+                   /* read 32k or less */
+      rd_cnt += (LONG)read_piece(handle, buff_piece, (VOID FAR *)workbuf);
+
+      workbuf += 0x08000000L;
+   }
+   return( rd_cnt );
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SEEK.C */
+
+/*
+ * move file read / write pointer
+ */
+LONG dos_lseek(handle, smode, sofst)
+WORD handle;
+WORD smode;       /* 0 = from beginning, 1 from current  */
+                  /* 2 = EOF plus offset                 */
+LONG sofst;       /* offset in bytes                     */
+{
+   LONG ret;
+
+   regs.x.ax = 0x4200;
+   regs.x.ax += smode;
+   regs.x.bx = handle;
+   regs.x.cx = FPSEG(sofst); /* contains the      */
+   regs.x.dx = FPOFF(sofst); /* desired offset    */
+
+   __dos();
+
+   ret = (LONG)MKFP(regs.x.dx,regs.x.ax);
+   return(ret);   /* return pointers new location */
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_WAIT.C */
+
+/*
+ * get return code of a sub-process
+ */
+WORD dos_wait()
+{
+   regs.x.ax = 0x4d00;
+   __dos();
+
+   return((WORD) regs.x.ax); /* 0 = normal termination */
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_ALL.C */
+
+/*
+ * allocate memory
+ */
+VOID FAR *dos_alloc(nbytes)
+LONG nbytes;
+{
+   VOID FAR *maddr;
+
+   regs.x.ax = 0x4800;
+   if (nbytes == 0xFFFFFFFFL)             /* convert number */
+     regs.x.bx = 0xffff;                  /*  of bytes      */
+   else                                   /*  to            */
+     regs.x.bx = (nbytes + 15L) >> 4L;    /*  paragraphs    */
+
+   __dos();
+
+   if (DOS_ERR)
+     maddr = 0l;
+   else
+     maddr = MKFP(regs.x.ax,0);
+
+   return(maddr); /* return location of allocated memory block */
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_AVAI.C */
+
+/*
+ * Returns the amount of memory available in paragraphs
+ */
+LONG dos_avail()
+{
+   LONG mlen;
+
+   regs.x.ax = 0x4800;
+   regs.x.bx = 0xffff;
+
+   __dos();
+
+   mlen = ((LONG) regs.x.bx) << 4;
+
+   return(mlen);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_FREE.C */
+
+/*
+ * free memory that was allocated via dos_alloc()
+ */
+WORD dos_free(maddr)
+VOID FAR *maddr;
+{
+   regs.x.ax = 0x4900;
+   segregs.es = FPSEG(maddr);
+
+   __dos();
+
+   return((WORD) regs.x.ax);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SPAC.C */
+
+/*
+ * get disk free space
+ */
+WORD dos_space(drv, ptotal, pavail)
+WORD drv;                              /* 0 = default, 1 = A: etc */
+LONG FAR *ptotal;
+LONG FAR *pavail;
+{
+   regs.x.ax = 0x3600;
+   regs.x.dx = drv;
+   __dos();
+
+   /*   regs.x.ax contains number of sectors per cluster */
+   /*   regs.x.bx contains number of available clusters  */
+   /*   regs.x.cx contains number of bytes per sector    */
+   /*   regs.x.dx contains total number of clusters      */
+   
+   regs.x.ax *= regs.x.cx;
+   *ptotal = (LONG) regs.x.ax * (LONG) regs.x.dx;
+   *pavail = (LONG) regs.x.ax * (LONG) regs.x.bx;
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_RMDI.C */
+
+/*
+ * remove directory entry
+ */
+WORD dos_rmdir(ppath)
+BYTE FAR *ppath;
+{
+   dos_func(0x3a00, FPOFF(ppath), FPSEG(ppath));
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_CREA.C */
+
+/*
+ * create file
+ */
+WORD dos_create(pname, attr)
+BYTE FAR *pname;
+WORD attr;
+{
+   regs.x.cx = attr;
+
+   dos_func(0x3c00, FPOFF(pname), FPSEG(pname));
+
+   return((WORD) regs.x.ax);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_MKDI.C */
+
+/*
+ * create a sub-directory
+ */
+WORD dos_mkdir(ppath)
+BYTE FAR *ppath;
+{
+   dos_func(0x3900, FPOFF(ppath), FPSEG(ppath));
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_DEL.C */
+
+/*
+ * delete file
+ */
+WORD dos_delete(pname)
+BYTE FAR *pname;
+{
+   dos_func(0x4100, FPOFF(pname), FPSEG(pname));
+
+   return((WORD) regs.x.ax);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_REN.C */
+
+/*
+ * rename file
+ */
+WORD dos_rename(poname, pnname)
+BYTE FAR *poname;
+BYTE FAR *pnname;
+{
+   regs.x.di = FPOFF(pnname);
+   segregs.es = FPSEG(pnname);
+
+   dos_func(0x5600, FPOFF(poname), FPSEG(poname));
+
+   return((WORD) regs.x.ax);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_WPIE.C */
+
+/*
+ * write to a file
+ */
+UWORD write_piece(handle, cnt, pbuffer)
+WORD handle;
+UWORD cnt;
+VOID FAR *pbuffer;
+{
+   regs.x.cx = cnt;
+   regs.x.bx = handle;
+
+   dos_func(0x4000, FPOFF(pbuffer), FPSEG(pbuffer));
+
+   return((WORD) regs.x.ax);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_WRIT.C */
+
+/*
+ * write 32k or less to a file
+ */
+LONG dos_write(handle, cnt, pbuffer)
+WORD handle;
+LONG cnt;
+VOID FAR *pbuffer;
+{
+   LONG workbuf = (LONG)pbuffer;
+   UWORD buff_piece;
+   LONG wt_cnt;
+
+   buff_piece = 0x8000;
+   wt_cnt = 0L;
+   DOS_ERR = FALSE;
+   while (cnt && !DOS_ERR)
+   {
+      if (cnt > 0x00008000L)
+         cnt -= 0x00008000L;
+      else
+      {
+         buff_piece = cnt;
+         cnt = 0;
+      }
+      wt_cnt += (LONG)write_piece(handle, buff_piece, (VOID FAR *)workbuf);
+      workbuf += 0x08000000L;
+   }
+   return( wt_cnt );
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_CHMO.C */
+
+/*
+ * change file mode
+ */
+WORD dos_chmod(pname, func, attr)
+BYTE FAR *pname;
+WORD func;
+WORD attr;
+{
+   regs.x.cx = attr;
+
+   dos_func((UWORD) 0x4300 + func, FPOFF(pname), FPSEG(pname));
+
+   return((WORD) regs.x.cx);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SETD.C */
+
+/*
+ * set a file's date and time
+ */
+WORD dos_setdt(handle, time, date)
+WORD handle, time, date;
+{
+   regs.x.ax = 0x5701;
+   regs.x.bx = handle;
+   regs.x.cx = time;
+   regs.x.dx = date;
+
+   __dos();
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_GETD.C */
+
+/*
+ * get a file's date and time
+ */
+WORD dos_getdt(handle, time, date)
+WORD handle;
+WORD FAR *time;
+WORD FAR *date;
+{
+   regs.x.ax = 0x5700;
+   regs.x.bx = handle;
+
+   __dos();
+
+   if (DOS_ERR)
+      return(FALSE);
+   else
+   {
+      *time = regs.x.cx;
+      *date = regs.x.dx;
+      return(TRUE);
+   }
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_EXEC.C */
+
+/*
+ * Execute another program
+ */
+WORD dos_exec(pname, para, envrn)
+BYTE FAR *pname;
+BYTE FAR *para;
+WORD envrn;
+{
+   EXEC_BLK exec;
+   EXEC_BLK *pexec = &exec;
+
+   exec.eb_segenv = envrn;
+   exec.eb_pcmdln = para;
+
+   segregs.es = FPSEG(pexec);
+   regs.x.bx  = FPOFF(pexec);
+
+   dos_func(0x4b00,FPOFF(pname),FPSEG(pname));
+
+   return(!DOS_ERR);
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_GDAT.C */
+
+VOID dos_getdate(yr,mo,dy,dw)
+WORD FAR *yr;
+WORD FAR *mo;
+WORD FAR *dy;
+WORD FAR *dw;
+{
+   regs.x.ax = 0x2a00;
+   __dos();
+   *dw = regs.h.al;
+   *yr = regs.x.cx;
+   *mo = regs.h.dh;
+   *dy = regs.h.dl;
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_SDAT.C */
+
+VOID dos_setdate(yr,mo,dy)
+WORD yr,mo,dy;
+{
+   regs.x.ax = 0x2b00;
+   regs.x.cx = yr;
+   regs.h.dh = mo;
+   regs.h.dl = dy;
+   __dos();
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_GTIM.C */
+
+VOID dos_gettime(hr,mi,se,hn)
+WORD FAR *hr;
+WORD FAR *mi;
+WORD FAR *se;
+WORD FAR *hn;
+{
+   regs.x.ax = 0x2c00;
+   __dos();
+   *hr = regs.h.ch;
+   *mi = regs.h.cl;
+   *se = regs.h.dh;
+   *hn = regs.h.dl;
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_STIM.C */
+
+VOID dos_settime(hr,mi,se,hn)
+WORD hr,mi,se,hn;
+{
+   regs.x.ax = 0x2d00;
+   regs.h.ch = hr;
+   regs.h.cl = mi;
+   regs.h.dh = se;
+   regs.h.dl = hn;
+   __dos();
+}
+
+/* LIBMAN: SRC: HDR: NAME: DOS_VERS.C */
+
+VOID dos_version(vh,vl,oem,user)
+WORD FAR *vh;
+WORD FAR *vl;
+WORD FAR *oem;
+LONG FAR *user;
+{
+   regs.x.ax = 0x3000;
+   __dos();
+   *vh = regs.h.al;
+   *vl = regs.h.ah;
+   *oem = regs.h.bh;
+   *user = regs.h.bl;
+   *user <<= 16;
+   *user |= regs.x.cx;
+}
+
+/* DOSBIND.C  */

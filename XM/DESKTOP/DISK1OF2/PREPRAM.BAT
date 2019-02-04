@@ -1,0 +1,11 @@
+copy *.c d:/v
+copy *.h d:/v
+copy *.a86 d:/v
+copy foodbg.obj d:/v
+copy desktop.inp d:/v
+copy hmkdesk.bat d:/v
+copy linkit.bat d:/v
+copy dcopyit.bat d:copyit.bat/v
+copy c:\tools\link86.exe d:/v
+copy c:\tools\rasm.exe d:/v
+copy c:\metaware\hc.exe d:/v

@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  doodlel.app doodles.app
+#   del *.obj
+
+doodlel.app:   doodlel.obj
+   tcc -edoodlel.app doodlel.obj ltcgem.lib
+
+doodlel.obj:   doodle.c
+   tcc -c -ml -odoodlel.obj doodle.c
+
+#doodles.app:   doodles.obj
+#   tcc -ms -edoodles.app doodles.obj stcgem.lib
+#
+#doodles.obj:   doodle.c
+#   tcc -c -ms -odoodles.obj doodle.c

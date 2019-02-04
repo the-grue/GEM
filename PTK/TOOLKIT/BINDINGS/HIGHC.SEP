@@ -1,0 +1,538 @@
+/* LIBMAN: AES: NAME: AESLIB\MAKEFILE */
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = aesbind.obj ev_timer.obj gf_shrnk.obj ob_edit.obj sh_wdef.obj \
+      ap_bvset.obj fm_alert.obj gf_slide.obj ob_find.obj sh_write.obj \
+      ap_exit.obj fm_buttn.obj gf_watch.obj ob_offs.obj wn_calc.obj \
+      ap_find.obj fm_cent.obj ob_order.obj wn_close.obj \
+      ap_init.obj fm_dial.obj mn_bar.obj rs_free.obj wn_creat.obj \
+      ap_read.obj fm_do.obj mn_click.obj rs_gaddr.obj wn_delet.obj \
+      ap_tplay.obj fm_error.obj mn_ichck.obj rs_load.obj wn_find.obj \
+      ap_trec.obj fm_keybd.obj mn_ienab.obj rs_obfix.obj wn_get.obj \
+      ap_write.obj fs_input.obj mn_regis.obj rs_saddr.obj wn_open.obj \
+      ap_yield.obj gf_drag.obj mn_text.obj sc_clear.obj wn_set.obj \
+      ev_buttn.obj gf_grow.obj mn_tnorm.obj sc_read.obj wn_updat.obj \
+      ev_dclck.obj gf_handl.obj mn_unreg.obj sc_write.obj xg_2box.obj \
+      ev_keybd.obj gf_mbox.obj ob_add.obj sh_envrn.obj xg_step.obj \
+      ev_mesag.obj gf_mkst.obj ob_chang.obj sh_find.obj sh_get.obj \
+      ev_mouse.obj gf_mouse.obj ob_del.obj sh_rdef.obj sh_put.obj \
+      ev_multi.obj gf_rubb.obj ob_draw.obj sh_read.obj
+aes: $(OBJ)
+      @echo AES is done
+/* LIBMAN: AES: NAME: AESLIB\LIBAES1.RSP */
++ AESLIB\AESBIND &
++ AESLIB\AP_BVSET &
++ AESLIB\AP_EXIT &
++ AESLIB\AP_FIND &
++ AESLIB\AP_INIT &
++ AESLIB\AP_READ &
++ AESLIB\AP_TPLAY &
++ AESLIB\AP_TREC &
++ AESLIB\AP_WRITE &
++ AESLIB\AP_YIELD &
++ AESLIB\EV_BUTTN &
++ AESLIB\EV_DCLCK &
++ AESLIB\EV_KEYBD &
++ AESLIB\EV_MESAG &
++ AESLIB\EV_MOUSE &
++ AESLIB\EV_MULTI &
++ AESLIB\EV_TIMER &
++ AESLIB\FM_ALERT &
++ AESLIB\FM_BUTTN &
++ AESLIB\FM_CENT &
++ AESLIB\FM_DIAL &
++ AESLIB\FM_DO &
++ AESLIB\FM_ERROR &
++ AESLIB\FM_KEYBD &
++ AESLIB\FS_INPUT &
++ AESLIB\GF_DRAG &
++ AESLIB\GF_GROW &
++ AESLIB\GF_HANDL &
++ AESLIB\GF_MBOX &
++ AESLIB\GF_MKST &
++ AESLIB\GF_MOUSE &
++ AESLIB\GF_RUBB &
++ AESLIB\GF_SHRNK &
++ AESLIB\GF_SLIDE &
++ AESLIB\GF_WATCH &
++ AESLIB\MN_BAR &
++ AESLIB\MN_CLICK
+/* LIBMAN: AES: NAME: AESLIB\LIBAES2.RSP */
++ AESLIB\MN_ICHCK &
++ AESLIB\MN_IENAB &
++ AESLIB\MN_REGIS &
++ AESLIB\MN_TEXT &
++ AESLIB\MN_TNORM &
++ AESLIB\MN_UNREG &
++ AESLIB\OB_ADD &
++ AESLIB\OB_CHANG &
++ AESLIB\OB_DEL &
++ AESLIB\OB_DRAW &
++ AESLIB\OB_EDIT &
++ AESLIB\OB_FIND &
++ AESLIB\OB_OFFS &
++ AESLIB\OB_ORDER &
++ AESLIB\RS_FREE &
++ AESLIB\RS_GADDR &
++ AESLIB\RS_LOAD &
++ AESLIB\RS_OBFIX &
++ AESLIB\RS_SADDR &
++ AESLIB\SC_CLEAR &
++ AESLIB\SC_READ &
++ AESLIB\SC_WRITE &
++ AESLIB\SH_ENVRN &
++ AESLIB\SH_FIND &
++ AESLIB\SH_RDEF &
++ AESLIB\SH_READ &
++ AESLIB\SH_WDEF &
++ AESLIB\SH_WRITE &
++ AESLIB\SH_GET &
++ AESLIB\SH_PUT &
++ AESLIB\WN_CALC &
++ AESLIB\WN_CLOSE &
++ AESLIB\WN_CREAT &
++ AESLIB\WN_DELET &
++ AESLIB\WN_FIND &
++ AESLIB\WN_GET &
++ AESLIB\WN_OPEN &
++ AESLIB\WN_SET &
++ AESLIB\WN_UPDAT &
++ AESLIB\XG_2BOX &
++ AESLIB\XG_STEP
+/* LIBMAN: VDI: NAME: VDILIB\MAKEFILE */
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vdibind.obj
+vdibind: $(OBJ)
+      @echo VDIBIND is done
+/* LIBMAN: VDI: NAME: VDILIB\CONTROL\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vst_ex_l.obj vs_clip.obj  v_bez_on.obj v_clswk.obj  v_p_rot.obj \
+      vst_load.obj v_bezqua.obj v_clrwk.obj  v_opnvwk.obj v_setapp.obj \
+      vst_unlo.obj v_bez_of.obj v_clsvwk.obj v_opnwk.obj  v_updwk.obj \
+      v_getdrv.obj
+control: $(OBJ)
+      @echo VDI-CONTROL is done
+/* LIBMAN: VDI: NAME: VDILIB\CONTROL\LIBCONT.RSP */ 
++ VDILIB\CONTROL\VST_EX_L &
++ VDILIB\CONTROL\VST_LOAD &
++ VDILIB\CONTROL\VST_UNLO &
++ VDILIB\CONTROL\VS_CLIP &
++ VDILIB\CONTROL\V_BEZQUA &
++ VDILIB\CONTROL\V_BEZ_OF &
++ VDILIB\CONTROL\V_BEZ_ON &
++ VDILIB\CONTROL\V_CLRWK &
++ VDILIB\CONTROL\V_CLSVWK &
++ VDILIB\CONTROL\V_CLSWK &
++ VDILIB\CONTROL\V_OPNVWK &
++ VDILIB\CONTROL\V_OPNWK &
++ VDILIB\CONTROL\V_P_ROT &
++ VDILIB\CONTROL\V_SETAPP &
++ VDILIB\CONTROL\V_UPDWK &
++ VDILIB\CONTROL\V_GETDRV
+/* LIBMAN: VDI: NAME: VDILIB\OUTPUT\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = v_bezier.obj v_ellarc.obj v_filla.obj v_pline.obj \
+      vr_recfl.obj v_cellar.obj v_ellips.obj v_gtext.obj v_pmark.obj \
+      v_arc.obj v_circle.obj v_ellpie.obj v_justi.obj v_rbox.obj \
+      v_bar.obj v_confil.obj v_etext.obj v_piesl.obj v_rfbox.obj 
+output: $(OBJ)
+      @echo VDI-OUTPUT is done
+/* LIBMAN: VDI: NAME: VDILIB\OUTPUT\LIBOUT.RSP */ 
++ VDILIB\OUTPUT\VR_RECFL &
++ VDILIB\OUTPUT\V_ARC &
++ VDILIB\OUTPUT\V_BAR &
++ VDILIB\OUTPUT\V_BEZIER &
++ VDILIB\OUTPUT\V_CELLAR &
++ VDILIB\OUTPUT\V_CIRCLE &
++ VDILIB\OUTPUT\V_CONFIL &
++ VDILIB\OUTPUT\V_ELLARC &
++ VDILIB\OUTPUT\V_ELLIPS &
++ VDILIB\OUTPUT\V_ELLPIE &
++ VDILIB\OUTPUT\V_ETEXT &
++ VDILIB\OUTPUT\V_FILLA &
++ VDILIB\OUTPUT\V_GTEXT &
++ VDILIB\OUTPUT\V_JUSTI &
++ VDILIB\OUTPUT\V_PIESL &
++ VDILIB\OUTPUT\V_PLINE &
++ VDILIB\OUTPUT\V_PMARK &
++ VDILIB\OUTPUT\V_RBOX &
++ VDILIB\OUTPUT\V_RFBOX
+/* LIBMAN: VDI: NAME: VDILIB\ATTRIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vsf_udpa.obj vsl_widt.obj vst_col.obj vst_rot.obj \
+      vsf_col.obj vsl_col.obj vsm_col.obj vst_eff.obj vswr_mod.obj \
+      vsf_int.obj vsl_ends.obj vsm_heig.obj vst_font.obj vs_color.obj \
+      vsf_peri.obj vsl_type.obj vsm_type.obj vst_heig.obj vs_grayo.obj \
+      vsf_styl.obj vsl_udst.obj vst_alig.obj vst_poin.obj vsf_xper.obj
+attrib: $(OBJ)
+   @echo VDI-ATTRIB is done
+/* LIBMAN: VDI: NAME: VDILIB\ATTRIB\LIBATTR.RSP */ 
++ VDILIB\ATTRIB\VSF_COL &
++ VDILIB\ATTRIB\VSF_INT &
++ VDILIB\ATTRIB\VSF_PERI &
++ VDILIB\ATTRIB\VSF_XPER &
++ VDILIB\ATTRIB\VSF_STYL &
++ VDILIB\ATTRIB\VSF_UDPA &
++ VDILIB\ATTRIB\VSL_COL &
++ VDILIB\ATTRIB\VSL_ENDS &
++ VDILIB\ATTRIB\VSL_TYPE &
++ VDILIB\ATTRIB\VSL_UDST &
++ VDILIB\ATTRIB\VSL_WIDT &
++ VDILIB\ATTRIB\VSM_COL &
++ VDILIB\ATTRIB\VSM_HEIG &
++ VDILIB\ATTRIB\VSM_TYPE &
++ VDILIB\ATTRIB\VST_ALIG &
++ VDILIB\ATTRIB\VST_COL &
++ VDILIB\ATTRIB\VST_EFF &
++ VDILIB\ATTRIB\VST_FONT &
++ VDILIB\ATTRIB\VST_HEIG &
++ VDILIB\ATTRIB\VST_POIN &
++ VDILIB\ATTRIB\VST_ROT &
++ VDILIB\ATTRIB\VSWR_MOD &
++ VDILIB\ATTRIB\VS_COLOR &
++ VDILIB\ATTRIB\VS_GRAYO
+/* LIBMAN: VDI: NAME: VDILIB\RASTER\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vro_cpy.obj vrt_cpy.obj vr_trnfm.obj v_get_pi.obj    
+raster: $(OBJ)
+      @echo VDI-RASTER is done
+/* LIBMAN: VDI: NAME: VDILIB\RASTER\LIBRAST.RSP */ 
++ VDILIB\RASTER\VRO_CPY &
++ VDILIB\RASTER\VRT_CPY &
++ VDILIB\RASTER\VR_TRNFM &
++ VDILIB\RASTER\V_GET_PI
+/* LIBMAN: VDI: NAME: VDILIB\INPUT\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vex_butv.obj vq_key_s.obj vrq_str.obj  vsm_cho.obj  v_hide_c.obj \
+      vex_curv.obj vq_mouse.obj vrq_val.obj  vsm_loc.obj  v_show_c.obj \
+      vex_motv.obj vrq_cho.obj  vsc_form.obj vsm_str.obj \
+      vex_timv.obj vrq_loc.obj  vsin_mod.obj vsm_val.obj  
+input: $(OBJ)
+      @echo VDI-INPUT is done
+/* LIBMAN: VDI: NAME: VDILIB\INPUT\LIBINP.RSP */ 
++ VDILIB\INPUT\VEX_BUTV &
++ VDILIB\INPUT\VEX_CURV &
++ VDILIB\INPUT\VEX_MOTV &
++ VDILIB\INPUT\VEX_TIMV &
++ VDILIB\INPUT\VQ_KEY_S &
++ VDILIB\INPUT\VQ_MOUSE &
++ VDILIB\INPUT\VRQ_CHO &
++ VDILIB\INPUT\VRQ_LOC &
++ VDILIB\INPUT\VRQ_STR &
++ VDILIB\INPUT\VRQ_VAL &
++ VDILIB\INPUT\VSC_FORM &
++ VDILIB\INPUT\VSIN_MOD &
++ VDILIB\INPUT\VSM_CHO &
++ VDILIB\INPUT\VSM_LOC &
++ VDILIB\INPUT\VSM_STR &
++ VDILIB\INPUT\VSM_VAL &
++ VDILIB\INPUT\V_HIDE_C &
++ VDILIB\INPUT\V_SHOW_C
+/* LIBMAN: VDI: NAME: VDILIB\INQUIRE\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vql_attr.obj vqt_ext.obj  vqt_name.obj vq_color.obj \
+      vqf_attr.obj vqm_attr.obj vqt_foin.obj vqt_widt.obj vq_extnd.obj \
+      vqin_mod.obj vqt_attr.obj vqt_just.obj vq_cella.obj 
+inquire: $(OBJ)
+      @echo VDI-INQUIRE is done
+/* LIBMAN: VDI: NAME: VDILIB\INQUIRE\LIBINQ.RSP */ 
++ VDILIB\INQUIRE\VQF_ATTR &
++ VDILIB\INQUIRE\VQIN_MOD &
++ VDILIB\INQUIRE\VQL_ATTR &
++ VDILIB\INQUIRE\VQM_ATTR &
++ VDILIB\INQUIRE\VQT_ATTR &
++ VDILIB\INQUIRE\VQT_EXT &
++ VDILIB\INQUIRE\VQT_FOIN &
++ VDILIB\INQUIRE\VQT_JUST &
++ VDILIB\INQUIRE\VQT_NAME &
++ VDILIB\INQUIRE\VQT_WIDT &
++ VDILIB\INQUIRE\VQ_CELLA &
++ VDILIB\INQUIRE\VQ_COLOR &
++ VDILIB\INQUIRE\VQ_EXTND
+/* LIBMAN: VDI: NAME: VDILIB\ESCAPE\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = vsc_expo.obj v_al_txt.obj v_dspcur.obj v_ps_hal.obj \
+      vm_coord.obj vsp_film.obj v_bit_im.obj v_eeol.obj   v_rmcur.obj \
+      vm_fname.obj vs_bkcol.obj v_clr_di.obj v_eeos.obj   v_rvoff.obj \
+      vm_pagsi.obj vs_cura.obj  v_copies.obj v_en_cur.obj v_rvon.obj \
+      vqp_fnam.obj vs_mute.obj  v_curdow.obj v_ex_cur.obj v_setrgb.obj \
+      vq_chcel.obj vs_palet.obj v_curho.obj  v_fo_adv.obj v_sound.obj \
+      vq_curad.obj vt_align.obj v_curle.obj  v_hardco.obj v_topbot.obj \
+      vq_scan.obj  vt_axis.obj  v_curri.obj  v_met_ex.obj v_tray.obj \
+      vq_tabst.obj vt_origi.obj v_curtex.obj v_orient.obj v_wr_met.obj \
+      vq_tdim.obj  vt_resol.obj v_curup.obj  v_out_w.obj  v_xbitim.obj
+escape: $(OBJ)
+      @echo VDI-ESCAPE is done
+/* LIBMAN: VDI: NAME: VDILIB\ESCAPE\LIBESC.RSP */ 
++ VDILIB\ESCAPE\VM_COORD &
++ VDILIB\ESCAPE\VM_FNAME &
++ VDILIB\ESCAPE\VM_PAGSI &
++ VDILIB\ESCAPE\VQP_FNAM &
++ VDILIB\ESCAPE\VQ_CHCEL &
++ VDILIB\ESCAPE\VQ_CURAD &
++ VDILIB\ESCAPE\VQ_SCAN &
++ VDILIB\ESCAPE\VQ_TABST &
++ VDILIB\ESCAPE\VQ_TDIM &
++ VDILIB\ESCAPE\VSC_EXPO &
++ VDILIB\ESCAPE\VSP_FILM &
++ VDILIB\ESCAPE\VS_BKCOL &
++ VDILIB\ESCAPE\VS_CURA &
++ VDILIB\ESCAPE\VS_MUTE &
++ VDILIB\ESCAPE\VS_PALET &
++ VDILIB\ESCAPE\VT_ALIGN &
++ VDILIB\ESCAPE\VT_AXIS &
++ VDILIB\ESCAPE\VT_ORIGI &
++ VDILIB\ESCAPE\VT_RESOL &
++ VDILIB\ESCAPE\V_AL_TXT &
++ VDILIB\ESCAPE\V_BIT_IM &
++ VDILIB\ESCAPE\V_CLR_DI &
++ VDILIB\ESCAPE\V_COPIES &
++ VDILIB\ESCAPE\V_CURDOW &
++ VDILIB\ESCAPE\V_CURHO &
++ VDILIB\ESCAPE\V_CURLE &
++ VDILIB\ESCAPE\V_CURRI &
++ VDILIB\ESCAPE\V_CURTEX &
++ VDILIB\ESCAPE\V_CURUP &
++ VDILIB\ESCAPE\V_DSPCUR &
++ VDILIB\ESCAPE\V_EEOL &
++ VDILIB\ESCAPE\V_EEOS &
++ VDILIB\ESCAPE\V_EN_CUR &
++ VDILIB\ESCAPE\V_EX_CUR &
++ VDILIB\ESCAPE\V_FO_ADV &
++ VDILIB\ESCAPE\V_HARDCO &
++ VDILIB\ESCAPE\V_MET_EX &
++ VDILIB\ESCAPE\V_ORIENT &
++ VDILIB\ESCAPE\V_OUT_W &
++ VDILIB\ESCAPE\V_PS_HAL &
++ VDILIB\ESCAPE\V_RMCUR &
++ VDILIB\ESCAPE\V_RVOFF &
++ VDILIB\ESCAPE\V_RVON &
++ VDILIB\ESCAPE\V_SETRGB &
++ VDILIB\ESCAPE\V_SOUND &
++ VDILIB\ESCAPE\V_TOPBOT &
++ VDILIB\ESCAPE\V_TRAY &
++ VDILIB\ESCAPE\V_WR_MET &
++ VDILIB\ESCAPE\V_XBITIM
+/* LIBMAN: DOS: NAME: DOSLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = dosbind.obj dos_crea.obj dos_mkdi.obj dos_sdrv.obj dos_spac.obj \
+      dos_all.obj dos_del.obj dos_open.obj dos_sdta.obj dos_wait.obj \
+      dos_avai.obj dos_free.obj dos_read.obj dos_seek.obj dos_wpie.obj \
+      dos_chdi.obj dos_gdir.obj dos_ren.obj dos_setd.obj dos_getd.obj \
+      dos_writ.obj dos_chmo.obj dos_gdrv.obj dos_rmdi.obj dos_sfir.obj \
+      dos_exec.obj dos_clos.obj dos_gdta.obj dos_rpie.obj dos_snex.obj \
+      dos_gdat.obj dos_sdat.obj dos_gtim.obj dos_stim.obj dos_vers.obj
+doslib: $(OBJ)
+      @echo DOSLIB is done
+/* LIBMAN: DOS: NAME: DOSLIB\LIBDOS.RSP */ 
++ DOSLIB\DOSBIND &
++ DOSLIB\DOS_ALL &
++ DOSLIB\DOS_AVAI &
++ DOSLIB\DOS_CHDI &
++ DOSLIB\DOS_CHMO &
++ DOSLIB\DOS_CLOS &
++ DOSLIB\DOS_CREA &
++ DOSLIB\DOS_DEL &
++ DOSLIB\DOS_FREE &
++ DOSLIB\DOS_GDIR &
++ DOSLIB\DOS_GDRV &
++ DOSLIB\DOS_GDTA &
++ DOSLIB\DOS_MKDI &
++ DOSLIB\DOS_OPEN &
++ DOSLIB\DOS_READ &
++ DOSLIB\DOS_REN &
++ DOSLIB\DOS_RMDI &
++ DOSLIB\DOS_RPIE &
++ DOSLIB\DOS_SDRV &
++ DOSLIB\DOS_SDTA &
++ DOSLIB\DOS_SEEK &
++ DOSLIB\DOS_SETD &
++ DOSLIB\DOS_GETD &
++ DOSLIB\DOS_SFIR &
++ DOSLIB\DOS_SNEX &
++ DOSLIB\DOS_SPAC &
++ DOSLIB\DOS_WAIT &
++ DOSLIB\DOS_WPIE &
++ DOSLIB\DOS_WRIT &
++ DOSLIB\DOS_EXEC &
++ DOSLIB\DOS_GDAT &
++ DOSLIB\DOS_SDAT &
++ DOSLIB\DOS_GTIM &
++ DOSLIB\DOS_STIM &
++ DOSLIB\DOS_VERS 
+/* LIBMAN: OBJ: NAME: OBLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = ob_dofl.obj     ob_g_txt.obj    ob_s_txt.obj    ob_ud_di.obj \
+      ob_dost.obj     ob_isfl.obj     ob_udfl.obj     ob_xywh.obj \
+      ob_dr_di.obj    ob_isst.obj     ob_udst.obj 
+oblib: $(OBJ)
+   @echo OBLIB is done
+/* LIBMAN: OBJ: NAME: OBLIB\LIBOB.RSP */ 
++ OBLIB\OB_DOFL &
++ OBLIB\OB_DOST &
++ OBLIB\OB_DR_DI &
++ OBLIB\OB_G_TXT &
++ OBLIB\OB_ISFL &
++ OBLIB\OB_ISST &
++ OBLIB\OB_S_TXT &
++ OBLIB\OB_UDFL &
++ OBLIB\OB_UDST &
++ OBLIB\OB_UD_DI &
++ OBLIB\OB_XYWH
+/* LIBMAN: RCL: NAME: RCLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = rc_copy.obj rc_equal.obj rc_gr2ar.obj rc_insid.obj rc_inter.obj
+rclib: $(OBJ)
+      @echo RCLIB is done
+/* LIBMAN: RCL: NAME: RCLIB\LIBRC.RSP */ 
++ RCLIB\RC_COPY &
++ RCLIB\RC_EQUAL &
++ RCLIB\RC_GR2AR &
++ RCLIB\RC_INSID &
++ RCLIB\RC_INTER
+/* LIBMAN: XLI: NAME: XFMLIB\MAKEFILE */ 
+.SUFFIXES .obj .c
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = xfmlib.obj x_duy_sc.obj x_saspec.obj x_udx_xf.obj x_ytox.obj \
+      x_dux_sc.obj x_duy_xf.obj x_sxform.obj x_udx_yf.obj \
+      x_dux_xf.obj x_mul_di.obj x_udx_sc.obj x_udy_sc.obj
+xfmlib: $(OBJ)
+      @echo XFMLIB is done
+/* LIBMAN: XLI: NAME: XFMLIB\LIBX.RSP */ 
++ XFMLIB\XFMLIB &
++ XFMLIB\X_DUX_SC &
++ XFMLIB\X_DUX_XF &
++ XFMLIB\X_DUY_SC &
++ XFMLIB\X_DUY_XF &
++ XFMLIB\X_MUL_DI &
++ XFMLIB\X_SASPEC &
++ XFMLIB\X_SXFORM &
++ XFMLIB\X_UDX_SC &
++ XFMLIB\X_UDX_XF &
++ XFMLIB\X_UDX_YF &
++ XFMLIB\X_UDY_SC &
++ XFMLIB\X_YTOX
+/* LIBMAN: EMS: NAME: EMSLIB\MAKEFILE */ 
+.SUFFIXES .obj .c .asm
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+OBJ = emslib.obj ems_np.obj ems_fp.obj ems_fs.obj ems_all.obj \
+      ems_map.obj ems_free.obj ems_vers.obj ems_smap.obj ems_rmap.obj
+emslib:  $(OBJ)
+      @echo EMS is done
+/* LIBMAN: EMS: NAME: EMSLIB\LIBEMS.RSP */ 
++ EMSLIB\EMSLIB &
++ EMSLIB\EMS_NP &
++ EMSLIB\EMS_FP &
++ EMSLIB\EMS_FS &
++ EMSLIB\EMS_ALL &
++ EMSLIB\EMS_MAP &
++ EMSLIB\EMS_FREE &
++ EMSLIB\EMS_VERS &
++ EMSLIB\EMS_SMAP &
++ EMSLIB\EMS_RMAP
+/* LIBMAN: MIS: NAME: MISC\MAKEFILE */ 
+.SUFFIXES .obj .c .asm
+.c.obj:
+   hc $* -pr \toolkit\gemlib\gemlib.pro
+.asm.obj:
+   masm $* /DHC /MX;
+OBJ = fardraw.obj formdo.obj trimage.obj ev_event.obj
+misc: $(OBJ)
+      @echo MISC is done
+/* LIBMAN: MIS: NAME: MISC\LIBMISC.RSP */ 
++MISC\FARDRAW &
++MISC\FORMDO &
++MISC\TRIMAGE &
++MISC\EV_EVENT
+/* LIBMAN: ALL: NAME: MAKELIB.BAT */ 
+echo off
+if "%1" == "" goto argu_err
+cd aeslib
+ndmake
+cd ..\vdilib
+ndmake
+cd attrib
+ndmake
+cd ..\escape
+ndmake
+cd ..\inquire
+ndmake
+cd ..\raster
+ndmake
+cd ..\control
+ndmake
+cd ..\input
+ndmake
+cd ..\output
+ndmake
+cd ..
+cd ..\doslib
+ndmake
+cd ..\oblib
+ndmake
+cd ..\rclib
+ndmake
+cd ..\xfmlib
+ndmake
+cd ..\emslib
+ndmake
+cd ..\misc
+ndmake
+cd ..
+IF EXIST %1HCGEM.LIB DEL %1HCGEM.LIB
+LIB %1HCGEM.LIB @AESLIB\LIBAES1.RSP ;
+LIB %1HCGEM.LIB @AESLIB\LIBAES2.RSP ;
+LIB %1HCGEM.LIB + VDILIB\VDIBIND ;
+LIB %1HCGEM.LIB @VDILIB\ATTRIB\LIBATTR.RSP ;
+LIB %1HCGEM.LIB @VDILIB\ESCAPE\LIBESC.RSP ;
+LIB %1HCGEM.LIB @VDILIB\INQUIRE\LIBINQ.RSP ;
+LIB %1HCGEM.LIB @VDILIB\RASTER\LIBRAST.RSP ;
+LIB %1HCGEM.LIB @VDILIB\CONTROL\LIBCONT.RSP ;
+LIB %1HCGEM.LIB @VDILIB\INPUT\LIBINP.RSP ;
+LIB %1HCGEM.LIB @VDILIB\OUTPUT\LIBOUT.RSP ;
+LIB %1HCGEM.LIB @DOSLIB\LIBDOS.RSP ;
+LIB %1HCGEM.LIB @OBLIB\LIBOB.RSP ;
+LIB %1HCGEM.LIB @RCLIB\LIBRC.RSP ;
+LIB %1HCGEM.LIB @XFMLIB\LIBX.RSP ;
+LIB %1HCGEM.LIB @EMSLIB\LIBEMS.RSP ;
+LIB %1HCGEM.LIB @MISC\LIBMISC.RSP ;
+DEL %1HCGEM.BAK
+goto exit
+:argu_err
+echo usage:
+echo        MAKELIB L to create large memory model
+echo        MAKELIB S to create small memory model
+echo Note:
+echo        In either case, you have to make sure that
+echo        your compiler configuration file contains the
+echo        right command line option to generate small
+echo        or large memory model object files!
+:exit
+/* LIBMAN: ALL: NAME: GEMLIB.PRO */ 
+#pragma memory_model(Large);
+#pragma Off (Prototype_override_warnings);

@@ -1,0 +1,7 @@
+
+sht_nm	db	'PROSYNC 640'
+	rb	13 - length sht_nm
+
+lng_nm	db	'Quadram 640 X 480 X 4 Prosync driver'
+	rb	81 - length lng_nm
+

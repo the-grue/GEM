@@ -1,0 +1,435 @@
+
+                Digital Research's GEM (Intel 8086 version!)      
+
+                    - The Hitchiker's Guide to GEM -
+
+                        (C)1985-1998 by Ken Mauro  
+
+
+
+The following is a compilation of notes, comments and observations based on 
+years of empirical study, accidents & being a thorn in the side of several 
+organizations associated with but not limited to..
+
+
+Digital Research Inc.     (USA)  now owned by Caldera Inc.
+Prospero Software Ltd.    (UK) - no longer supports GEM Pascal.  
+Locomotive Software Ltd.  (UK) - no longer supports GEM Basic. 
+Kuma Software Ltd.        (UK) - not known if they are still around.
+GST Software Ltd.         (UK) - known as PressWorks on the net.
+                                  
+
+Discus Distribution Inc.  (USA) - Still in business - No Technical Support.
+                                  The only authorized source for DRI/GEM apps.
+                                  Sells legal copies and printed documentation. 
+                                * mention my name - good for a laugh or two :-)
+                                  and possibly a deep discount..
+
+Usefull Book references.
+-------------------------------------------------------------------------------
+                                Programmer's Guide to GEM (SYBEX Inc.)  
+                                by: Phil Balma, William Fitler
+                                ISBN 0-89588-297-3
+
+                                The GEM Operating System Handbook (TAB Inc.)
+                                by: Dave Prochnow
+                                ISBN 0-8306-2742-1
+
+
+Some Backround Info first..
+------------------------------------------------------------------------------
+                                The first version was GEM 1.1 (~3/85)
+                                (might have been part of the gem collection)
+     
+                                The first retail version was GEM 1.2 (9/85)  
+                                The last retail version was GEM 3.13 (4/89)
+
+                                The version of GEM noted for most applications 
+                                in this text was the version in use at the time
+                                of release. With a few exceptions, most early 
+                                applications will run on later versions of GEM. 
+                                
+The GEM Desktop and             As it runs well under DR-DOSplus (CP/M-86 4.1)
+CP/M-86 users (IBM PC/XT)       You may find it useful as a tool to manage and
+                                organize and run coexisting MS DOS and CP/M-86
+                                files on standard (32meg) MS DOS partitions. 
+
+                                I do not know at this time if GEM will function
+                                on a CP/M partition or if USER is supported.   
+                                I will update this text as I learn more. (CP/M)
+                                                                 
+The GEM development team        After Apple's lawsuit and DRI's continued weak
+                                marketing of GEM, the original developers began
+                                to leave (literally run) in other directions.
+                                  
+                                Gary Kildall - his story is history.
+
+                                Bill Fitler - CP/M's GSX-86 graphics extension. 
+                                Phil Balma    for the DR-Draw and DR-Graph apps.
+
+                                Tim Oren - RCS.APP, GEM's resource editor. 
+
+                                Lee Lorenzen - Crystal, an early project name.
+                                               later the GEM VDI/AES kernel. 
+
+                                later started ventura software and continued to
+                                customize GEM (for Xerox ventura publisher)
+                                un-affected by DRI's 'apple' problems.
+
+
+------------------------------------------------------------------------------
+
+
+The Catalog begins here (at last)
+
+
+GEM Desktop versions            Produced by Digital Research Inc.        
+-------------------------------------------------------------------------------
+GEM Desktop	1.2		Superior desktop - compatible with GEM 2, 3.x
+				Four drag-able overlapping windows w/info line, 
+                                movable disk icons and yes, a real trash can!
+				by Lee Jay Lorenzen's team (pre - Ventura)
+				
+                                This Desktop will function under later versions
+                                of GEM, the trashcan does not look the same, 
+                                however is still functional. 
+
+GEM Desktop 2.0/ 2.1/ 2.2       The stripped down one used for later versions.
+            3.0/ 3.13           Two fixed, non moveable windows - No trash can.
+                                (Courtesy of the Apple lawsuit in late 1985)
+
+GEM Desktop 2.2                 An upgrade shipped with GEM Graph 1.1 and 
+                                possibly some other apps, added some new 
+                                screen and plotter devices. it also appears
+                                to have some early elements of GEM/3 
+
+GEM Desktop 3.0/3.10    	The later versions of the GEM VDI/AES support
+                                features such as cached and compressed fonts 
+                                bezier curves and improvements to GEM OUTPUT.
+                                the use of screen and printer device runtime 
+                                configuration via *.ddf's etc. started here. 
+
+GEM desktop 3.11                Shipped with Delrina's Perform.app 1.x         
+                                Screen drivers and VDI properly handles 
+                                rotated text and other minor improvements.  
+
+GEM Desktop 3.13                The last standard retail version shipped. 
+                                Part of the GEM PTK/SDK 3.13 which finally
+                                was rewritten to support ANSI C compilers.
+
+GEM/4    DRIVDI.EXE             Only made it to the market as runtime support
+         DRIAES.EXE             for Artline/2, PresTeam/2, Publish it/3 etc.
+                                The VDI will use EMS, if available.           
+                                The GEM/3 desktop will not run properly, and
+                                a com shell provided to launch gem/4 apps from
+                                the GEM/3 desktop may crash after repeated use.
+
+                                Probably the model for DRI's X/GEM for FlexOS,
+                                A 32bit protected mode multitasking system.
+
+ViewMax/ DR-DOS 5.0		A 'crippled' GEM/4 kernel, can only be used as 
+				a shell to call GEM Applications. 
+                                Although designed for DR DOS, it will run 
+                                under MS-DOS 3.x and later (minus passwords). 
+                                To use it with GEM apps you must have a GEM/3
+                                installation as well as a Viewmax installation.
+                                This version was written in Lattice C 3.x
+
+ViewMax/ DR-DOS 6.0		Improved version of the above, but with the 
+                                same kernel limitations	as the above. 
+                                This version was rewritten in Turbo C2.0 and 
+                                and allows configuration via *.ini file.  
+
+
+What is interesting about ViewMax is the network drive icons that appear when 
+mapped network drives are present. Also the directory tree function can handle
+the deep directory structures found on cdroms without crashing.
+
+
+
+GEM applications                Produced by Digital Research Inc.	
+-------------------------------------------------------------------------------
+
+GEM Write 	1.0		GEM 1.2 -  GEM ported version of VolksWriter,
+                                a popular DOS based wordprocessor at that time. 
+                                Can use a selected drive for virtual memory. 
+                                This program has dsiplay problems w/ GEM 3.1x
+                                
+GEM Paint 	1.0, 2.0	GEM 1.2 - Bitmapped paint program  
+GEM Draw 	1.0             GEM 1.2 - Easy to use drawing program
+                                Vector based objects, bitmapped fonts.
+                                Ability to open two drawing windows and drag
+                                objects between different drawings. 
+
+GEM Draw        2.0	        GEM2.x - Added rotation of objects.
+                              
+GEM Wordchart 	1.0		GEM 1.2 - Good for charts and overheads, 
+
+GEM Graph	1.0, 1.1        GEM 1.2 - Presentation Graphs.
+                                Imports lotus (*.wks) spreadsheets and others. 
+GEM MapEd	1.0, 1.1        Used to generate maps and objects for GEM graph.
+
+GEM Publisher	1.0             GEM 2.x based Desktop publishing program.  
+				Not as sophisticated as ventura publisher.
+                                Uses a VMM (Virtual Memory Manager) in place
+                                of ems/xms - it should even work on a IBM PC. 
+                                Requires a hard disk.
+
+GEM Publisher	2.0             GEM 3.x version, more features, better fonts. 
+
+Presentation Team 1.0		GEM 3.13 - application suite w/desktop. 
+                                Draw2.0, Draw Library, Graph2.0, MapEd 1.1
+                                Wordchart 2.0 and Bitstream Font Install 2.0
+                                                                  
+Artline  	1.0, 1.01	GEM Artline By CCP GMBH, marketed by DRI.
+                                GEM 3.x based application.  
+                                Drawing program supports GEM VDI Bezier curves.
+				Introduced vector based VDI fonts.
+				Imports from GEM Draw.
+
+
+
+GEM applications                Produced by third party vendors. 
+-------------------------------------------------------------------------------
+Perform		2.0, 2.1	GEM 3.11 based app by Delrina Inc.
+                                A great vector based forms publisher/processor. 
+                                Inports many bitmap and vector formats.
+                                Lockable objects (rectangles, text etc.)
+                                Supports Dbase (*.dbf) file import. 
+                                Prints several different types of barcodes. 
+
+                                Must use Screen Drivers above v3.11 or, 
+                                rotated text will not display properly.
+
+
+
+
+GEM/4 Applications              Produced by Digital Research Inc.
+-------------------------------------------------------------------------------
+Pres. Team      2.0		GEM/4 based application excluding desktop.
+                                All-in-one integrated version of write, draw
+                                wordchart, graph, output etc. Network capable. 
+                                Starts from the dos prompt only.
+
+
+GEM/4 Applications              Produced by third party vendors.
+-------------------------------------------------------------------------------
+Artline         2.x             GEM/4 Artline by CCP - Marketed by DRI. 
+
+KeyDraw+        2.01		Artline 2.0 re-packaged for Softkey Inc.
+                                Sophisticated, supports customizable menus and
+                                floating toolbars and fountain fill palettes.
+                                Supports lockable drawing layers like AutoCadd.
+                                Bitmap Tracing! (autotrace/ manual modes)
+                                Comparable to Corel Draw 2.x
+
+KeyPublisher	1.0		DAK repackaged PUBLISH-IT 1.19 (GST england)
+                                
+Publish-it	2.0		PKlite (*.exe packed) GEM 3.13 VDI, AES etc.
+				Supplied with Typographica, a superior VDI font
+                                generator, supports many SVGA HiRes drivers.
+
+Publish-it	3.0		GEM/4 based app by (GST/Timeworks)
+                                Little is known about this app as Timeworks Inc
+                                went out of business soon after it's release.
+
+Ventura		1.0, 1.1	This kernel is compatible with GEM 1.2, 2.xx! 
+				ie: display has old 'pre-apple law suit' look.
+
+Ventura		2.0		Includes 800x600 VGA GEM 3.x compatible drivers
+				also has true 800x600 swiss/ dutch fonts
+
+
+
+
+
+GEM/3 third party DEMOS         from NDSG @Compuserve (1992)
+------------------------------------------------------------------------------
+GEM MipsCalc	1.0		Lotus 123 + Presentations in GEM; world-class,
+				The demo was crippled - load and save is enabled
+                                with spreadsheet size limited to 16k.
+				I downloaded it from NDSG @Compuserve.
+				It supports lotus 1.x style (*.wks) files.
+
+				It also contains a GEM event recorder (like the
+                                one supplied MS-WINDOWS) and a superior version 
+                                of GEM Paint's screen saver app.
+
+				(I own a full ver. w/ 283 page bound manual).  
+				SBO Inc. is out of business, I tried to locate 
+				them through their last post office box; in 
+				Carpenteria California (~1992) - n/g.
+
+				Very well written in Microsoft C 5.1
+ 
+
+GEM vtxpc	1.0		Interesting Communication package. (demo) 
+				The company that wrote it never got off the
+				ground. (Written in Microsoft C 5.1)
+
+
+DynaCadd	1.0		AutoCadd class vector based cadd program 
+				marketed (I believe) in Canada and Europe.	
+				Uses custom (non vdi/artline ) vector fonts, 
+				handles DXF, plotters, printers etc.
+				Functional demo, save disabled (requires EMS).
+				(However, you can 'output' to a GEM Metafile.)
+
+
+GEM Applications and languages  Produced by Third party UK developers. 
+------------------------------------------------------------------------------
+SuperBase	1.02		GEM 2.x based RDBMS by Precision Software Ltd.
+Personal			Can index and display GEM Paint's *.img files.
+				Imports DbaseII/ III files and Indexes.(great!) 
+                                Works well. The last time I checked (1994) the
+                                license	was owned by a company named OXXI Inc.
+                                (A software developer for the commodore AMIGA)  
+				And the were willing (at that time) to sell off
+                                the leftover materials from the PC GEM projects.
+	
+Superbase 2/3/4                 Far more sophisticated versions incorporating
+                                script driven programming and communications.
+                                These versions were ported over to WINDOWS 3.x
+
+K-Comm		2.0		KUMA Software Ltd. (PC-GEM, Atari-ST)
+                                GEM 2.x based suite of compatible applications.
+				Configurable communications terminal package.
+				Supports Xmodem / Ascii - online help screens.
+                                Unfortunately this app does not appear to run
+                                properly on EGA/VGA - only on CGA & HERCULES.
+                                (It was targeted primarily for The Amstrad PC) 
+
+K-Word		2.0		Supports *.DIF, ascii formats, Spell checking
+
+K-Graph		2.0		Supports *.DIF format (ASCII?) spread sheets.
+K-Spread	2.0		Supports *.DIF format (ASCII?) spread sheets.
+
+K-Data		2.0		Relational, supports variable length records.	
+K-Minstrel	2.0		Supported early RS232 midi devices I think.
+				Edits/ Displays/ Plays Music Scores.
+K-Spell		2.0		Spell checker/ Thesaurus for K-data/ K-word	
+
+				These applications are written in LATTICE C, 
+				with some greenleaf communication libraries. 
+				These apps were all ported from the ATARI-ST.
+								
+
+GEM Application Development     Produced by Digital Research Inc.
+-------------------------------------------------------------------------------
+Lattice C 2.11                  Since I have no direct knowledge of the early
+Phoenix Plink86                 development PTK's and SDK's, I will only list
+                                those I am actually familiar with. I do know
+                                That all of the original DRI GEM apps, except 
+                                GEM write (Pascal) were written in Lattice C 
+
+                               *These Kits may also be refered to as the 
+                                GEM System Developer's Kit as well.
+
+GEM PTK 3.0  (Lattice 3.2)      GEM Programmer's ToolKit/ Compiler Bindings. 
+                                GEM Programmer toolkits were marketed with
+                                portability, both in terms of the 'C' compilers
+                                supported, as well as the M68k platform.
+
+                                Lattice C 3.2 was also marketed as a compiler
+                                suited for Concurrent PC DOS applications.
+
+GEM PTK 3.1  (Turbo C 2.0)      Small, Large Model
+             (Microsoft C 5.1) 	Small, Large Model	
+             (Meta Ware C 1.2)  Large model only, 
+                                MetaWare High C was used to write some Plotter
+                                and possibly some Polaroid camera drivers.
+
+
+				The final PTK was written by Robert Schneider
+				(DRI GmBh) - also related to the X/GEM system	
+				bindings for the 32bit protected mode FlexOS. 
+
+				It also sports a really good script driven 
+                                library install program that could be modified.
+
+GEM RCS 2.0/2.3                 The GEM Resource Editor (RCS) 
+				Used to edit the (*.rsc) component of a GEM app.
+				A great tool for modifying dialogs icons and 
+                                other AES display objects.
+
+                                The 2.3 version was enhanced to support the
+                                setting of 'state bit' flags in GEM resources.
+                                The setting of such bits can be used to over-   
+                                ride the way the AES displays border styles.
+
+GEM SBK (RASM86/Lattice)        GEM 2.x System Builder's Kit 
+                                Device Driver Skeletons, VDI font development.
+				I have an incomplete set as some of the disks
+				generated from backups at Discus Inc were bad.
+				
+
+
+
+Third Party GEM Language Products (Those not produced by Digital Research)
+------------------------------------------------------------------------------
+Prospero Software Ltd., UK	Still in business as of 1995, they do not
+				support GEM APPS, but were willing to sell the
+				GEM pascal/fortran with printed manuals.
+
+GEM Pascal	1.72		Integrated GEM Editor, Linker and Debugger 
+GEM Fortran 	1.1		produces completely stand-alone, executable  
+				GEM (*.app)/ DOS (*.exe) -no runtime royalties.
+				Theses are true native machine code compilers.  
+
+These follow ISO/ 7185 		Supports Small Code model <64k program segment.
+language implementations, 	All of dos memory is available for data.	
+with some extentions added.	Completely re-written bindings, non Microsoft
+				3 manuals/ ~700+pages (Language/AES/VDI)
+				Very good documentation - better than GEM PTK 
+
+				The only GEM function not operational (bug?) 
+				is the Xgraf/StepCalc replacement for exploding
+                                & shrinking window portions of the AES library. 
+                                (It does work in the DRI 'C' library version)
+
+				The only draw back was no provision for the 
+				handling of *.rsc files, you would have to 
+				have purchased the resource editor (RCS 2.x) 
+				from the GEM SDK. Prospero languages unlike
+				DRI, will let you dynamically create internal
+				resources in the program text using a format
+				similar to the (*.RSH) ascii method in the SDK. 
+				(difficult but posssible).
+ 
+Note:  although I only	        I have re-written the example programs to use
+have the pascal package,	external (*.rsc) files that can be modified 
+I was told that the             by the GEM SDK's Resource editor (RCS 2.3). 
+Fortran compiler is        	Prospero had never provided a resource editor 
+functionally identical.  	to go along with their language products.
+				(I believe DRI would not license the RCS from
+				the PC DOS version of the GEM PTK)
+
+
+
+
+Locomotive Software Ltd., UK	Still in business as of 1995 (no GEM support)
+-------------------------------------------------------------------------------
+Locomotive Basic  1.0		GEM 1.2  GEM Basic (Interpreter)
+                                Originally packaged with Amstrad PC 1512 
+
+Locomotive Basic+ 2.0		Locomotive Software's full version.
+                                GEM 2.1 or later required for some features.    
+                                This is also an interpretive based language. 
+				While it does not allow direct access to GEM 
+                                system objects, menus or resources, there is 
+				a documented assembler interface to MASM 4.x.
+
+				Full use of fonts and many graphic functions as
+				well as Indexed Sequential files are supported.
+
+				Direct access to printer drivers are supported
+                                without using GEM Output.
+
+				Very well Documented, 2 manuals/ ~275 pages.
+					
+
+
+
+                        - The End For Now -
+
+

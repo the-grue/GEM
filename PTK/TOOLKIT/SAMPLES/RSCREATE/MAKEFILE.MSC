@@ -1,0 +1,5 @@
+rscreate.obj:
+
+rscreate.app:   rscreate.obj
+   cl -Ferscreate.exe rscreate.obj lmscgem.lib llibce.lib
+

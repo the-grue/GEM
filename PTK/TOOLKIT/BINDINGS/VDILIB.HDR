@@ -1,0 +1,28 @@
+/*****************************************************************************
+ *
+ *	-------------------------------------------------------------
+ *	GEM Desktop					  Version 3.1
+ *	Serial No.  XXXX-0000-654321		  All Rights Reserved
+ *	Copyright (C) 1985 - 1989		Digital Research Inc.
+ *	-------------------------------------------------------------
+ *
+ *****************************************************************************/
+
+#include "portab.h"
+#include "vdi.h"
+
+EXTERN VOID vdi _(( VOID ));
+
+typedef struct gsx_parameters {
+
+    WORD FAR *contrl;
+    WORD FAR *intin;
+    WORD FAR *ptsin;
+    WORD FAR *intout;
+    WORD FAR *ptsout;
+
+}GSXBLK;
+
+EXTERN WORD contrl[], intin[], ptsin[], intout[], ptsout[];
+
+EXTERN GSXBLK pblock;

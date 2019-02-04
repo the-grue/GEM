@@ -1,0 +1,398 @@
+@PROMPT_PTR
+*** LINES: 4
+{                            Welcome to GEM Setup!
+     This program installs GEM/3 onto your computer.
+     Do you want to install GEM/3 for the first time or change an existing
+     GEM/3 installation?
+}
+
+*** LINES: 2
+{     Sorry, but you already have the maximum number of devices allowed.
+     Before trying to ADD a new device you must first REMOVE a device.
+}
+
+*** LINES: 1
+{     The disk you created, GEM DESKTOP is the disk you will use for
+}
+
+*** LINES: 3
+{     To continue, you will need to have one empty formatted disk ready.
+     If you need to clean off or format a disk, you must exit GEM Setup
+     and return to DOS to do so.
+}
+
+*** LINES: 3
+{     To continue, you will need to have TWO empty formatted disks ready.
+     If you need to clean off or format a disk, you must exit GEM Setup
+     and return to DOS to do so.
+}
+
+*** LINES: 1
+{     Label your disk GEM DESKTOP, and insert it in drive |.
+}
+
+*** LINES: 2
+{     Label one disk GEM STARTUP and the other GEM DESKTOP,
+     and put them aside.
+}
+
+*** LINES: 3
+{     Can't find the file GEMSETUP.TXT.  To run GEMSETUP, insert the disk
+     labeled GEM SYSTEM MASTER DISK into drive A.  Logon to drive A.
+     When you see the prompt A>, type GEMSETUP.
+}
+
+*** LINES: 1
+{     future GEM Desktop sessions.
+}
+
+*** LINES: 1
+{     To use GEM/3, insert the GEM DESKTOP disk in drive |.  When you see
+}
+
+*** LINES: 1
+{     RESERVED
+}
+
+*** LINES: 1
+{     Insert the disk labeled | into drive |.
+}
+
+*** LINES: 2
+{     From the list below, select the graphics card and display
+     installed in your system.
+}
+
+*** LINES: 1
+{     Select the mouse or tablet you are using from the list below.
+}
+
+*** LINES: 1
+{     Select a communications port for your mouse or tablet:
+}
+
+*** LINES: 1
+{     Your current setup is:
+}
+
+*** LINES: 1
+{     Would you like to:
+}
+
+*** LINES: 1
+{     Choose item to change:
+}
+
+*** LINES: 1
+{     Choose item to remove:
+}
+
+*** LINES: 1
+{     Choose device category to add:
+}
+
+*** LINES: 1
+{     Select the printer that you intend to use from the list below.
+}
+
+*** LINES: 1
+{     Select a communications port for your printer:
+}
+
+*** LINES: 1
+{     Select the plotter that you intend to use from the list below.
+}
+
+*** LINES: 1
+{     Select a communications port for your plotter:
+}
+
+*** LINES: 1
+{     Select the camera that you intend to use:
+}
+
+*** LINES: 1
+{     Select a communications port for your camera:
+}
+
+*** LINES: 1
+{     Select the scanner that you intend to use:
+}
+
+*** LINES: 2
+{     Please be sure that you have installed the mouse properly
+     according to the mouse manufacturers instructions.
+}
+
+*** LINES: 2
+{     Insert a scanner disk containing the file |
+     into drive |.
+}
+
+*** LINES: 1
+{     This concludes GEM Setup.
+}
+
+*** LINES: 1
+{     Store the GEM SYSTEM diskettes in a safe place.
+}
+
+*** LINES: 1
+{     Select a port address for your scanner.
+}
+
+*** LINES: 1
+{     Select a transfer address for your scanner.
+}
+
+*** LINES: 2
+{     Can't find file |,
+     Please insert the disk labeled | into drive |.
+}
+
+*** LINES: 3
+{     Insert your GEM Driver Pack disk into drive |.  For additional
+     information on driver packs available from Digital Research, see the
+     Driver Pack Information sheet elsewhere in this package.
+}
+
+*** LINES: 1
+{     Insert the scanner system communications disk into drive |.
+}
+
+*** LINES: 1
+{     RESERVED
+}
+
+*** LINES: 2
+{     From the list below, choose the hard disk onto which you want
+     to install GEM/3.
+}
+
+*** LINES: 2
+{     You have already installed the maximum number of devices. You must
+     remove a device before you can add this one.
+}
+
+*** LINES: 2
+{     You have selected more than one device to be connected to a single port
+     Unless you are using a port switch box, you may experience problems.
+}
+
+*** LINES: 2
+{     You are about to terminate GEM Setup abnormally. Your setup could
+     be incomplete.  If you did not want to terminate, choose CONTINUE.
+}
+
+*** LINES: 2
+{     The two disks you created, GEM Startup and GEM Desktop, are the disks
+     you will use for future GEM Desktop sessions.
+}
+
+*** LINES: 1
+{     The disk you created, GEM Startup, is the disk you will use for
+}
+
+*** LINES: 1
+{     future GEM Desktop sessions.
+}
+
+*** LINES: 1
+{     To use GEM/3, insert the GEM STARTUP disk in drive |.  When you see
+}
+
+*** LINES: 1
+{     the DOS prompt (|:>), type GEM <ENTER>.
+}
+
+*** LINES: 1
+{     To use GEM Desktop, type GEM <ENTER> at the DOS prompt (|:>).
+}
+
+@CHOICE_PTR
+*** LINES: 2
+{INSTALL NEW CONFIGURATION
+CHANGE EXISTING CONFIGURATION
+}
+
+*** LINES: 2
+{HARD DISK(S)
+FLOPPY DISKS
+}
+
+*** LINES: 2
+{CANCEL
+CONTINUE
+}
+
+*** LINES: 2
+{EXIT TO DOS
+CONTINUE
+}
+
+*** LINES: 5
+{Parallel port #1 (LPT1)
+Parallel port #2 (LPT2)
+Parallel port #3 (LPT3)
+Communications port #1 (COM1)
+Communications port #2 (COM2)
+}
+
+*** LINES: 2
+{CONTINUE
+SAVE AND EXIT FROM GEM SETUP
+}
+
+*** LINES: 5
+{RESERVED
+RESERVED
+RESERVED
+RESERVED
+RESERVED
+}
+
+*** LINES: 1
+{OTHER (Driver Pack)
+}
+
+*** LINES: 1
+{MORE
+}
+
+*** LINES: 6
+{ADD A PRINTER
+ADD A PLOTTER
+ADD A CAMERA
+ADD A SCANNER
+CHANGE YOUR CURRENT SETUP
+REMOVE A DEVICE FROM YOUR SETUP
+}
+
+@FOOTER_PTR
+*** LINES: 1
+{ Press   or  to move cursor, <ENTER> to choose, <ESC> to exit/cancel.
+}
+
+*** LINES: 1
+{ Press <F1> for device info,  or  to move cursor, <ENTER> to choose.
+}
+
+*** LINES: 1
+{ Press <ESC> to exit/cancel, <ENTER> to continue.
+}
+
+
+@HVOL_PTR
+
+The following strings are disk volume label strings.  Each string MUST BE
+11 characters long, (i.e. if a string is only 10 characters long then pad
+the inside with a space.  See GEM SYSTEM and GEM SCREEN below)
+
+*** LINES: 14
+{GEM  SYSTEM
+GEM SCREEN1
+GEM SCREEN2
+GEM PRINTR1
+GEM PRINTR2
+GEM PRINTR3
+GEM  SCREEN
+GEM PRINTER
+GEM DRIVRPK
+GEM DRIVRPK
+GEM DRIVRPK
+GEM DRIVRPK
+GEM DRIVRPK
+GEM DRIVRPK
+}
+
+@HLAB_PTR
+
+The following strings are disk label strings.  The XX strings are place
+holders for driver pack label strings (which come from gemsetup.txt).
+DO NOT translate the XX's.
+
+*** LINES: 14
+
+{GEM SYSTEM MASTER DISK
+GEM SCREEN DISK #1
+GEM SCREEN DISK #2
+GEM PRINTER DISK #1
+GEM PRINTER DISK #2
+GEM PRINTER DISK #3
+GEM SCREEN DISK
+GEM PRINTER DISK
+XX
+XX
+XX
+XX
+XX
+XX
+}
+
+@KEYWORDS_PTR
+
+The following strings are unique characters for the gemsetup.txt label
+strings.
+
+*** LINES: 12
+
+{D
+SH
+L
+FI
+FN
+M
+SR
+FO
+SCAN P
+SCAN X
+SCAN C
+A
+}
+
+@FLAB_PTR
+
+The following strings are floppy disk labels.
+
+*** LINES: 2
+
+{GEM DESKTOP DISK
+GEM STARTUP DISK
+}
+
+@FVOL_PTR
+
+The following strings are floppy disk volumes.
+
+*** LINES: 2
+
+{GEM DESKTOP
+GEM STARTUP
+}
+
+The following are isolated messages.
+@COPY_PTR
+
+*** LINES: 1
+
+{Copying file |            from |     to |                    ...
+}
+
+@TOO_MANY
+
+*** LINES: 2
+
+{I'm sorry, but you are attempting to add too many devices.
+Please remove an old device before adding a new device.
+}
+
+@D_SPACE
+
+*** LINES: 2
+
+{COPY ERROR: Either the disk space is exceeded, or the source or target
+disk is damaged.  Press any key to continue...
+}
+#
+#	$Header: gemsetup.msg 3.1.3.1 89/01/26 15:08:56 pang ER $
+#

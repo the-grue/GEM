@@ -1,0 +1,368 @@
+@METAFILE
+{
+|FILENAME|MDGEM8.SYS
+}
+@SCREEN
+{
+|DESCRIPTION|AT&T DEB Card 16-Color Display (640x400) 
+|SHORT DESCR|AT&T 16 Clr
+|FILENAME|SDDEB8.EGA
+|SRC DISK|GEM SCREEN DISK #1
+|FNT WILDCRD|*.EGA
+|LONG DESCRP|
+Choose this entry if the AT&T DEB Graphics adapter card and 16-
+color display are installed in your computer.  This display 
+offers a resolution of 640 horizontal by 400 vertical pixels.
+}
+{
+|DESCRIPTION|AT&T Monochrome Card (640x400)
+|SHORT DESCR|AT&T Mono
+|FILENAME|SDATT8.EGA
+|SRC DISK|GEM SCREEN DISK #1
+|FNT WILDCRD|*.EGA
+|LONG DESCRP|
+Choose this entry if your computer is an AT&T PC equipped with 
+its native graphics adapter card and monochrome display.  This 
+display offers a resolution of 640 horizontal by 400 vertical 
+pixels.
+}
+{
+|DESCRIPTION|Hercules Card / Monochrome PC Display (720x348)
+|SHORT DESCR|Hercules
+|FILENAME|SDHRC8.EGA
+|SRC DISK|GEM SCREEN DISK #1
+|FNT WILDCRD|*.EGA
+|LONG DESCRP|
+Choose this entry if the Hercules Graphics Card and Monochrome PC 
+Display are installed in your computer.  This display offers a 
+resolution of 720 horizontal by 348 vertical pixels.
+}
+{
+|DESCRIPTION|IBM CGA / Color Display (640x200) - Mono Mode
+|SHORT DESCR|IBM CGA
+|FILENAME|SDCGA8.CGA
+|SRC DISK|GEM SCREEN DISK #2
+|FONT DISK|GEM PRINTER DISK #1
+|FNT WILDCRD|*.CGA
+|LONG DESCRP|
+Choose this entry if your computer is a Compaq or other 100% IBM-
+compatible computer equipped with an IBM Color Graphics Adapter 
+(CGA) card and color display, which you intend to use in 
+monochrome mode.  This display offers a resolution of 640 
+horizontal by 200 vertical pixels.
+}
+{
+|DESCRIPTION|IBM EGA / Monochrome Display (640x350)
+|SHORT DESCR|EGA Mono
+|FILENAME|SDEH18.EGA
+|SRC DISK|GEM SCREEN DISK #1
+|FNT WILDCRD|*.EGA
+|LONG DESCRP|
+Choose this entry if the IBM Enhanced Graphics Adapter (EGA) card 
+and the IBM monochrome display are installed on your computer, or 
+if you intend to use your EGA display in monochrome mode. This 
+display offers a resolution of 640 horizontal by 350 vertical 
+pixels. 
+}
+{
+|DESCRIPTION|IBM Enhanced Card & 16-Color Display (640x350)
+|SHORT DESCR|EGA HiRes 16
+|FILENAME|SDEHF8.EGA
+|SRC DISK|GEM SCREEN DISK #1
+|FNT WILDCRD|*.EGA
+|LONG DESCRP|
+Choose this entry if your system is equipped with an IBM Enhanced 
+Graphics Adapter card, with at least 128K of graphics memory on 
+the card, and an IBM enhanced color display.  This 16-color 
+display offers a resolution of 640 horizontal by 350 vertical 
+pixels.
+}
+{
+|DESCRIPTION|IBM 16-Color VGA for PS/2 (640x480) or Compatible
+|SHORT DESCR|VGA color
+|FILENAME|SDPSC8.VGA
+|SRC DISK|GEM SCREEN DISK #2
+|FNT WILDCRD|*.VGA
+|LONG DESCRP|
+Choose this entry if you are using a Personal System/2 computer 
+with an IBM PS/2 16-color VGA card.  This display offers a 
+resolution of 640 horizontal by 480 vertical pixels.
+}
+{
+|DESCRIPTION|IBM VGA Monochrome for the PS/2 (640x480) or Compatible
+|SHORT DESCR|VGA mono     
+|FILENAME|SDPSM8.VGA
+|SRC DISK|GEM SCREEN DISK #2
+|FNT WILDCRD|*.VGA
+|LONG DESCRP|
+Choose this entry if you are using the IBM Personal System/2 with 
+an IBM PS/2 VGA monochrome card.  This monochrome display offers a 
+resolution of 640 horizontal by 480 vertical pixels.
+}
+{
+|DESCRIPTION|MDS THE GENIUS Monitor / THE GENIUS Monitor Card (728x1008)
+|SHORT DESCR|Genius
+|FILENAME|SDGEN8.VGA
+|SRC DISK|GEM SCREEN DISK #2
+|FNT WILDCRD|*.VGA
+|LONG DESCRP|
+Choose this entry if you are using THE GENIUS Monitor and THE GENIUS 
+Monitor Card by Micro Display Systems.  This monochrome display 
+offers a resolution of 728 horizontal by 1008 vertical pixels.
+}
+{
+|DESCRIPTION|Video 7 Vega Deluxe / Quadram Prosync 16-Color Display (640x480) 
+|SHORT DESCR|Prosync 640
+|FILENAME|SDP648.VGA
+|SRC DISK|GEM SCREEN DISK #2
+|FNT WILDCRD|*.VGA
+|LONG DESCRP|
+Choose this entry if your computer is equipped with the Quadram 
+Prosync 16-color display and Video 7 Vega Deluxe card.  The display 
+offers a resolution of 640 horizontal by 480 vertical pixels.
+}
+{
+|DESCRIPTION|Video 7 Vega Deluxe / Quadram Prosync 16-Color Display (752x410) 
+|SHORT DESCR|Prosync 752
+|FILENAME|SDP758.EGA
+|SRC DISK|GEM SCREEN DISK #1
+|FNT WILDCRD|*.EGA
+|LONG DESCRP|
+Choose this entry if your computer is equipped with the Quadram 
+Prosync 16-color display and Video 7 Vega Deluxe card.  The 
+display offers a resolution of 752 horizontal by 410 vertical 
+pixels.
+}
+{
+|DESCRIPTION|Wyse/Amdek Monochrome Graphics Display (1280x800)
+|SHORT DESCR|Wyse/Amdek
+|FILENAME|SDWYS8.VGA
+|SRC DISK|GEM SCREEN DISK #2
+|FNT WILDCRD|*.VGA
+|LONG DESCRP|
+Choose this entry if you are using a Wyse or Amdek display and card. 
+This monochrome display offers a resolution of 1280 horizontal by 
+800 vertical pixels.
+}
+@PRINTER
+{
+|DESCRIPTION|Epson GQ-3500 Laser Printer (300 x 300 Dots/Inch)
+|SHORT DESCR|EPSON GQ 3500
+|FILENAME|PDEGH8.B30
+|FNT WILDCRD|*.B30
+|AUX FILE|EGH.ATM
+|SRC DISK|GEM PRINTER DISK #3
+|LONG DESCRP|
+Choose this entry if you are using the Epson GQ-3500 Laser 
+printer.  This printer offers a print resolution of 300 x 300 
+dots per inch. 
+}
+{
+|DESCRIPTION|Epson LQ Series Printers (180 x 180 Dots/Inch)
+|SHORT DESCR|Epson LQ
+|FILENAME|PDELQ8.ELQ
+|SRC DISK|GEM PRINTER DISK #1
+|AUX FILE|ELQ.ATM
+|FONT DISK|GEM PRINTER DISK #2
+|FNT WILDCRD|*.ELQ
+|LONG DESCRP|
+Choose this entry if you are using an Epson LQ-Series printer.  
+LQ-Series printers offer a print resolution of 180 x 180 
+dots per inch.
+}
+{
+|DESCRIPTION|Hewlett Packard Laserjet II Printer (300 x 300 Dots/Inch)
+|SHORT DESCR|HP Laser II
+|FILENAME|PDHPU8.B30
+|SRC DISK|GEM PRINTER DISK #3
+|FNT WILDCRD|*.B30
+|LONG DESCRP|
+Choose this entry if you are using a Hewlett Packard Laserjet 
+II printer.  This printer offers a print resolution of 300 x 300 
+dots per inch.
+}
+{
+|DESCRIPTION|Hewlett Packard LaserJet+ (150 x 150 Dots/Inch)
+|SHORT DESCR|HP Laserjet+
+|FILENAME|PDHPH8.HPH
+|FNT WILDCRD|*.HPH
+|SRC DISK|GEM PRINTER DISK #3
+|FONT DISK|GEM PRINTER DISK #1
+|LONG DESCRP|
+Choose this entry if you are using a Hewlett Packard LaserJet+ 
+printer.  This printer offers a resolution of 150 x 150 dots per 
+inch. 
+}
+{
+|DESCRIPTION|IBM/Epson High Resolution Printers (120 x 144 Dots/Inch)
+|SHORT DESCR|IBM/Epson Hi
+|FILENAME|PDEHI8.EPS
+|SRC DISK|GEM PRINTER DISK #1
+|AUX FILE|EHI.ATM
+|FNT WILDCRD|*.EPS
+|LONG DESCRP|
+Choose this entry if you are using an IBM Graphics printer, the 
+Epson FX 80/100, or the Epson MX 80/100.  These printers offer a
+resolution of 120 x 144 dots per inch. 
+}
+{
+|DESCRIPTION|IBM Proprinter (120 x 144 Dots/Inch)
+|SHORT DESCR|Proprinter
+|FILENAME|PDPRO8.EPS
+|SRC DISK|GEM PRINTER DISK #1
+|AUX FILE|PRO.ATM
+|FNT WILDCRD|*.EPS
+|LONG DESCRP|
+Choose this entry if you are using the IBM Proprinter.  This printer 
+offers 120 x 144 dots per inch print resolution. 
+}
+{
+|DESCRIPTION|LaserWriter / Postscript Printers
+|SHORT DESCR|Postscrpt 12
+|FILENAME|PDPST8.SYS
+|SRC DISK|GEM PRINTER DISK #2
+|AUX FILE|PSTV23.PRE;PSTV23.CNF
+|LONG DESCRP|
+Choose this entry if you are using a printer that uses Postscript-type 
+files and the standard Adobe resident font set: Courier, Helvetica, 
+Times, and Symbol.
+}
+{
+|DESCRIPTION|LaserWriter Plus / Postscript Printers
+|SHORT DESCR|Postscrpt 35
+|FILENAME|PDPST8.SYS
+|SRC DISK|GEM PRINTER DISK #2
+|AUX FILE|PST.PRE;PST.CNF
+|LONG DESCRP|
+Choose this entry if you are using a printer that uses 
+Postscript-type files and has the extended Adobe resident font 
+set: Bookman, Zapf-Chancery, etc. in addition to the standard
+resident font set: Courier, Helvetica, Times, and Symbol.
+}
+{
+|DESCRIPTION|Toshiba P321, P341, or P351 Printer (180 x 180 Dots/Inch)
+|SHORT DESCR|Toshiba
+|FILENAME|PDTSH8.ELQ
+|FNT WILDCRD|*.ELQ
+|AUX FILE|TSH.ATM
+|SRC DISK|GEM PRINTER DISK #2
+|LONG DESCRP|
+Choose this entry if you are using a Toshiba 321,341, or 351 
+printer.  Each of these printers offers a print resolution of 180 
+x 180 dots per inch.
+}
+{
+|DESCRIPTION|Xerox 4020 Color Ink Jet (120 x 240 Dots/Inch) 
+|SHORT DESCR|XEROX 4020
+|FILENAME|PDX208.X20
+|SRC DISK|GEM PRINTER DISK #2
+|AUX FILE|X20.ATM
+|FNT WILDCRD|*.X20
+|LONG DESCRP|
+Choose this entry if you are using the Xerox eight-color printer.  
+This printer offers a print resolution of 120 x 240 dots per 
+inch.
+}
+@MOUSE
+{
+|DESCRIPTION|No Mouse
+|MOUSE ID|0
+|LONG DESCRP|
+Choose this entry if your computer is not equipped with a mouse.  
+Instead of a mouse, you use the cursor control keys to perform 
+operations such as cursor movement, dragging, and clicking.  For 
+details on cursor key techniques, refer to the Desktop Keyboard 
+Reference card at the back of the GEM Desktop manual.  Mouse 
+techniques are explained in the GEM Desktop user's guide.
+}
+{
+|DESCRIPTION|Bus Mouse (Requires file MOUSE.COM )
+|MOUSE ID|2
+|LONG DESCRP|
+Choose this entry if you are using a bus-type mouse.  This type 
+of mouse connects to a special hardware board in your computer 
+and requires that the file MOUSE.COM be contained either on your 
+DOS boot disk or in the root directory of your hard disk.  Any 
+mouse that uses MOUSE.COM, including the Microsoft, Logitech, 
+AT&T, HP Vectra, and Xerox 6065 mice, can be used as a bus-type 
+mouse.  Refer to the mouse manufacturer's installation 
+instructions.  For further information on .COM files, refer to 
+your DOS user's guide.
+}
+{
+|DESCRIPTION|IBM Personal System/2 Mouse
+|MOUSE ID|10
+|LONG DESCRP|
+Choose this entry if you are using the IBM Personal System/2 
+mouse.  This mouse connects to the IBM mouse port on your 
+computer.
+}
+{
+|DESCRIPTION|Microsoft Serial Mouse (RS232 )
+|MOUSE ID|3
+|LONG DESCRP|
+Choose this entry only if you are using a Microsoft serial mouse.  
+This mouse connects to one of the serial ports on your computer.
+}
+{
+|DESCRIPTION|Mouse Systems PC Mouse / SummaMouse / Compatibles
+|MOUSE ID|1
+|LONG DESCRP|
+Choose this entry if your mouse is any of the above, or if it is 
+a "generic" mouse.  If you are unsure of the type of mouse you 
+are using, you may find the manufacturer's name and the model 
+indicated on the bottom of the mouse or in your hardware 
+documentation.  If you are unable to determine the name and model 
+of your mouse, most likely you are using a generic serial mouse 
+and should choose this entry.  The mouse connects to one of the 
+serial ports on your computer.  Manager Mouse and the Torrington 
+mouse are also generic serial mice.
+}
+{
+|DESCRIPTION|SummaSketch 961 Cursor-Type Tablet
+|MOUSE ID|7
+|LONG DESCRP|
+Choose this entry if you are using the SummaSketch 9-inch hand 
+cursor-controlled data tablet.  This tablet connects to one of 
+the serial ports on your computer.
+}
+{
+|DESCRIPTION|SummaSketch 961 Stylus-Type Tablet
+|MOUSE ID|6
+|LONG DESCRP|
+Choose this entry if you are using the SummaSketch 9-inch stylus-
+controlled data tablet.  This tablet connects to one of the 
+serial ports on your computer.}
+}
+{
+|DESCRIPTION|SummaSketch 1201 Cursor-Type Tablet
+|MOUSE ID|5
+|LONG DESCRP|
+Choose this entry if you are using the SummaSketch 12-inch hand 
+cursor-controlled data tablet.  This tablet connects to one of 
+the serial ports on your computer.
+}
+{
+|DESCRIPTION|SummaSketch 1201 Stylus-Type Tablet
+|MOUSE ID|4
+|LONG DESCRP|
+Choose this entry if you are using the SummaSketch 12-inch 
+stylus-controlled data tablet.  This tablet connects to one of 
+the serial ports on your computer.
+}
+{
+|DESCRIPTION|Summagraphics MM1812 Cursor-Type Tablet
+|MOUSE ID|9
+|LONG DESCRP|
+Choose this entry if you are using the Summagraphics 18-inch hand 
+cursor-controlled data tablet.  This tablet connects to one of 
+the serial ports on your computer.
+}
+{
+|DESCRIPTION|Summagraphics MM1812 Stylus-Type Tablet
+|MOUSE ID|8
+|LONG DESCRP|
+Choose this entry if you are using the Summagraphics 18-inch 
+stylus-controlled data tablet.  This tablet connects to one of 
+the serial ports on your computer.
+}

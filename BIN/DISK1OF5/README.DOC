@@ -1,0 +1,190 @@
+                      GEM(R)/3 Release 3.13 
+                        README.DOC File 
+                           April 1989
+
+ 
+This file is divided into the following sections:
+
+1. GEM 3.1 installation and the GEM Setup program
+2. GEM(R) applications, which include the GEM(R)/3 Desktop (TM)
+3. Font issues
+4. Application-specific font limitations
+5. Hardware considerations
+6. Screen Driver Pack Installation
+
+If you are using an HP(R) LaserJet(R) with HP soft fonts and running 
+Ventura Publisher(R) under GEM 3.1, read the GEM 3.1 Release Note to 
+learn how to set up and use this combination on your system.
+
+INSTALLATION AND GEM SETUP
+
+Before running GEM Setup and installing fonts on your system, add the 
+following lines to the CONFIG.SYS file in your root directory.
+
+     FILES = 20
+     BUFFERS = 15
+
+Removing a device with GEM Setup deletes the native GEM bit-mapped 
+fonts associated with that device from the FONTS folder. To preserve 
+fonts, copy them from the FONTS folder onto a floppy disk. When you 
+have finished changing your device setup, copy the fonts from the 
+floppy disk back onto your hard disk.
+
+If you are using more than one driver pack disk to add or change 
+devices, run a separate GEM Setup session for each driver pack disk.
+
+If you have a floppy disk system and you are using GEM Setup to change 
+the screen or mouse, insert the GEM DESKTOP disk in drive A and the 
+GEM STARTUP disk in drive B before choosing "CHANGE EXISTING 
+CONFIGURATION" in GEM Setup.
+
+The SYSTEM MASTER DISK includes a file named DESKTOP.CPM; this file 
+allows you to use GEM software with the Concurrent and DOS Plus 
+operating systems. Here's how to prepare the 3.1 SYSTEM MASTER DISK 
+for use with these systems:
+
+1. Use a track-to-track copy utility, such as DISKCOPY, to    
+   duplicate the GEM SYSTEM MASTER DISK.
+
+2. Insert the duplicate into drive A and type:
+
+        DEL A:DESKTOP.INF
+
+3. Rename the .CPM file by typing:
+
+        REN A:DESKTOP.CPM A:DESKTOP.INF
+
+4. Using the duplicate SYSTEM MASTER DISK, run GEM Setup to install
+   Release 3.1. 
+
+GEM APPLICATIONS
+
+GEM Desktop
+
+The GEM Desktop Format command does not return error messages or 
+status information. To see error messages and the disk status, use one 
+of the alternate formatting methods described below. If the GEM 
+Desktop Format command has no effect at all, as is the case with 
+Concurrent DOS(TM), use one of the alternate formatting methods.
+
+Alternate formatting methods - you can also format floppy disks by:
+
+-  double-clicking on the icon for the format command file. When the 
+   OPEN APPLICATION dialog appears, type the drive identifier, for 
+   example, "A:" (the colon is required) in the "Parameters" field.
+
+-  choosing "Enter DOS Commands" from the File Menu; this 
+   allows you to format from the DOS command line.
+
+GEM(R) WordChart(TM)
+
+GEM WordChart running on a screen with a resolution greater than or 
+equal to 640 X 480 results in reduced window size.
+
+APPLICATION-SPECIFIC FONT LIMITATIONS  
+
+GEM(R) Draw Plus(RM) (Release 2.0), as initially installed, allows you to use 
+true screen font sizes 7, 10, 14, and 36 points, and "doubled" screen 
+font sizes of 20, 28, and 72 points. If you create more than twelve 
+point sizes in screen fonts, unexpected results can occur.
+
+Since no doubling occurs for printers, you must generate true point-size 
+printer fonts. As shown on the GEM Draw Plus Type Menu, a maximum of 
+four typefaces are available at a time.  
+
+GEM(R) Graph(TM) and GEM(R) Graph MapEditor(TM) do not support 7-point type but 
+are otherwise the same as GEM Draw Plus.  
+
+GEM WordChart accepts up to six point sizes and a maximum of 
+four typefaces; all typefaces must have IDENTICAL sizes.
+
+GEM(R) Paint(TM) (Release 2.1 and earlier) supports up to twelve 
+point sizes for all typefaces combined. If you create more 
+than twelve point sizes, unexpected results can occur, including 
+corruption of the Style Menu.
+
+PostScript(R) Fonts
+
+To specify a character in the PostScript Symbol font that has a 
+decimal value of 129 or greater, add 31 to the value. For example, if 
+your ASCII/Decimal chart indicates 130, enter 161.
+
+HARDWARE CONSIDERATIONS
+
+Printers
+
+If your system freezes when printing a text file, reboot the computer 
+and check your free disk space. If it contains less free space than 
+that used by the fonts you are trying to print, there is insufficient 
+space to load your fonts. Free up the needed amount of space (at least 
+equal to the size of your font files).  A single floppy disk may not 
+have room for all the printer fonts.
+
+Toshiba printers need to be placed into unidirectional mode for 
+printing graphics under GEM 3.1, for example, in GEM Draw Plus. 
+Otherwise, problems such as jagged vertical lines occur. The 
+adjustment procedure differs for different models. Consult the 
+documentation supplied with your printer.
+
+You may elect to leave the printer in bidirectional mode when working 
+only with text for example, in GEM 1st Word Plus. Printing is faster 
+in bidirectional mode, and differences in print quality are almost 
+imperceptible when printing text only.
+
+If you are using a serial printer, use the DOS MODE utility to specify
+the printer port.  Using a word processor in ASCII mode, add the following
+command to your GEM.BAT or AUTOEXEC.BAT file:
+
+     MODE COMn:9600,N,8,1
+
+where n is the number of the port that the printer is connected to.
+
+Refer to your operating system documentation for further information 
+about the MODE command.
+
+If you are using a dot matrix printer, you cannot use the GEM(R) Output(TM)
+"Copies" option to print multiple copies of ASCII or GEM(R) 1st Word Plus(TM)
+files.  Instead, use the "Duplicate Name" option to print the file
+as many times as you wish.
+
+SCREEN DRIVER PACK INSTALLATION
+
+To install a screen driver pack:
+
+1.  Run GEM Setup from your GEM(R)/3 System Master Disk 3.1. 
+    (Refer to your GEM/3 Desktop Installation Guide for further
+     information about GEM Setup.) 
+       
+2.  Choose "INSTALL NEW CONFIGURATION" from the Setup menu.
+
+3.  Choose any device on the list.  Choose any port.  (These are 
+    temporary choices).
+
+4.  Press ENTER.
+
+5.  Next, choose an input device and communications port.
+
+6.  Save and exit GEM Setup.
+
+You must now rerun GEM Setup to install a driver from the Screen 
+Driver Pack Disk.
+
+1.  Run GEM Setup.
+
+2.  Choose "CHANGE EXISTING CONFIGURATION" from the Setup menu.
+
+3.  Next, choose "CHANGE YOUR CURRENT SETUP."
+
+4.  Choose to change your screen, then select "Other (Driver Pack)."
+
+5.  Insert your screen driver pack disk in the floppy drive and choose 
+    the appropriate driver.
+
+6.  Save your changes and exit from GEM Setup.
+
+
+
+
+
+END OF README.DOC 
+-----------------

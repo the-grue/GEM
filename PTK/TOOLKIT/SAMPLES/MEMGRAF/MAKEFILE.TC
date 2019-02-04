@@ -1,0 +1,32 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+#all:  memgrafl.app memgrafs.app memgrafl.acc memgrafs.acc
+#   del *.obj
+
+all:  memgrafl.app memgrafl.acc
+   del *.obj
+
+memgrafl.acc: memaccl.obj
+   tlink ..\startup\c0acctcl memaccl, memgrafl.acc, nul, c:\tc\lib\ltcgem c:\tc\lib\cl
+
+#memgrafs.acc: memaccs.obj
+#   tlink ..\startup\c0acctcs memaccs, memgrafs.acc, nul, c:\tc\lib\stcgem c:\tc\lib\cs
+
+memgrafl.app: memappl.obj
+   tcc -ml -ememgrafl.app memappl.obj ltcgem.lib
+
+#memgrafs.app: memapps.obj
+#   tcc -ms -ememgrafs.app memapps.obj stcgem.lib
+
+memaccl.obj: memgraf.c
+   tcc -c -ml -DDESKACC=1 -omemaccl.obj memgraf.c
+
+#memaccs.obj: memgraf.c
+#   tcc -c -ms -DDESKACC=1 -omemaccs.obj memgraf.c
+
+memappl.obj: memgraf.c
+   tcc -c -ml -omemappl.obj memgraf.c
+
+#memapps.obj: memgraf.c
+#   tcc -c -ms -omemapps.obj memgraf.c

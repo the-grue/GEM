@@ -1,0 +1,123 @@
+            
+
+               - GUIDELINES FOR BUILDING GEMSETUP 3.0 -
+
+                              Cregg Lund
+                         Digital Research Inc.
+                            (408) 646-6397
+
+  The source files for gemsetup are arranged in 2 sub-directories.  The
+first sub_directory is called SETUP.  The files in SETUP are all the 
+C and ASSEMBLY code for GEMSETUP.  The second sub_directory is called
+BINDINGS.  The files in BINDINGS are all the source files for a DOS 
+SYSTEM CALL library.  The directory structure is as follows:
+
+			        C:\
+			        |
+			        |
+                 ---------------------------------
+                |                                |
+                |                                |
+             \SETUP                          \BINDINGS
+
+
+
+
+  The following tools were used for GEMSETUP:
+  
+  	C COMPILER: 	METAWARE HIGH C version 1.4
+         ASSEMBLER:     MICROSOFT MACRO ASSEMBLER version 3.00
+	    LINKER:     PLINK86 (Phoenix Software) version 1.47
+        LIB-LINKER:     PLIB86 (Phoenix Software) version 1.4
+    
+
+  To compile and assemble the source code files in SETUP, run the
+batch file called COMPILE.BAT.
+
+  To link the object files in SETUP, run the batch file called LINK.BAT.
+
+  To build the library in BINDINGS, run the batch file called DOSLIB.BAT.
+
+  GEMSETUP reads an input file which contains information about the various
+devices supported by GEM.  The file is called GEMSETUP.TXT.  There are two
+files in SETUP that end with TXT.  One is called 6DISKSET.TXT and is used for
+5 1/4" disks; the other is called 3DISKSET.TXT and is used for 3 1/2" disks.
+For whichever media is used (3 1/2" or 5 1/4"), the appropriate TXT file
+must renamed to GEMSETUP.TXT.   
+
+    The following is a list of labels used in the GEMSETUP.TXT file and 
+their descriptions:
+
+
+	|DESCRIPTION|	72 character-long description of the driver/device
+		This label is used by GEMSETUP.EXE in its device choice menus.
+
+	|SHORT DESCRP|	12 character-long icon label for the device. Used
+		by OUTPUT.APP.
+
+	|LONG DESCRP|	paragraph of information (in 72 character-long lines).
+		When the user asks for help in one of GEMSETUP.EXE's device
+		choice menus, he/she sees this information. Limited to a
+		maximum of 20 lines.
+
+	|FILENAME|	12 characters of filename descriptor for actual driver
+		file. Used by GEMSETUP to find file on disk.
+
+	|FNT WILDCRD|	Wildcard of the form "*.EGA;*.EGC". GEMSETUP uses
+		these wildcards to search for fonts for each driver. Usually
+		this wildcard simply matches the extension of FILENAME, above.
+
+	|MOUSE_ID|	Mouse id value for screen drivers. Currently in the
+		range 0-10. GEMSETUP patches this value in the zyxg area
+		in the screen drivers. 
+
+	|SRC DISK|	Diskette label for disk containing FILENAME. Used in
+		GEMSETUP's prompt to the user asking for a certain disk to
+		be inserted.
+
+	|FONT DISK|	Diskette label for disk containing associated fonts
+		for a driver. GEMSETUP asks the user to insert this disk,
+		and then copies the files specified in FNT WILDCRD.
+
+	|SCAN PORT|	Port address value for scanner. This value is patched
+		by GEMSETUP in the zyxg area of the scanner driver.
+
+	|SCAN XFER|	Transfer address value for scanner. This value is
+		patched by GEMSETUP in the zyxg area of the scanner driver.
+
+	|SCAN COM|	File specification of any manufacturer-supplied
+		dos driver-type utilities required by the scanner. GEMSETUP
+		asks for the disk and copies the file into \GEMAPPS\GEMSYS.
+
+	|AUX FILES|	File specification of any additional DRI-supplied
+		files required by the driver. GEMSETUP will not ask for the 
+		disk, but assume that the file is on the same disk as the 
+		driver. The file will then be copied into \GEMAPPS\GEMSYS.
+		(This facility accomodates printers requiring .CNF files.)
+
+The absolute minimum requirement is:
+
+	|DESCRIPTION|
+	|FILENAME|
+
+In addition, any device using OUTPUT.APP (not mice, metafiles or scanners) 
+requires the following:
+
+	|SHORT DESCRP|
+
+In addtion, all mice and tablets require the following:
+
+	|MOUSE_ID|
+
+In addtion, all scanners require the following:
+
+	|SCAN PORT|
+	|SCAN XFER|
+	|SCAN COM|
+
+In addtion, all output devices having fonts 1) with a different extension
+	than FILENAME or 2) on a different disk than SRC DISK require:
+
+	|FNT WILDCRD|
+	|FONT DISK|
+

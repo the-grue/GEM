@@ -1,0 +1,17 @@
+sdwys8.vga=entry, zyxg,
+jmptbl,
+monobj,
+monout,
+opttext,
+isin,
+dummy,
+wy700,
+opttxt1,
+opttxt2,
+opttdraw,
+monspblt,
+rastop,
+hirespat,
+enddseg,
+8x16[nop]
+

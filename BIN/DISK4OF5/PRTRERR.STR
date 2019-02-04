@@ -1,0 +1,48 @@
+~2[2][
+The printer is not responding. Make sure|
+the power is on and it has the correct|
+cable attached before trying again.
+][ Abort | Retry ]
+~2[2][
+The printer is off-line. Switch the|
+printer on-line before trying again.
+][ Abort | Retry ]
+~2[2][
+The printer has run out of paper. Reload|
+the paper tray and try again.
+][ Abort | Retry ]
+~2[2][
+A paper jam has occurred on the printer.|
+Clear the paper path and try again.
+][ Abort | Retry ]
+~2[2][
+The printer is low on toner. Load a new|
+toner cartridge and try again.
+][ Abort | Retry ]
+~2[2][
+Your printer is not responding. Examine|
+the printer to determine the cause of|
+the problem and correct it before|
+selecting Retry.
+][ Abort | Retry ]
+~2[2][
+The printer engine power is off. Turn on|
+the power and try again.
+][ Abort | Retry ]
+~2[2][
+The printer engine is having|
+operational problems.
+][ Abort | Retry ]
+~1[3][
+The output file could not be created.
+][ Abort ]
+~1[3][
+Error writing to the output print file.|
+Make sure there is sufficient space on|
+your disk.
+][ Abort ]
+~1[3][
+Insufficient memory available on the PC|
+to output your document.
+][ Abort ]
+~

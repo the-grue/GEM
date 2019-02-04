@@ -1,0 +1,95 @@
+The following is a list of tools needed if the DR/GEM stuff is to be recompiled
+in it's current state. The list may not be complete as it is just a reference listing I made while trawling through the files. Some of the Tools are available,
+but others will take ingenuity to find. It would be nice if those with contacts
+at the various copyright holders, could get some leeway to allow copies to be posted
+for us to use. Also is there anybody out there, who used to work on GEM at DR who 
+can remember, even vaguely, what was in the DR main server .CFG .PRO & .INI files for these tools.
+enjoy
+Chris Barnes
+
+NEEDED                 WHERE TO GET 		      COMMENTS
+
+lattice C v2.14        apparently lattice      v2.14 is invoked with lc1 & lc2
+                        is available  in       V3 USES lc ONLY, also looks as if
+						all versions all   	   there were changes 2 to 3 in the  price $600  from       meaning of parameters eg 2 appears
+		        www.lattice.com/otherdos.htm   to use s for small model where as 3
+			(but I got no response from them)  uses ms
+lattice C v3.1                                 (this is version used by sdk)
+metaware high C v1.4   Y from GEMRCS.ZIP (1)   uses set up files HC.PRO with
+                                               pragma's  NOTE SOURCES WILL ONLY
+											   BUILD IF THIS IS PRESENT there are at
+											   least 3 *.pro files all slightly different and some directories which need them have them missing.
+*.PRO                  cpm/./gemworld/gembuild one version which works.
+											   
+microsoft C v4         sometimes copies in 2nd 
+                        hand chain             v5 may work(I will check when I got           
+						                                                      time)
+TurboC                 was on cover            | Tc1 also
+turboC++v2.0           discs last year??       |  may be close enough   
+turboC++v3.0           2nd hand chain
+
+masm v3.0              Y see(1)                 NOTE options come after file names
+                                                arrowasm (freeware) works ok 
+												
+rasm86 v1.4            Y FROM DOS86PR2.ZIP (2)
+TASM                   (5 is on web sometimes   Need to recreate tasm.cfg file to
+                       don't know if 5 will     match DR's
+					   work),Borland still sell
+
+link v3.61             Y FROM MSDOS 3.3
+plink86 v1.47          Y (1)
+link86 v2.02           Y (2)
+Tlink v3.0/4/5.0       Borland products
+
+lib ?                  got v3.08 FROM MSDOS 3.3
+plib86 v1.4            Y (1)
+lib86 v?               got v1.3 (2)
+
+
+make v?
+Microsoft versions                               v4.06 from C5 is not the right 
+                                                 version I think. The version
+                                                 from MSC 4 might be correct
+Borland versions
+ndmake                 not found on web          mid 80s shareware UNIX make clone
+                          by me PM has           need to recreate make.inc file to
+					       a copy sent  		 match DR's
+                           to you
+pmapsym                Y pmap2sym from sdk
+grep                   Y fgrep ? (1)               
+msym                   Y (1)
+
+sm.com                 Y (1)                   an exe to com translator/compactor?
+exe2com/bin/?          Y                       DOS3 or several on internet
+ep.exe                 Y (1).exe only          no set up files (epsilon.b &/or            
+                                               epsilon.sta) which it won't work
+                                               without ?a macro compiler/editor??
+exemod.exe             try Microsoft site      M'soft Exe file header utility v4.02												  
+exehdr.*               an alternate to exemod
+
+LIBRARY FILES          ??                      poss MSC4 needed
+Metaware 1.4 INC       ??                      stdio.h  conio.h
+         ....LIB       ??                      hcse.lib 
+		 
+		 
+		 
+		 (1)  from gem page on cpm site in gemrcs.zip
+		 
+		 (2)  from cpm site go to cpm86 and find file tools86.zip 
+		      inside which are two zip files one of which is 
+			  dos86pr2.zip which contains above.
+			  
+		 (3)  there is now a tool download file on
+		      www.deltasoft.com
+		      which contains tools
+		      from cpm site collected together.
+		 (4)  pester friends and aquaintances to dig into the backs 
+		      of cupboards. 
+			  NB most,if not all of this  material, is copyright 
+			  and not all to DR/Caldera, so do not abuse. DR did a C
+			  compiler for dos, which has not turned up yet, it's
+			  a pity they didn't use & improve it.
+		 (5)  Any additional information would be most welcome.
+		      email   warwick.barnes@zetnet.co.uk
+			          chrisjbarnes@openlink.org
+			  

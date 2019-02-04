@@ -1,0 +1,17 @@
+#
+#  Remove all '#' to get small applications and accessories too
+#
+userdefl.obj:   userdef.c
+   cl -c -AL -Gs -Oas -Zl -Fouserdefl.obj userdef.c
+
+#userdefs.obj:   userdef.c
+#   cl -c -AS -Gs -Oas -Zl -Fouserdefs.obj userdef.c
+
+userdefl.app:   userdefl.obj
+   cl -AL -Feuserdefl.app userdefl.obj lmscgem.lib llibce.lib
+
+#userdefs.app:   userdefs.obj
+#   cl -AS -Feuserdefs.app userdefs.obj smscgem.lib slibce.lib
+
+#all:  userdefl.app userdefs.app
+#   del *.obj
